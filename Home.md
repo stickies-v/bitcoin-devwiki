@@ -1,5 +1,5 @@
 Welcome to the bitcoin-devwiki wiki!
 
-*test*
+For now, this is an experiment in collaborative editing of the release notes draft.
 
-Yow.
+This wiki is not intended to house anything else, it is generally preferable to use the [bitcoin wiki](https://en.bitcoin.it/wiki/).
