@@ -374,6 +374,7 @@ feel free to move things to the right category if mis-sorted.
 - #10222 `6ce7337` [tests] test_runner - check unicode (jnewbery)
 - #10327 `35da2ae` [tests] remove import-abort-rescan.py (jnewbery)
 - #11023 `bf74d37` [tests] Add option to attach a python debugger if functional test fails (jnewbery)
+- #10565 `8c2098a` [coverage] Remove subtrees and benchmarks from coverage report (achow101)
 
 ### Miscellaneous
 - #9871 `be8ba2c` Add a tree sha512 hash to merge commits (sipa)
@@ -432,7 +433,6 @@ feel free to move things to the right category if mis-sorted.
 - #10623 `c38f540` doc: Add 0.14.2 release notes (MarcoFalke)
 - #10276 `b750b33` contrib/verifybinaries: allow filtering by platform (knocte)
 - #10248 `01c4b14` Rewrite addrdb with less duplication using CHashVerifier (sipa)
-- #10565 `8c2098a` [coverage] Remove subtrees and benchmarks from coverage report (achow101)
 - #10577 `232508f` Add an explanation of quickly hashing onto a non-power of two range (gmaxwell)
 - #10608 `eee398f` Add a comment explaining the use of MAX_BLOCK_BASE_SIZE (gmaxwell)
 - #10728 `7397af9` fix typo in help text for removeprunedfunds (AkioNak)
