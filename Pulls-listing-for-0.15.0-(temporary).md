@@ -79,7 +79,6 @@ feel free to move things to the right category if mis-sorted.
 - #10148 `d4e551a` Use non-atomic flushing with block replay (sipa)
 - #10685 `30c2130` Clarify CCoinsViewMemPool documentation (TheBlueMatt)
 - #10558 `90a002e` Address nits from per-utxo change (morcos)
-- #10660 `0c3542e` Allow to cancel the txdb upgrade via splashscreen keypress 'q' (jonasschnelli)
 - #10706 `6859ad2` Improve wallet fee logic and fix GUI bugs (morcos)
 - #10526 `754aa02` Force on-the-fly compaction during pertxout upgrade (sipa)
 - #10985 `d896d5c` Add undocumented -forcecompactdb to force LevelDB compactions (sipa)
@@ -195,6 +194,7 @@ feel free to move things to the right category if mis-sorted.
 - #10870 `412b466` [Qt] Use wallet 0 in rpc console if running with multiple wallets (jonasschnelli)
 - #10988 `a9dd111` qt: Increase BLOCK_CHAIN_SIZE constants (laanwj)
 - #10644 `e292140` Slightly overhaul NSI pixmaps (jonasschnelli)
+- #10660 `0c3542e` Allow to cancel the txdb upgrade via splashscreen keypress 'q' (jonasschnelli)
 
 ### Wallet
 - #9359 `f7ec7cf` Add test for CWalletTx::GetImmatureCredit() returning stale values (ryanofsky)
