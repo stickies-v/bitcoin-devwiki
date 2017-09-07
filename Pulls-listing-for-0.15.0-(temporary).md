@@ -359,7 +359,6 @@ feel free to move things to the right category if mis-sorted.
 - #10739 `1fc783f` test: Move variable `state` down where it is used (paveljanik)
 - #9980 `fee0d80` Fix mem access violation merkleblock (Christewart)
 - #10893 `0c173a1` [QA] Avoid running multiwallet.py twice (jonasschnelli)
-- #10703 `f1f1605` [tests] Allow tests to pass when stderr is non-empty (jnewbery)
 - #10927 `9d5e8f9` test: Make sure wallet.backup is created in temp path (laanwj)
 - #10899 `f29d5db` [test] Qt: Use _putenv_s instead of setenv on Windows builds (brianmcmichael)
 - #10912 `5c8eb79` [tests] Fix incorrect memory_cleanse(…) call in crypto_tests.cpp (practicalswift)
