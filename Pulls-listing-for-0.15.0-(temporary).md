@@ -380,11 +380,6 @@ feel free to move things to the right category if mis-sorted.
 - #11023 `bf74d37` [tests] Add option to attach a python debugger if functional test fails (jnewbery)
 
 ### Miscellaneous
-- #9696 `aa5fa64` [trivial] Fix recently introduced typos in comments (practicalswift)
-- #9795 `390a39b` doc: Update manpages for master (laanwj) (MarcoFalke)
-- #9807 `5628c70` RPC doc fix-ups (fanquake)
-- #9833 `dd6e0d6` Trivial: fix comments referencing AppInit2 (benma)
-- #9612 `f19afdb` [trivial] Rephrase the definition of difficulty (kallewoof)
 - #9871 `be8ba2c` Add a tree sha512 hash to merge commits (sipa)
 - #9821 `d19d45a` util: Specific GetOSRandom for Linux/FreeBSD/OpenBSD (laanwj)
 - #9903 `ba80a68` Docs: add details to -rpcclienttimeout doc (ian-kelling)
