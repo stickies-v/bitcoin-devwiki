@@ -26,6 +26,6 @@ Here are the changes to RPC methods:
 
 | Changed Method         | Notes   |
 | :--------------------- | :------ |
-| `addmultisigaddress`   | `account` named parameter renamed to `label`  (`account` still accepted for backward compatibility) | 
-| `getnewaddress`        | `account` named parameter renamed to `label` (`account` still accepted for backward compatibility) |
+| `addmultisigaddress`   | Renamed `account` named parameter to `label`. Still accepts `account` for backward compatibility. | 
+| `getnewaddress`        | Renamed `account` named parameter to `label`. Still accepts `account` for backward compatibility. |
 | `listunspent`          | Returns new `label` fields, along with `account` fields for backward compatibility. | 
