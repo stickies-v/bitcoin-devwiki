@@ -1,1 +1,0 @@
-(deleted, this is part of the release notes in https://github.com/bitcoin/bitcoin/commit/d4c9d00e7e79958dea9586f927778dba2be8230a)
