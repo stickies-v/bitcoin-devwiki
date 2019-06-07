@@ -28,7 +28,7 @@ The inheritance chain from `SigningProvider` should be condensed and the scopes 
 SigningProvider -> CKeyStore -> CBasicKeyStore -> CCryptoKeyStore -> CWallet
 ```
 
-Instead, `CWallet` will need to be standalone and `SPKManager` will be a `SigningProvider`; there is no need for `CWallet` to be a `SigningProvider`. Additionally `CKeyStore`, `CBasicKeyStore`, and `CCryptoKeyStore` are largely unnecessary. `CKeyStore` can be removed and it's functionality split into `SigningProvider` and `CBasicKeyStore`. The `Add*` functions can go up to `CBasicKeyStore` while the `Have*` go down to `SigningProvider`. The watch only related functions should go to `CWallet` and `CBasicKeyStore` can be renamed to another type of `SigngingProvider`. Lastly, `CCryptoKeyStore` should be entirely combined with `CWallet`. At the end of this refactoring, the stack will be:
+Instead, `CWallet` will need to be standalone and `SPKManager` will be a `SigningProvider`; there is no need for `CWallet` to be a `SigningProvider`. Additionally `CKeyStore`, `CBasicKeyStore`, and `CCryptoKeyStore` are largely unnecessary. `CKeyStore` can be removed and it's functionality split into `SigningProvider` and `CBasicKeyStore`. The `Add*` functions can go up to `CBasicKeyStore` while the `Have*` go down to `SigningProvider`. The watch only related functions should go to `CWallet` and `CBasicKeyStore` can be renamed to another type of `SigningProvider`. Lastly, `CCryptoKeyStore` should be entirely combined with `CWallet`. At the end of this refactoring, the stack will be:
 
 ```
 SigningProvider -> CBasicKeyStore (renamed) -> CWallet
