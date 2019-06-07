@@ -1,5 +1,7 @@
 Welcome to the bitcoin-devwiki wiki!
 
-For now, this is an experiment in collaborative editing of the release notes draft.
+This wiki contains design documentation for the Bitcoin Core node and wallet.
 
-This wiki is not intended to house anything else, it is generally preferable to use the [bitcoin wiki](https://en.bitcoin.it/wiki/).
+It is also used for collaborative editing of the release notes draft.
+
+For notes on documentation of the Bitcoin protocol, please use the [bitcoin wiki](https://en.bitcoin.it/wiki/).
