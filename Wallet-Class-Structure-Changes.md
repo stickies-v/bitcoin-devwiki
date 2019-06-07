@@ -12,7 +12,7 @@ Within every `CWallet`, there will be one or more boxes, also called `SPKManager
 
 ## `CWallet` changes
 
-`CWallet` will no loner handle keys, addresses, and `IsMine` directly. Instead it will contain one or more `SPKManagers` with a map of address types to `SPKManager`. When a new address is being requested, the `SPKManager` for that type is retrieved and a new address fetched from it. For signing, `SPKManager` will be passed into `ProduceSignature` as the `SigningProvider` to be used there. Lastly, `IsMine` will be moved to be part of `SPKManager` so wallets will call `IsMine` for each of its `SPKManager`s to determine whether a transaction belongs to it.
+`CWallet` will no loner handle keys, addresses, and `IsMine` directly. Instead it will contain one or more `SPKManagers` with a map of address types to `SPKManager`. When a new address is being requested, the `SPKManager` for that type is retrieved and a new address fetched from it. `IsMine` will be moved to be part of `SPKManager` so wallets will call `IsMine` for each of its `SPKManager`s to determine whether a transaction belongs to it. For signing, `SPKManager` will be passed into `ProduceSignature` as the `SigningProvider` to be used there. In order to determine which `SPKManger` to use when signing, the wallet will go through each of the `SPKManager`s it has and find the one which returns `IsMine = True` for a scriptPubKey. The `SPKManager` that does will be the one used for signing.
 
 # Prerequisites
 
