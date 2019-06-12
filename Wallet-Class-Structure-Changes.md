@@ -34,3 +34,7 @@ Instead, `CWallet` will need to be standalone and `SPKManager` will be a `Signin
 SigningProvider -> CBasicKeyStore (renamed) -> CWallet
 ```
 Combined with the addition of `SPKManager`, `CWallet` will be standalone and `SPKManager` will extend `CBasicKeyStore (renamed)`.
+
+# See Also
+
+Wallet and Segwit: https://gist.github.com/sipa/125cfa1615946d0c3f3eec2ad7f250a2
