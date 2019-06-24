@@ -16,11 +16,11 @@ Within every `CWallet`, there will be one or more boxes, also called `ScriptPubK
 
 # Prerequisites
 
-## `IsMine`
+## `IsMine` (:heavy_check_mark: done in https://github.com/bitcoin/bitcoin/pull/16226)
 
 Before this new class structure can be implemented, some things need to be moved around and changed. `IsMine` is currently a standalone module because it is used in a couple of non-wallet tests. However it needs to be moved to be part of the wallet module first, possibly as a member function of `CWallet`. Once `SPKManger` is introduced, `IsMine` will become a member function if that.
 
-## `CWallet` Subclass Stack
+## `CWallet` Subclass Stack (:construction: WIP in https://github.com/bitcoin/bitcoin/pull/16227)
 
 The inheritance chain from `SigningProvider` should be condensed and the scopes slightly changed. The chain currently is:
 
