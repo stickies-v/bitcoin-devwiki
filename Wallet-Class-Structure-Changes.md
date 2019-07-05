@@ -8,7 +8,7 @@ The wallet is currently structured as a monolith. The `CWallet` class contains b
 
 ## The "box"
 
-Within every `CWallet`, there will be one or more boxes, also called `ScriptPubKeyManager`. `ScriptPubKeyManager` will extend the `SigningProvider` interface and thus be able to be passed into `ProduceSignature` in order to sign transactions. There will be additional functions added to it that allow for address fetching (e.g. `GetNewAddress()`). Each `ScriptPubKeyManager` will also have it's own `IsMine()` function to determine whether a `CTxOut` belongs to that `ScriptPubKeyManager` (and thus the wallet itself). Each `ScriptPubKeyManager` maintains which address type(s) (legacy/bech32/p2sh-wrapped) it can return and will respond accordingly to `GetNewAddress()` calls.
+Within every `CWallet`, there will be one or more boxes, also called `ScriptPubKeyManager`. `ScriptPubKeyManager` will provide a `GetSigningProvider()` function which will return the `SigningProvider` for a given script to be used during signing. There will be additional functions added to it that allow for address fetching (e.g. `GetNewAddress()`). Each `ScriptPubKeyManager` will also have it's own `IsMine()` function to determine whether a `CTxOut` belongs to that `ScriptPubKeyManager` (and thus the wallet itself). Each `ScriptPubKeyManager` maintains which address type(s) (legacy/bech32/p2sh-wrapped) it can return and will respond accordingly to `GetNewAddress()` calls.
 
 ## `CWallet` changes
 
