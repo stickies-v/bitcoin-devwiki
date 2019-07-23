@@ -35,6 +35,10 @@ SigningProvider -> CBasicKeyStore (renamed) -> CWallet
 ```
 Combined with the addition of `ScriptPubKeyManager`, `CWallet` will be standalone and `ScriptPubKeyManager` will extend `CBasicKeyStore (renamed)`.
 
+## Give out Destinations from the wallet instead of keys (:heavy_check_mark: Done in https://github.com/bitcoin/bitcoin/pull/16237)
+
+Since `ScriptPubKeyManager` moves the wallet to an addresses and scripts model rather than keys, we need to give out the addresses (aka Destinations) from the wallet instead of keys. So RPCs like `getnewaddress` will fetch a Destinaion from the wallet rather than fetching and converting a key to a Destination. This will allow us to have different `ScriptPubKeyManager`s later that can have arbitrary scripts. To make the transition easier, everything that was getting keys from the wallet needs to be getting Destinations and the wallet needs to give out Destinations instead of keys.
+
 # See Also
 
 Wallet and Segwit: https://gist.github.com/sipa/125cfa1615946d0c3f3eec2ad7f250a2
