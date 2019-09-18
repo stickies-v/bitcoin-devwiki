@@ -1,4 +1,4 @@
-=head1 B # Preface
+# Preface
 
 This describes the wallet class structure changes that were discussed at CoreDev Amsterdam. A transcript of most of this discussion can be found [here](http://diyhpl.us/wiki/transcripts/bitcoin-core-dev-tech/2019-06-05-wallet-architecture/).
 
