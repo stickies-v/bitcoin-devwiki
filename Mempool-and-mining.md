@@ -1,4 +1,4 @@
-Text taken directly from slides used for Bitcoin OpTech talk by Suhas:
+Text taken directly from slides used for talk by Suhas:
 
 Mempool and Mining 
 The dynamic duo 
