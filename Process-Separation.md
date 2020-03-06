@@ -39,7 +39,7 @@ functionality to run in the different processes and communicate though pipes.
 
 - [ ] [#10102 Multiprocess bitcoin](https://github.com/bitcoin/bitcoin/pull/10102)
 
-### Stage 5: Ad-hoc process connection PRs
+### Step 5: Ad-hoc process connection PRs
 
 Changes adding `-ipcconnect` and `-ipcbind` options and allowing `bitcoin-node`
 to open a listening socket that allows incoming `bitcoin-gui` and `bitcoin-wallet`
