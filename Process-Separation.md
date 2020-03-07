@@ -7,7 +7,7 @@ A combined branch with all multiprocess changes can be found at
 with documentation in
 [`doc/multiprocess.md`](https://github.com/ryanofsky/bitcoin/blob/ipc-export/doc/multiprocess.md).
 
-For review purposes, the branch has been broken up into multiple PRs, major ones are listed and grouped below. 
+For review purposes, the branch has been broken up into multiple PRs, major ones are listed and grouped below.
 
 ### Step 1: Refactoring PRs
 
@@ -39,7 +39,7 @@ functionality to run in the different processes and communicate though pipes.
 
 - [ ] [#10102 Multiprocess bitcoin](https://github.com/bitcoin/bitcoin/pull/10102)
 
-### Step 5: Ad-hoc process connection PRs
+### Step 5: Ad-hoc connection PRs
 
 Changes adding `-ipcconnect` and `-ipcbind` options and allowing `bitcoin-node`
 to open a listening socket that allows incoming `bitcoin-gui` and `bitcoin-wallet`
