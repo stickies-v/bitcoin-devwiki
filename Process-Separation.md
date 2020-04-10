@@ -16,14 +16,14 @@ Refactoring PRs replace wallet code accessing node state directly, and GUI code 
 - [X] [#10244 Refactor: separate gui from wallet and node](https://github.com/bitcoin/bitcoin/pull/10244)
 - [X] [#14437 Refactor: Start to separate wallet from node](https://github.com/bitcoin/bitcoin/pull/14437)
 - [X] [#15288 Remove wallet -> node global function calls](https://github.com/bitcoin/bitcoin/pull/15288)
-- [ ] [#17999 refactor: Add ChainClient setMockTime, getWallets methods](https://github.com/bitcoin/bitcoin/pull/17999)
-- [ ] [#18278 interfaces: Describe and follow some code conventions](https://github.com/bitcoin/bitcoin/pull/18278)
+- [X] [#17999 refactor: Add ChainClient setMockTime, getWallets methods](https://github.com/bitcoin/bitcoin/pull/17999)
+- [X] [#18278 interfaces: Describe and follow some code conventions](https://github.com/bitcoin/bitcoin/pull/18278)
 
 ### Step 2: Build support PR
 
 The build PR adds new `bitcoin-gui` and `bitcoin-node` makefile targets, a new travis variant, and new configure and depends changes to build against the [libmultiprocess](https://github.com/chaincodelabs/libmultiprocess) library. These changes only affect build scripts, not C++ code.
 
-- [ ] [#16367 Multiprocess build support](https://github.com/bitcoin/bitcoin/pull/16367)
+- [X] [#16367 Multiprocess build support](https://github.com/bitcoin/bitcoin/pull/16367)
 
 ### Step 3: Blocking fix PRs
 
