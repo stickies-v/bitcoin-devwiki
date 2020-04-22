@@ -29,7 +29,7 @@ The build PR adds new `bitcoin-gui` and `bitcoin-node` makefile targets, a new t
 
 Performance improvements or fixes needed for multiprocess support.
 
-- [ ] [#17905 gui: Avoid redundant tx status updates](https://github.com/bitcoin/bitcoin/pull/17905)
+- [X] [#17905 gui: Avoid redundant tx status updates](https://github.com/bitcoin/bitcoin/pull/17905)
 
 ### Step 4: Spawned process PR
 
