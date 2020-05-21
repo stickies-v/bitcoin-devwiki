@@ -1,0 +1,5 @@
+The wallet uses heuristics to distinguish between unconfirmed, conflicted, and abandoned transactions. Transaction states are updated based on mempool and block connected notifications, and the wallet's incomplete view of dependencies between transactions looking at which transactions spend the same outputs.
+
+This is a placeholder page to help document limitations and ideas for improving the heuristics. [_FIXME: actually mention some requirements and ideas here._]
+
+The conflicted state was first added in [PR #7105 Keep track of explicit wallet conflicts instead of using mempool](https://github.com/bitcoin/bitcoin/pull/7105) and the abandoned state was added in [PR #7312 Add RPC call abandontransaction](https://github.com/bitcoin/bitcoin/pull/7312). Various changes and improvments have been made since then [_FIXME: mention notable changes here._], and there is an open PR for an improvement to handle mempool conflicts [#18600 Track conflicted transactions removed from mempool and fix UI notifications](https://github.com/bitcoin/bitcoin/pull/18600), which also has a lot of discussion about wider issues
