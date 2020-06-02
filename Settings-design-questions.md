@@ -20,6 +20,12 @@ In-progress wiki page to summarize design questions raised in various settings p
   - Treat as empty string, error, or something else?
 - Default handling negated list settings
   - Treat as empty list, error, or something else?
+- Drop `IsArgSet` method?
+  - No known use cases for calling `IsArgSet` method without also calling `IsArgNegated` method
+    - In cases where `IsArgSet` is called correctly with `IsArgNegated`, code can be simplified by using `GetArg*` calls instead
+    - In cases where `IsArgSet` is called correctly without `IsArgNegated`, there are strange behaviors and arguable bugs like `-norpcwallet` connecting to the `/wallet/0/` endpoint
+- Drop `ForceSetArg` and/or `SoftSetArg` methods?
+  - Unclear if these help more code clarity more than they hurt. There are no cases where they are ever needed to provide functionality. They are just a way of injecting external data into the ArgsManager object that could be stored equivalently (and maybe with less complexity and ambiguity) by respective ArgsManager clients.
 
 ### Pull requests
 
