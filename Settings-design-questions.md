@@ -2,7 +2,7 @@ In-progress wiki page to summarize design questions raised in various settings p
 
 ### UI design questions
 
-- Default precedence of command line, static config, dynamic settings
+- Precedence of command line, static config, dynamic settings
 - GUI handling conflicting settings
   - Keep "Options set in this dialog are overridden by the command line" overlay and show persistent value, or drop and show active value?
 - Static config feature to disable dynamic settings
