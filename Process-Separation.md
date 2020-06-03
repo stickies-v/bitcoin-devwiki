@@ -47,8 +47,8 @@ Changes adding `-ipcconnect` and `-ipcbind` options and allowing `bitcoin-node`
 to open a listening socket that allows incoming `bitcoin-gui` and `bitcoin-wallet`
 connections.
 
-- [ ] [`c83e46ccb4f` Add bitcoin-wallet -ipcconnect and bitcoin-node -ipcbind options](https://github.com/ryanofsky/bitcoin/commit/c83e46ccb4fb74b5a7b30d278d46dfbf721f9c91)
-- [ ] [`1a1c4e0c528` Add bitcoin-gui -ipcconnect option](https://github.com/ryanofsky/bitcoin/commit/1a1c4e0c528306877e24c8302a6f80ebc8c6fb93)
+- [ ] [`d4503123180` Add bitcoin-wallet -ipcconnect and bitcoin-node -ipcbind options](https://github.com/ryanofsky/bitcoin/commit/d450312318053190862a074c8cd170b8096b7487)
+- [ ] [`17c5f41a1fd` Add bitcoin-gui -ipcconnect option](https://github.com/ryanofsky/bitcoin/commit/17c5f41a1fd4d876ecfd0d7f261805076fe6c2e3)
 
 ### Followup changes
 
