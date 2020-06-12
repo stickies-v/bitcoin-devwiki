@@ -2,7 +2,7 @@
 
 This describes the wallet class structure changes that were discussed at CoreDev Amsterdam. A transcript of most of this discussion can be found [here](http://diyhpl.us/wiki/transcripts/bitcoin-core-dev-tech/2019-06-05-wallet-architecture/).
 
-# The New Structure (:construction: Work in Progress in https://github.com/bitcoin/bitcoin/pull/16341)
+# The New Structure (:heavy_check_mark: in https://github.com/bitcoin/bitcoin/pull/17261)
 
 The wallet is currently structured as a monolith. The `CWallet` class contains basically everything in the wallet - address generation, key generation, signing, transaction tracking, determining whether a transaction belongs to it, etc. The goal of this change will be to break out the address generation, key generation, signing, and ismine parts into a separate "box" within the wallet. This "box" will provide a standard interface for address generation, key fetching (for signing) and determining ismine and `CWallet` can have one or more of these boxes for the various address types (i.e. a default for legacy, one for bech32, and one to query for p2sh-segwit). Each box's internal implementation can vary which allows us to create one for the current wallet behavior and one for native descriptor wallets without requiring other significant changes to `CWallet`. This will also allow for future expandability
 
