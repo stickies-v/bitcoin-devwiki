@@ -13,11 +13,11 @@ For review purposes, the branch has been broken up into multiple PRs, major ones
 
 Refactoring PRs replace wallet code accessing node state directly, and GUI code accessing wallet and node state directly, with new code accessing state indirectly through explicitly-defined interface classes in [`src/interfaces/`](https://github.com/ryanofsky/bitcoin/tree/ipc-export/src/interfaces) that [don't assume interface callers and callees have access to the same memory space](https://github.com/ryanofsky/bitcoin/blob/ipc-export/doc/developer-notes.md#internal-interface-guidelines).
 
-- [X] [#10244 Refactor: separate gui from wallet and node](https://github.com/bitcoin/bitcoin/pull/10244)
-- [X] [#14437 Refactor: Start to separate wallet from node](https://github.com/bitcoin/bitcoin/pull/14437)
+- [X] [#10244 Separate gui from wallet and node](https://github.com/bitcoin/bitcoin/pull/10244)
+- [X] [#14437 Start to separate wallet from node](https://github.com/bitcoin/bitcoin/pull/14437)
 - [X] [#15288 Remove wallet -> node global function calls](https://github.com/bitcoin/bitcoin/pull/15288)
-- [X] [#17999 refactor: Add ChainClient setMockTime, getWallets methods](https://github.com/bitcoin/bitcoin/pull/17999)
-- [X] [#18278 interfaces: Describe and follow some code conventions](https://github.com/bitcoin/bitcoin/pull/18278)
+- [X] [#17999 Add ChainClient setMockTime, getWallets methods](https://github.com/bitcoin/bitcoin/pull/17999)
+- [X] [#18278 Describe and follow some code conventions](https://github.com/bitcoin/bitcoin/pull/18278)
 
 ### Step 2: Build support PR
 
@@ -30,7 +30,7 @@ The build PR adds new `bitcoin-gui` and `bitcoin-node` makefile targets, a new t
 
 Performance improvements or fixes needed for multiprocess support.
 
-- [X] [#17905 gui: Avoid redundant tx status updates](https://github.com/bitcoin/bitcoin/pull/17905)
+- [X] [#17905 Avoid redundant tx status updates](https://github.com/bitcoin/bitcoin/pull/17905)
 - [X] [#18587 Avoid wallet tryGetBalances calls in WalletModel::pollBalanceChanged](https://github.com/bitcoin/bitcoin/pull/18587)
 ### Step 4: Spawned process PR
 
@@ -47,8 +47,8 @@ Changes adding `-ipcconnect` and `-ipcbind` options and allowing `bitcoin-node`
 to open a listening socket that allows incoming `bitcoin-gui` and `bitcoin-wallet`
 connections.
 
-- [ ] [`d4503123180` Add bitcoin-wallet -ipcconnect and bitcoin-node -ipcbind options](https://github.com/ryanofsky/bitcoin/commit/d450312318053190862a074c8cd170b8096b7487)
-- [ ] [`17c5f41a1fd` Add bitcoin-gui -ipcconnect option](https://github.com/ryanofsky/bitcoin/commit/17c5f41a1fd4d876ecfd0d7f261805076fe6c2e3)
+- [ ] [#19460 Add bitcoin-wallet -ipcconnect option](https://github.com/bitcoin/bitcoin/pull/19460)
+- [ ] [#19461 Add bitcoin-gui -ipcconnect option](https://github.com/bitcoin/bitcoin/pull/19461)
 
 ### Followup changes
 
