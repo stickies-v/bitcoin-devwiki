@@ -1,5 +1,3 @@
-# Bitcoin Core p2p meetings
-
 **15:00 UTC alternate Tuesdays on the #bitcoin-core-dev channel on Freenode**
 
 Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss P2P PRs and issues in Bitcoin Core. Meetings will be held on:
