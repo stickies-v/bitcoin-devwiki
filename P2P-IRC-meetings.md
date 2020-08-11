@@ -15,7 +15,7 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 - 29 December 2020
 - etc
 
-(see https://calendar.google.com/calendar?cid=MTFwcXZkZ3BkOTlubGliZjliYTg2MXZ1OHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ for all Bitcoin Core irc meetings)
+[Google calendar](https://calendar.google.com/calendar?cid=MTFwcXZkZ3BkOTlubGliZjliYTg2MXZ1OHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ) for all Bitcoin Core irc meetings.
 
 ### Format
 
