@@ -2,18 +2,18 @@
 
 Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss P2P PRs and issues in Bitcoin Core. Meetings will be held on:
 
--	11 August 2020
--	25 August 2020
--	8 September 2020
--	22 September 2020
--	6 October 2020
--	20 October 2020
--	3 November 2020
--	17 November 2020
--	1 December 2020
--	15 December 2020
--	29 December 2020
--	etc
+- 11 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-11-15.00.html))
+- 25 August 2020
+- 8 September 2020
+- 22 September 2020
+- 6 October 2020
+- 20 October 2020
+- 3 November 2020
+- 17 November 2020
+- 1 December 2020
+- 15 December 2020
+- 29 December 2020
+- etc
 
 (see https://calendar.google.com/calendar?cid=MTFwcXZkZ3BkOTlubGliZjliYTg2MXZ1OHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ for all Bitcoin Core irc meetings)
 
