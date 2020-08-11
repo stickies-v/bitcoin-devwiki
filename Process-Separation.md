@@ -59,3 +59,5 @@ Steps 1, 2, and 3 above can proceed simultaneously, but steps 4 and 5 depend on 
 ### Links
 - [Presentation](https://docs.google.com/presentation/d/1AeJ-7gD-dItUgs5yH-HoEzLvXaEWe_2ZiGUUxYIXcws/edit) as of [pr/ipc.21](https://github.com/ryanofsky/bitcoin/releases/tag/pr%2Fipc.21) ([commits](https://github.com/ryanofsky/bitcoin/compare/master...pr/ipc.21)) 
 - [Update](https://docs.google.com/presentation/d/1h47dU2g3__0YQ_bd0pxZ_eYqpxC4JkrnrAsV032HXGU/edit)
+- [#19160 Review club meeting notes](https://bitcoincore.reviews/19160)
+- [_Stack Exchange_ answer on process separation benefits](https://bitcoin.stackexchange.com/questions/98398/what-is-the-motivation-behind-russell-yanofskys-work-to-separate-bitcoin-core-i)
