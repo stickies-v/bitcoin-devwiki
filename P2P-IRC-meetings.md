@@ -26,3 +26,21 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 1. **Focus and priorities**: Everyone will have a chance to share what they're working on and prioritizing.
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
+
+##### 11 Aug 2020
+
+- Adam Jonas: Opt-in review begging experiment
+- aj p2p things:
+  - taproot relay (non-standard input, 0.19 #19681 0.20 #19680 ; wtxid relay backport #19606 ; anything else?)
+  - any other wtxid cleanups?
+  - tx relay overhaul #19184
+  - refactors .. so many of them :-/
+  - update / automate [https://github.com/users/ajtowns/projects/1](https://github.com/users/ajtowns/projects/1)
+  - better p2p testing? #14210 / #19316
+  - rest are backlog for me:
+    - package relay? #14895
+    - erlay #18261 (needs rebase! phew!)
+    - does mempool count? epoch mempool stuff...
+    - dynamically throttle min-fee-bump for RBF depending on network activity...
+    - support absurdly low fee txs #13990
+    - parallel connection attempts when starting #15502
