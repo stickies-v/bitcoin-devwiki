@@ -27,6 +27,10 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
+##### 25 Aug 2020
+
+_Please update this wiki page with proposed topics!_
+
 ##### 11 Aug 2020
 
 - Adam Jonas: Opt-in review begging experiment
