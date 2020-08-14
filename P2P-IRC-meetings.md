@@ -2,7 +2,7 @@
 
 Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss P2P PRs and issues in Bitcoin Core. Meetings will be held on:
 
-- 11 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-11-15.00.html)), [summary](#11-aug-2020)
+- 11 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-11-15.00.html)), ([summary](#11-aug-2020))
 - 25 August 2020
 - 8 September 2020
 - 22 September 2020
@@ -27,16 +27,16 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-#### 25 Aug 2020
+### 25 Aug 2020
 
 _Please update this wiki page with proposed topics!_
 
-#### 11 Aug 2020
+### 11 Aug 2020
 
 Date: 2020-08-11 15:00:07 UTC  
 Host: jnewbery
 
-##### Topic: Individual priorities
+#### Topic: Individual priorities
 
 aj:
   - taproot relay (non-standard input, 0.19 #19681 0.20 #19680 ; wtxid relay backport #19606 ; anything else?)
@@ -101,7 +101,7 @@ vasild:
 
 ajonas also created a [longer list organized by theme](https://gist.github.com/adamjonas/85137e2623f12450f1978d291a28d680).
 
-##### Topic: Opt-in review begging experiment
+#### Topic: Opt-in review begging experiment
 
 ajonas read over [core dev tech transcript on priorities from 2018](https://diyhpl.us/wiki/transcripts/bitcoin-core-dev-tech/2018-03-07-priorities/), which lists some possibilities for how to better coordinate review. Since then, he has experimented with asking for reviews directly. [The results](https://docs.google.com/spreadsheets/d/1INEN1RrZTsu-V4GH6kr0aVhFOVY8nGgx0ajHf3NEYlc/) should be taken with a grain of salt. It was also noted that merge speed may not be a very good metric, which ajonas agreed with.
 
@@ -109,7 +109,7 @@ ajonas expressed interest in expanding his experiments if any contributors would
 
 A related comment by fanquake was that "ACK recap" comments can sometimes be misleading. There be confusion as to why a PR which looks like it has *lots* of ACKs, maybe after a [PR review-club](https://bitcoincore.reviews/), hasn't been merged. (amiti, jonatack, and ajonas disagreed and/or asked for further clarification)
 
-##### Topic: feature negotiation (new bip proposal from sdaftuar)
+#### Topic: feature negotiation (new bip proposal from sdaftuar)
 
 sdaftuar plans to send a new [BIP proposal](https://github.com/sdaftuar/bips/blob/2020-08-generalized-feature-negotiation/bip-p2p-feature-negotiation.mediawiki) to the mailing list soon.
 
