@@ -111,7 +111,7 @@ A related comment by fanquake was that "ACK recap" comments can sometimes be mis
 
 #### Topic: feature negotiation (new bip proposal from sdaftuar)
 
-sdaftuar plans to send a new [BIP proposal](https://github.com/sdaftuar/bips/blob/2020-08-generalized-feature-negotiation/bip-p2p-feature-negotiation.mediawiki) to the mailing list soon.
+sdaftuar plans to send a new [BIP proposal](https://github.com/sdaftuar/bips/blob/2020-08-generalized-feature-negotiation/bip-p2p-feature-negotiation.mediawiki) to the mailing list soon [edit: [mailing list post](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2020-August/018084.html)].
 
 To summarize, [wtxid-relay](https://github.com/bitcoin/bitcoin/pull/18044) uses a new feature-negotiation method (exchanging messages between version and verack) that this BIP proposes to codify for future use. To do so, we need to ensure software on the network knows to ignore unknown messages pre-verack, which is the undocumented de facto standard today.
 
