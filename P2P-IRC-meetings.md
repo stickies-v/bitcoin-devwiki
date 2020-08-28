@@ -30,7 +30,7 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 ### 8 Sept 2020
 _Please update this wiki page with proposed topics!_
 
-Follow-up on "What would a good transaction propagation framework look like? See a first draw Transactions propagation design goals [#19820](https://github.com/bitcoin/bitcoin/issues/19820) (ariard)
+Follow-up on last meeting's "What would a good transaction propagation framework look like? See a first draw Transactions propagation design goals [#19820](https://github.com/bitcoin/bitcoin/issues/19820) (ariard)
 
 ## 25 Aug 2020
 
