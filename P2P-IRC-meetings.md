@@ -4,7 +4,7 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 - 11 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-11-15.00.html)), ([summary](#11-aug-2020))
 - 25 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-25-15.00.log.html)), ([summary](#25-aug-2020))
-- 8 September 2020
+- 8 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-08-15.00.log.html)), ([summary](#8-sept-2020))
 - 22 September 2020
 - 6 October 2020
 - 20 October 2020
@@ -27,10 +27,54 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-### 8 Sept 2020
-_Please update this wiki page with proposed topics!_
+## 22 Sept 2020
 
-Follow-up on last meeting's "What would a good transaction propagation framework look like? See a first draw Transactions propagation design goals [#19820](https://github.com/bitcoin/bitcoin/issues/19820) (ariard)
+Follow-up on "What would a good transaction propagation framework look like? See a first draw Transactions propagation design goals [#19820](https://github.com/bitcoin/bitcoin/issues/19820) (ariard)
+
+## 8 Sept 2020
+
+### Topic: priorities
+
+gleb: opened 4 addr-related Prs ([#19843](https://github.com/bitcoin/bitcoin/pull/19843), [#19869](https://github.com/bitcoin/bitcoin/pull/19869), [#19906](https://github.com/bitcoin/bitcoin/pull/19906), [#19860](https://github.com/bitcoin/bitcoin/pull/19860)) over the last 10 days. Addr needs attention, and his future work is blocked. Some of them are refactoring, others have important implications and bug fixes. [#19843](https://github.com/bitcoin/bitcoin/pull/19843) is a little refactor which will unlock his future work.
+
+jnewbery: Still encouraged review of the remaining backport #19606. It's not a totally clean backport, but it shouldn't be impossible to review.
+
+jonatack: Quick reminder to review the bip155 and bip324 implementation PRs and it would be great to have #19643 in master, and it seems RFM.
+
+hebasto: [#17785](https://github.com/bitcoin/bitcoin/pull/17785).
+
+sdaftuar: I'd love review on [#19858](https://github.com/bitcoin/bitcoin/pull/19858).
+
+### Topic: netgroup diversity of outbound peers (sdaftuar)
+
+This discussion was originally suggested by sdaftuar because some of the suggestions in [#19860](https://github.com/bitcoin/bitcoin/pull/19860) had some non-obvious changes. This patch prevents short-lived ADDR_FETCH and FEELER connections from affecting other peer selection and prevents BLOCK_RELAY connections from affecting other full-relay peer selection. This is because block-relay-connections should be more private (we rely on them for anti-eclipse). The disadvantage of this change is that it reduces diversity as a whole since new full-relay connections may be in the same netgroup with existent block-relay-only connections. This last point is what sdaftuar thought should be the primary consideration, as that seems like it has the most significant effect on Bitcoin Core's partition-resistance since generally speaking, more diversity is assumed to be better.
+
+#### The attack scenario:
+An adversary controlling a victim's AddrMan (e.g. by occupying all of the full-relay slots) may learn which netgroups existing block-relay-only connections are occupying. This knowledge might allow the attacker to glean who are the node's peers and possibly evict the victim from them.
+
+PR #19860 attempts to address the scenario where a node has lost all of the full connections to a poisoned AddrMan, but 2 block-relay-only are still healthy. sdaftuar's intuition was that if the AddrMan starts healthy, then the node would be OK due to the [tried-table-collision resolution algorithm](https://github.com/bitcoin/bitcoin/commit/e68172ed9fd0e35d4e848142e9b36ffcc41de254#diff-546affdc61603f38c92524326c9e0bf7R537) (though he was not 100% on that intuition). He also offered the opinion that it wasn't worth optimizing for the scenario where the AddrMan is already poisoned, but the two block-relay only connections remained healthy. Since block-relay peers ignore Addr messages, healthy block-relay-only connections will not help sanitize the AddrMan.
+
+note: jnewbery wondered whether anchor block-relay-only connections ([#17428](https://github.com/bitcoin/bitcoin/pull/17428)) might make the above scenario of compromised full connections and healthy block-relay-only connections more likely. amiti and ariard thought it might.
+
+current protections: Each node has its own way of dividing the address space into netgroups. This is known as keyed-netgroups.
+
+#### Goals of block-relay-only connections:
+This discussion revisited the goals of block-relay-only connections. sdaftuar stated that the goals of block-only connections are twofold: the primary goal is to increase the difficulty/cost of an adversary required to carry out a network partitioning attack against a target node without requiring the bandwidth overhead of full connections. The specific motivation was that Bitcoin Core's existing full-relay connections leak topology information (and fixing that is sort difficult if not eventually hopeless).
+
+The second goal is more amorphous. It's easier to optimize for anti-DoS/robustness/design tradeoffs if there is an individual focus on the different aspects of network traffic. For instance, the design goals around transaction relay may lead to different peering strategies than the design goals around block-only relay. Separating logic for the connection types also reduces potential privacy/exploitability concerns by preventing leak between them. sdaftuar noted, however, that it seems there is a long way to go from truly separating connection types since AddrMan remains firmly in the middle.
+
+#### Connection diversity:
+gleb brought up that block-relay-only connections weren't originally intended to improve diversity, but this ended up being a substantial side-effect benefit. sdaftuar contended that taking the diversity benefit away for the sake of privacy is hard to imagine, without a concrete understanding of where the privacy would be lost.
+
+sipa clarified that the value of connection diversity for full + block-only connections are for partition resistance, while full connections alone add actual short-term efficient connectivity. sdaftuar added that achieving maximum diversity for blocks-only and full connections are sufficient to achieve maximum diversity for full connections alone.
+
+#### Ideas to explore:
+sipa wondered if addr-only connections would be a useful addition to block-only and transaction-relay connections to which sdaftuar offered that he had an implementation idea for syncing the chain tip with more peers by coupling it with AddrMan updates. This would result in block-relay-only connections for eclipse prevention, addr+blocks connections for low-bandwidth extra diversity, and transaction-relay connections for transaction-relay.
+
+#### Resolution:
+In this PR, gleb felt comfortable sacrificing the diversity of block-relay-only connections because he believed it had so little effect. The degradation of diversity would be that the two existing block-relay-only connections _may_ overlap with new full relay connections. If more block-relay-only connections were introduced in the future, 2 of them could be private while n - 2 of them could overlap with the full connections. jnewbery pointed out that ultimately a worse case effect of this change would be that it reduces the level of connection diversity to where it was before block-relay-only peers were introduced.
+
+sdaftuar thought that this change's value ultimately came down to whether there is a belief that the attack of observing keyed-netgroup collisions from observed outbound connections is practical. And so, gleb suggested that we keep the current logic in place until more there are block-relay-only connections and then designate some of them to privacy and some portion of them to connection diversity.
 
 ## 25 Aug 2020
 
