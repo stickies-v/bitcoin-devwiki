@@ -20,7 +20,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 , there maybe race conditions or deadlocks
 #### Disadvantages of 1A Approach
 
-- Not supported by all compilers
+- Compile time checks always run on CI but not supported by all compilers locally
 - May not detect race conditions or deadlocks if compile time checks are broken or disabled and thread sanitizer is broken or disabled
 
 #### Advantages of 2A Approach
