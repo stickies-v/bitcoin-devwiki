@@ -17,7 +17,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 - Gets rid of `AssertLockHeld` calls which the compiler guarantees can never trigger at runtime, and which are not applied consistently in existing code
 - Gets rid of `LockAssertion` class which is easily confused with `AssertLockHeld`, declares unused variable names, reports line numbers incorrectly, and is [broken according to clang developers](https://reviews.llvm.org/D87629#2272676) ("please don't use ACQUIRE when the capability is assumed to be held previously.")
 - Use runtime checks infrequently only where compile time checks don't work, and only requires a single assert macro `AssertLockHeld` 
-, there maybe race conditions or deadlocks
+
 #### Disadvantages of 1A Approach
 
 - Compile time checks always run on CI but not supported by all compilers locally
