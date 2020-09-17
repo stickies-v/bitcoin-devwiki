@@ -2,13 +2,13 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 ### Summary of approaches
 
-- **1A** [#19865](https://github.com/bitcoin/bitcoin/pull/19865): Gets rid of runtime asserts that are redundant with compile time checks, only keeping them in cases where compile time checks don't work. Gets rid of multiple assert implementations. `AssertLockHeld` is the only one and it is restored to have the same definition it had from [2018](https://github.com/bitcoin/bitcoin/pull/13423) until [recently](https://github.com/bitcoin/bitcoin/pull/19668).
+- **1A** *One assert* [#19865](https://github.com/bitcoin/bitcoin/pull/19865): Gets rid of runtime asserts that are redundant with compile time checks, only keeping them in cases where compile time checks don't work. Gets rid of multiple assert implementations. `AssertLockHeld` is the only one and it is restored to have the same definition it had from [2018](https://github.com/bitcoin/bitcoin/pull/13423) until [recently](https://github.com/bitcoin/bitcoin/pull/19668).
 
-- **2A** [#19918](https://github.com/bitcoin/bitcoin/pull/19918): Keeps runtime checks and uses two assert implementations instead of one: `AssertLockHeld` and `WeaklyAssertLockHeld`. The names are intentionally chosen so people favor the strong assertion instead of the weak assertion whenever possible, and there's never a question about which is better to use.
+- **2A** *Two asserts* [#19918](https://github.com/bitcoin/bitcoin/pull/19918): Keeps runtime checks and uses two assert implementations instead of one: `AssertLockHeld` and `WeaklyAssertLockHeld`. The names are intentionally chosen so people favor the strong assertion instead of the weak assertion whenever possible, and there's never a question about which is better to use.
 
-- **PA** [#19929](https://github.com/bitcoin/bitcoin/pull/19929): PR was closed, but this was a more proper approach that applied thread safety annotations conservatively to avoid cases where the compiler might make incorrect assumptions.
+- **PA** *Proper asserts* [#19929](https://github.com/bitcoin/bitcoin/pull/19929): PR was closed, but this was a more proper approach that applied thread safety annotations conservatively to avoid cases where the compiler might make incorrect assumptions.
 
-- **AJA** [[1]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r485102739)[[2]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r488282255)[[3]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r490472714): Adds `LOCK_ALREADY_HELD` macro, _unclear what summary of this approach is_
+- **AJA** *AJ asserts* [[1]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r485102739)[[2]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r488282255)[[3]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r490472714): Adds `LOCK_ALREADY_HELD` macro, _unclear what summary of this approach is_
 
 ### Comparison of approaches
 
