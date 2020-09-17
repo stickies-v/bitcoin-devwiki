@@ -42,6 +42,8 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
   | 1A approach                                                  | AssertLockHeld                  | _(doesn't exist)_                  |
   | 2A approach                                                  | WeaklyAssertLockHeld            | AssertLockHeld                     |
   | AJA approach                                                 | LOCK_ALREADY_HELD               | AssertLockHeld                     |     
+  | Alternate suggestion                                         | RuntimeAssertLockHeld           | AssertLockHeld                     |
+  | Alternate suggestion                                         | RuntimeAssertLockHeld           | CompileTimeAssertLockHeld          |
   | Alternate suggestion                                         | AssertLockHeld                  | RedundantlyAssertLockHeld          |
   | Other suggestions?                                           |                                 |                                    |
 
