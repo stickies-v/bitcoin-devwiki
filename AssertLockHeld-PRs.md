@@ -1,4 +1,4 @@
-Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.com/bitcoin/bitcoin/blob/be3af4f31089726267ce2dbdd6c9c153bb5aeae1/src/sync.h#L79)
+Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.com/bitcoin/bitcoin/blob/be3af4f31089726267ce2dbdd6c9c153bb5aeae1/src/sync.h#L79). Please edit this page!
 
 ### Summary of approaches
 
@@ -8,7 +8,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 - **PA** [#19929](https://github.com/bitcoin/bitcoin/pull/19929): PR was closed, but this was a more proper approach that applied thread safety annotations conservatively to avoid cases where the compiler might make incorrect assumptions.
 
-- **AJA** [[1]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r485102739) and [[2]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r488282255): Adds `LOCK_ALREADY_HELD` macro, _unclear what summary of this approach is_
+- **AJA** [[1]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r485102739)[[2]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r488282255)[[3]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r490472714): Adds `LOCK_ALREADY_HELD` macro, _unclear what summary of this approach is_
 
 ### Comparison of approaches
 
