@@ -8,7 +8,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 - **PA** *Proper asserts* [#19929](https://github.com/bitcoin/bitcoin/pull/19929): PR was closed, but this was a more proper approach that applied thread safety annotations conservatively to avoid cases where the compiler might make incorrect assumptions.
 
-- **AJA** *AJ asserts* [[1]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r485102739)[[2]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r488282255)[[3]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r490472714): Adds `LOCK_ALREADY_HELD` macro, _unclear what summary of this approach is_
+- **AJA** *AJ asserts* [[1]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r485102739)[[2]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r488282255)[[3]](https://github.com/bitcoin/bitcoin/pull/19918#discussion_r490472714): Same as 2A, except calls it  `LOCK_ALREADY_HELD` instead of `WeaklyAssertLockHeld`.
 
 ### Comparison of approaches
 
@@ -56,6 +56,11 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 - More complexity, various practical drawbacks [#19929 (comment)](https://github.com/bitcoin/bitcoin/pull/19929#issuecomment-690358411)
 
 #### Advantages of AJA Approach
+
+- If you need to use a lock, you have three options:
+    * annotate the function with `EXCLUSIVE_LOCKS_REQUIRED(cs)` and call `AssertLockHeld(cs)`
+    * write `LOCK(cs)` to acquire the lock
+    * write `LOCK_ALREADY_HELD(cs)` if the lock is provably already held any time the function is called, but the function can't be annotated with EXCLUSIVE_LOCKS_REQUIRED
 
 #### Disadvantages of AJA Approach
 - Assert name doesn't contain the word assert.
