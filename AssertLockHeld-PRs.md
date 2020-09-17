@@ -33,13 +33,13 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 #### Disadvantages of 2A Approach
 
 - Requires two different assert implementations instead of one and more complicated developer guidelines.
-- `WeaklyAssertLockHeld` name may be [confusing](http://www.erisian.com.au/bitcoin-core-dev/log-2020-09-17.html#l-644). Since both asserts do exactly the same thing at runtime and only compile time annotations differ, different naming schemes are possible
+- `WeaklyAssertLockHeld` name may be [confusing](http://www.erisian.com.au/bitcoin-core-dev/log-2020-09-17.html#l-644). Since both asserts do exactly the same thing at runtime and only compile time annotations differ, different naming schemes are possible. Feel free to add suggestions below:
 
   |                                                              | ASSERT_EXCLUSIVE_LOCK assertion | EXCLUSIVE_LOCKS_REQUIRED assertion |
-  |----------------------------|---------------------------------|------------------------------------|
-  | Pre-[#19668](https://github.com/bitcoin/bitcoin/pull/19668)  | AssertLockHeld & LockAnnotation | (doesn't exist)                    |
+  |--------------------------------------------------------------|---------------------------------|------------------------------------|
+  | Pre-[#19668](https://github.com/bitcoin/bitcoin/pull/19668)  | AssertLockHeld & LockAnnotation | _(doesn't exist)_                  |
   | Post-[#16668](https://github.com/bitcoin/bitcoin/pull/19668) | LockAnnotation                  | AssertLockHeld                     |
-  | 1A approach                                                  | AssertLockHeld                  | (doesn't exist)                    |
+  | 1A approach                                                  | AssertLockHeld                  | _(doesn't exist)_                  |
   | 2A approach                                                  | WeaklyAssertLockHeld            | AssertLockHeld                     |
   | AJA approach                                                 | LOCK_ALREADY_HELD               | AssertLockHeld                     |     
   | Alternate suggestion                                         | AssertLockHeld                  | RedundantlyAssertLockHeld          |
