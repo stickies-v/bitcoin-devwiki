@@ -46,4 +46,4 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 #### Disadvantages of AJA Approach
 - Assert name doesn't contain the word assert.
-- Two assert calls have same behavior at runtime, and it may be unclear which call to prefer
+- Two assert calls have same behavior at runtime, and it may be unclear which call to prefer if they both work at compile time
