@@ -88,7 +88,9 @@ I (@ajtowns) think there are four underlying issues here:
   | Alternate suggestion                                         | AssertLockHeld                  | RedundantlyAssertLockHeld          |
   | Alternate suggestion                                         | UnprovenAssertLockHeld          | ProvenAssertLockHeld               |
   | Alternate suggestion                                         | UnsafelyAssertLockHeld          | AssertLockHeld                     |
+  | Alternate suggestion                                         | UnprovablyAssertLockHeld        | AssertLockHeld                     |
   | Other suggestions?                                           |                                 |                                    |
+
 
 #### Advantages of PA Approach
 
