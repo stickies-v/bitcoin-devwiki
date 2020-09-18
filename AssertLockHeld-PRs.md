@@ -16,7 +16,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 - Currently we have both [`AssertLockHeld`](https://github.com/bitcoin/bitcoin/blob/be3af4f31089726267ce2dbdd6c9c153bb5aeae1/src/sync.h#L79) and [`LockAssertion`](https://github.com/bitcoin/bitcoin/blob/be3af4f31089726267ce2dbdd6c9c153bb5aeae1/src/sync.h#L357) and it is confusing what the differences are between them and when each should be used.
 
-- AssertLockHeld is currently used haphazardly in the code. The developer notes [recommend](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#threads-and-synchronization) that it is used every place that EXCLUSIVE_LOCK_FUNCTION is used, but the recommendation is not enforced or consistently followed. (There is also disagreement about whether the recommendation is useful on its merits. The asserts may help with readability and may help detect bugs during development when compiling locally, but they add verbosity to the code and catch fewer errors than the static checks enforced by the project's QA)
+- AssertLockHeld is currently used haphazardly in the code. The developer notes [recommend](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#threads-and-synchronization) that it is used every place that EXCLUSIVE_LOCK_FUNCTION is used, but the recommendation is not enforced or consistently followed. (There is also disagreement about whether the recommendation is useful on its merits. The asserts may help with readability and may help detect bugs during development when compiling locally, but they add verbosity to the code and catch fewer errors than the static checks enforced by the project's CI)
 
 - LockAssertion class is using the [EXCLUSIVE_LOCK_FUNCTION](https://clang.llvm.org/docs/ThreadSafetyAnalysis.html#acquire-acquire-shared-release-release-shared-release-generic) acquire annotation incorrectly: ["please don't use ACQUIRE when the capability is assumed to be held previously"](https://reviews.llvm.org/D87629#2272676)
 
@@ -33,8 +33,8 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 #### Disadvantages of 1A Approach
 
-- Will only detect problems locally if using Clang and configured with `--enable-debug` (not enabled by default). But checks are enforced on every PR and on the master branch in QA.
-- Problems are reported in the form of compile time warnings which can be missed unless configured with `--enable-werror` (not enabled by default locally, but enabled in QA).
+- Will only detect problems locally if using Clang and configured with `--enable-debug` (not enabled by default). But checks are enforced on every PR and on the master branch in CI.
+- Problems are reported in the form of compile time warnings which can be missed unless configured with `--enable-werror` (not enabled by default locally, but enabled in CI).
 - May not detect problems if [Clang has bugs](https://github.com/bitcoin/bitcoin/pull/19865#issuecomment-687604066). Clang is spooky. There is some strange behavior that the amount of warnings produced [depends on the order of the attributes](https://github.com/bitcoin/bitcoin/pull/19668#discussion_r467244459) and static thread analysis has [known limitations](https://clang.llvm.org/docs/ThreadSafetyAnalysis.html#limitations).
 - Despite being a 3-line scripted diff, it is an intrusive patch that touches lots of code.
 - Current implementation makes AssertLockHeld less consistent with AssertLockNotHeld. Former tells the compiler the capability is held, while latter checks that the compiler already knows the capability is not held. This inconsistency just happens because AssertLockNotHeld isn't updated by the current PR. But it could be be updated if desired to make a slightly different safety/flexibility/consistency choice.
