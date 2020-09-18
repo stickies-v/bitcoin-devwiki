@@ -59,10 +59,12 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 #### Advantages of AJA Approach
 
 - If you need to use a lock, you have three options:
-    * annotate the function with `EXCLUSIVE_LOCKS_REQUIRED(cs)` and call `AssertLockHeld(cs)`
+    * annotate the function with `EXCLUSIVE_LOCKS_REQUIRED(cs)` (and call `AssertLockHeld(cs)`)
     * write `LOCK(cs)` to acquire the lock
     * write `LOCK_ALREADY_HELD(cs)` if the lock is provably already held any time the function is called, but the function can't be annotated with EXCLUSIVE_LOCKS_REQUIRED
+  In my opinion, calling `LOCK_ALREADY_HELD(cs)` guards the code following it in much the same was as `LOCK(cs)` does -- it's just that it's a guard that's validated manually prior to compile time, rather than at runtime by waiting on a mutex.
+- Capitalising it draws attention, which is appropriate given the logic that the lock is always held needs to be validated by hand.
 
 #### Disadvantages of AJA Approach
-- Assert name doesn't contain the word assert.
-- Both assert implementations have the exact same behavior at runtime, but different names. It's may be confusing which assert is better to use if both are accepted by the compiler.
+- Assert name doesn't contain the word assert. (Could call it LOCK_ASSERTION(cs) I guess)
+- Both assert implementations have the exact same behavior at runtime, but different names. It's may be confusing which assert is better to use if both are accepted by the compiler.  (Using a dummy SCOPED_LOCKABLE instead of ASSERT_EXCLUSIVE_LOCK ensures that AssertLockHeld and the current LockAssertion can only be used when appropriate; you'll get a compile error if AssertLockHeld is invoked when the lock isn't held, and likewise if you create a LockAssertion when the lock is held, or if you LOCK the mutex later in the same scope as the LockAssertion)
