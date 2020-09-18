@@ -57,12 +57,12 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
   |--------------------------------------------------------------|---------------------------------|---------------------------------| -------------- |
   | Pre-[#13423](https://github.com/bitcoin/bitcoin/pull/13423)  |                                 |                                 | AssertLockHeld |
   | Post-[#13423](https://github.com/bitcoin/bitcoin/pull/13423) | AssertLockHeld                  |                                 |                |
-  | Post-[#14437](https://github.com/bitcoin/bitcoin/pull/14437) | AssertLockHeld & LockAnnotation |                                 |                |
-  | Post-[#16034](https://github.com/bitcoin/bitcoin/pull/16034) | AssertLockHeld & LockAssertion  |                                 |                |
+  | Post-[#14437](https://github.com/bitcoin/bitcoin/pull/14437) | AssertLockHeld & LockAnnotation*|                                 |                |
+  | Post-[#16034](https://github.com/bitcoin/bitcoin/pull/16034) | AssertLockHeld & LockAssertion* |                                 |                |
   | Post-[#19668](https://github.com/bitcoin/bitcoin/pull/19668) | LockAssertion                   | AssertLockHeld                  |                |
   | 1A approach                                                  | AssertLockHeld                  |                                 |                |
   | 2A approach                                                  | WeaklyAssertLockHeld            | AssertLockHeld                  |                |
-  | QFA approach                                                 | LOCK_ASSERTION                  | AssertLockHeld                  |                |
+  | QFA approach                                                 | LOCK_ASSERTION*                 | AssertLockHeld                  |                |
   | Alternate suggestion                                         | LOCK_ALREADY_HELD               | AssertLockHeld                  |                |
   | Alternate suggestion                                         | RuntimeAssertLockHeld           | AssertLockHeld                  |                |
   | Alternate suggestion                                         | RuntimeAssertLockHeld           | CompileTimeAssertLockHeld       |                |
@@ -71,6 +71,8 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
   | Alternate suggestion                                         | UnsafelyAssertLockHeld          | AssertLockHeld                  |                |
   | Alternate suggestion                                         | UnprovablyAssertLockHeld        | AssertLockHeld                  |                |
   | Other suggestions?                                           |                                 |                                 |                |
+
+  (*) LockAnnotation, LockAssertion, and LOCK_ASSERTION are shown in the ASSERT_EXCLUSIVE_LOCK column of this table because they emulate ASSERT_EXCLUSIVE_LOCK functions. But the emulation isn't 100%, and has a few differences (see QFA Approach sections below for details)
 
 #### Advantages of PA Approach
 
@@ -83,6 +85,9 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 #### Advantages of QFA Approach
 
 - Addresses LockAssertion usability issues
+- Unlike other approaches which remove LockAssertion class replacing with ASSERT_EXCLUSIVE_LOCK function, keeping the class has some advantages
+  - LockAssertion gives a compile error if it's used unnecessarily (`init.cpp:1548:13: error: acquiring mutex 'cs_main' that is already held [-Werror,-Wthread-safety-analysis] ... init.cpp:1547:64: note: mutex acquired here`)
+  - LockAssertion doesn't hide errors in some cases that we probably don't care about (assertion is inside a try block, an exception prior to the assertion is caught via a catch clause and the lock might not be held via that path, and something needing the lock is accessed after the try/catch block)
 - Fixes easy bugs quickly
 - Doesn't make anything worse
 
@@ -90,7 +95,6 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 - Doesn't address LockAssertion annotation misuse
 - Additional changes needed / rebasing needed on other PRs.
-- Introduces a new macro
 
 #### Advantages of NA Approach
 
