@@ -45,6 +45,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
   | Alternate suggestion                                         | RuntimeAssertLockHeld           | AssertLockHeld                     |
   | Alternate suggestion                                         | RuntimeAssertLockHeld           | CompileTimeAssertLockHeld          |
   | Alternate suggestion                                         | AssertLockHeld                  | RedundantlyAssertLockHeld          |
+  | Alternate suggestion                                         | UnprovenAssertLockHeld          | ProvenAssertLockHeld               |
   | Other suggestions?                                           |                                 |                                    |
 
 #### Advantages of PA Approach
