@@ -6,7 +6,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 - **2A** *Two asserts* [#19918](https://github.com/bitcoin/bitcoin/pull/19918): Keeps runtime checks and uses two assert implementations instead of one: `AssertLockHeld` and `WeaklyAssertLockHeld`. The names are intentionally chosen so people favor the strong assertion instead of the weak assertion whenever possible, and there's never a question about which is better to use.
 
-- **PA** *Proper asserts* [#19929](https://github.com/bitcoin/bitcoin/pull/19929): PR was closed, but this was a more proper approach that applied thread safety annotations conservatively to avoid cases where the compiler might make incorrect assumptions.
+- **PA** *Proper asserts* [#19929](https://github.com/bitcoin/bitcoin/pull/19929): An approach that applied thread safety annotations as documented to avoid cases where the compiler might make incorrect assumptions.
 
 - **QF** *Quick fix* [#19970](https://github.com/bitcoin/bitcoin/pull/19970) just fixes the bugs in LockAssertion (so no need for unused variable names, and file/line numbers are reported correctly).
 
@@ -88,8 +88,8 @@ I (@ajtowns) think there are four underlying issues here:
 
 #### Advantages of PA Approach
 
-- More conservative and potentially avoids problems with false assumptions made by new compilers or future compiler versions
+- Uses thread safety annotations as documented and potentially avoids problems with false assumptions made by new compilers or future compiler versions
 
 #### Disadvantages of PA Approach
 
-- More complexity, various practical drawbacks [#19929 (comment)](https://github.com/bitcoin/bitcoin/pull/19929#issuecomment-690358411)
+- Various practical drawbacks [#19929 (comment)](https://github.com/bitcoin/bitcoin/pull/19929#issuecomment-690358411)
