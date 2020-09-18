@@ -16,13 +16,11 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 - Currently we have both [`AssertLockHeld`](https://github.com/bitcoin/bitcoin/blob/be3af4f31089726267ce2dbdd6c9c153bb5aeae1/src/sync.h#L79) and [`LockAssertion`](https://github.com/bitcoin/bitcoin/blob/be3af4f31089726267ce2dbdd6c9c153bb5aeae1/src/sync.h#L357) and it is confusing what the differences are between them and when each should be used.
 
-- LockAssertion class is using the [EXCLUSIVE_LOCK_FUNCTION](https://clang.llvm.org/docs/ThreadSafetyAnalysis.html#acquire-acquire-shared-release-release-shared-release-generic) annotation incorrectly: ["please don't use [ACQUIRE] when the capability is assumed to be held previously"](https://reviews.llvm.org/D87629#2272676)
+- AssertLockHeld is currently used haphazardly in the code. The developer notes [recommend](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#threads-and-synchronization) that it is used every place that EXCLUSIVE_LOCK_FUNCTION is used, but the recommendation is not enforced or consistently followed. (There is also disagreement about whether the recommendation is useful on its merits. The asserts may help with readability and may help detect bugs during development when compiling locally, but they add verbosity to the code and catch fewer errors than the static checks enforced by the project's QA)
 
-- LockAssertion class has minor usability issues:
+- LockAssertion class is using the [EXCLUSIVE_LOCK_FUNCTION](https://clang.llvm.org/docs/ThreadSafetyAnalysis.html#acquire-acquire-shared-release-release-shared-release-generic) acquire annotation incorrectly: ["please don't use ACQUIRE when the capability is assumed to be held previously"](https://reviews.llvm.org/D87629#2272676)
 
-  - LockAssertion reports the wrong file/line numbers on errors, and requires naming a dummy variable.
-  - LockAssertion uses a dummy SCOPED_LOCKABLE rather than ASSERT_EXCLUSIVE_LOCK. 
-  - Whether we should have redundant runtime checks in functions that already have compile time checks
+- LockAssertion class has minor usability issues. It reports the wrong file/line numbers on errors, and requires naming a dummy variable.
 
 ### Comparison of approaches
 
