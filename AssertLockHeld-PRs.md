@@ -53,25 +53,24 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 - Unlike 1A approach, does not clean up inconsistent runtime assertions in current code. It keeps developer notes recommendation to add them more places.
 - `WeaklyAssertLockHeld` name may be [confusing](https://github.com/bitcoin/bitcoin/pull/19918#issuecomment-694486228). Since both asserts do exactly the same thing at runtime and only compile time annotations differ, different naming schemes are possible. Feel free to add suggestions below:
 
-  |                                                              | ASSERT_EXCLUSIVE_LOCK assertion | EXCLUSIVE_LOCKS_REQUIRED assertion |
-  |--------------------------------------------------------------|---------------------------------|------------------------------------|
-  | Pre-[#13423](https://github.com/bitcoin/bitcoin/pull/13423)  | (doesn't exist)                 | AssertLockHeld (if lock is used)   |
-  | Post-[#13423](https://github.com/bitcoin/bitcoin/pull/13423) | AssertLockHeld                  | _(doesn't exist)_                  |
-  | Post-[#14437](https://github.com/bitcoin/bitcoin/pull/14437) | AssertLockHeld & LockAnnotation | _(doesn't exist)_                  |
-  | Post-[#16034](https://github.com/bitcoin/bitcoin/pull/16034) | AssertLockHeld & LockAssertion  | _(doesn't exist)_                  |
-  | Post-[#19668](https://github.com/bitcoin/bitcoin/pull/19668) | LockAssertion                   | AssertLockHeld                     |
-  | 1A approach                                                  | AssertLockHeld                  | _(doesn't exist)_                  |
-  | 2A approach                                                  | WeaklyAssertLockHeld            | AssertLockHeld                     |
-  | QFA approach                                                 | LOCK_ASSERTION                  | AssertLockHeld                     |
-  | Alternate suggestion                                         | LOCK_ALREADY_HELD               | AssertLockHeld                     |     
-  | Alternate suggestion                                         | RuntimeAssertLockHeld           | AssertLockHeld                     |
-  | Alternate suggestion                                         | RuntimeAssertLockHeld           | CompileTimeAssertLockHeld          |
-  | Alternate suggestion                                         | AssertLockHeld                  | RedundantlyAssertLockHeld          |
-  | Alternate suggestion                                         | UnprovenAssertLockHeld          | ProvenAssertLockHeld               |
-  | Alternate suggestion                                         | UnsafelyAssertLockHeld          | AssertLockHeld                     |
-  | Alternate suggestion                                         | UnprovablyAssertLockHeld        | AssertLockHeld                     |
-  | Other suggestions?                                           |                                 |                                    |
-
+  |                                                              | ASSERT_EXCLUSIVE_LOCK assert    | EXCLUSIVE_LOCKS_REQUIRED assert | Naked assert   |
+  |--------------------------------------------------------------|---------------------------------|---------------------------------| -------------- |
+  | Pre-[#13423](https://github.com/bitcoin/bitcoin/pull/13423)  |                                 |                                 | AssertLockHeld |
+  | Post-[#13423](https://github.com/bitcoin/bitcoin/pull/13423) | AssertLockHeld                  |                                 |                |
+  | Post-[#14437](https://github.com/bitcoin/bitcoin/pull/14437) | AssertLockHeld & LockAnnotation |                                 |                |
+  | Post-[#16034](https://github.com/bitcoin/bitcoin/pull/16034) | AssertLockHeld & LockAssertion  |                                 |                |
+  | Post-[#19668](https://github.com/bitcoin/bitcoin/pull/19668) | LockAssertion                   | AssertLockHeld                  |                |
+  | 1A approach                                                  | AssertLockHeld                  |                                 |                |
+  | 2A approach                                                  | WeaklyAssertLockHeld            | AssertLockHeld                  |                |
+  | QFA approach                                                 | LOCK_ASSERTION                  | AssertLockHeld                  |                |
+  | Alternate suggestion                                         | LOCK_ALREADY_HELD               | AssertLockHeld                  |                |
+  | Alternate suggestion                                         | RuntimeAssertLockHeld           | AssertLockHeld                  |                |
+  | Alternate suggestion                                         | RuntimeAssertLockHeld           | CompileTimeAssertLockHeld       |                |
+  | Alternate suggestion                                         | AssertLockHeld                  | RedundantlyAssertLockHeld       |                |
+  | Alternate suggestion                                         | UnprovenAssertLockHeld          | ProvenAssertLockHeld            |                |
+  | Alternate suggestion                                         | UnsafelyAssertLockHeld          | AssertLockHeld                  |                |
+  | Alternate suggestion                                         | UnprovablyAssertLockHeld        | AssertLockHeld                  |                |
+  | Other suggestions?                                           |                                 |                                 |                |
 
 #### Advantages of PA Approach
 
