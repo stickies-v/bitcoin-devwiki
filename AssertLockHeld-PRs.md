@@ -14,32 +14,24 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 ### Underlying issues
 
-I (@ajtowns) think there are four underlying issues here:
+- Currently we have both [`AssertLockHeld`](https://github.com/bitcoin/bitcoin/blob/be3af4f31089726267ce2dbdd6c9c153bb5aeae1/src/sync.h#L79) and [`LockAssertion`](https://github.com/bitcoin/bitcoin/blob/be3af4f31089726267ce2dbdd6c9c153bb5aeae1/src/sync.h#L357) and it is confusing what the differences are between them and when each should be used.
 
-1. LockAssertion has some non thread-safety bugs, namely it reports the wrong file/line numbers on errors, and requires naming a dummy variable.
-2. LockAssertion uses a dummy SCOPED_LOCKABLE rather than ASSERT_EXCLUSIVE_LOCK. 
-3. Whether we should have redundant runtime checks in functions that already have compile time checks
-4. What "LockAssertion" should be called
+- LockAssertion class is using the [EXCLUSIVE_LOCK_FUNCTION](https://clang.llvm.org/docs/ThreadSafetyAnalysis.html#acquire-acquire-shared-release-release-shared-release-generic) annotation incorrectly: ["please don't use [ACQUIRE] when the capability is assumed to be held previously"](https://reviews.llvm.org/D87629#2272676)
+
+- LockAssertion class has minor usability issues:
+
+  - LockAssertion reports the wrong file/line numbers on errors, and requires naming a dummy variable.
+  - LockAssertion uses a dummy SCOPED_LOCKABLE rather than ASSERT_EXCLUSIVE_LOCK. 
+  - Whether we should have redundant runtime checks in functions that already have compile time checks
 
 ### Comparison of approaches
 
-#### Advantages of current approach
-
-- LockAssertion gives a compile error if it's used unnecessarily (`init.cpp:1548:13: error: acquiring mutex 'cs_main' that is already held [-Werror,-Wthread-safety-analysis] ... init.cpp:1547:64: note: mutex acquired here`)
-- LockAssertion doesn't hide errors in some cases that we probably don't care about (assertion is inside a try block, an exception prior to the assertion is caught via a catch clause and the lock might not be held via that path, and something needing the lock is accessed after the try/catch block)
-- AssertLockHeld() and AssertLockNotHeld() behave in the same way, in that they're enforced both by clang at compile time and checked at runtime when DEBUG_LOCKORDER is enabled
-
-#### Disadvantages of current approach
-
-- It has some non-thread-safety related bugs
-- An upstream clang dev has [frowned on the dummy SCOPED_LOCKABLE approach](https://reviews.llvm.org/D87629#2272676) ("please don't use ACQUIRE when the capability is assumed to be held previously.")
-
 #### Advantages of 1A Approach
 
-- Addresses (1), (2), (3), renames `LockAssertion` to `LockAlreadyHeld`
 - Gets rid of `AssertLockHeld` calls which the compiler guarantees can never trigger at runtime, and which are not applied consistently in existing code
 - Gets rid of `LockAssertion` class which is easily confused with `AssertLockHeld`, declares unused variable names, reports line numbers incorrectly, and is broken according to clang developers
 - Falls back to runtime checks infrequently only where compile time checks don't work, and only requires a single assert macro `AssertLockHeld` 
+- Fixes LockAssertion annotation bug and usability problems by deleting LockAssertion
 
 #### Disadvantages of 1A Approach
 
@@ -47,15 +39,15 @@ I (@ajtowns) think there are four underlying issues here:
 - Problems are reported in the form of compile time warnings which can be missed unless configured with `--enable-werror` (not enabled by default).
 - May not detect problems if [Clang has bugs](https://github.com/bitcoin/bitcoin/pull/19865#issuecomment-687604066). There is already some strange behavior that the amount of warnings produced [depends on the order of the attributes](https://github.com/bitcoin/bitcoin/pull/19668#discussion_r467244459).
 - [Known limitations exist](https://clang.llvm.org/docs/ThreadSafetyAnalysis.html#limitations).
-- Intrusive patch that touches lots of code
+- Despite being a 3-line scripted diff, it is an intrusive patch that touches lots of code
 
 #### Advantages of 2A Approach
 
-- Addresses (1), (2), renames `LockAssertion` to `WeaklyAssertLockHeld`
 - Gets of broken `LockAssertion` class similar to 1A above
 - Requires two different assert implementations `AssertLockHeld` and `WeaklyAssertLockHeld` but uses naming to indicate stronger assert should be preferred and adds documentation to help explain what they each do.
 - Unlike 1A approach, does not drop runtime checks. This means if compile time checking is broken or disabled and thread sanitizer is broken or disabled, there is an extra level of checking
 - Redundant `AssertLockHeld` calls may help with readability because unlike `EXCLUSIVE_LOCKS_REQUIRED` annotations you can see them in the body of the function, not just attached to the function declaration.
+- Fixes LockAssertion annotation bug and usability problems by deleting LockAssertion
 
 #### Disadvantages of 2A Approach
 
@@ -93,14 +85,15 @@ I (@ajtowns) think there are four underlying issues here:
 
 #### Advantages of QFA Approach
 
-- Addresses (1)
+- Addresses LockAssertion usability issues
 - Fixes easy bugs quickly
 - Doesn't make anything worse
 
 #### Disadvantages of QFA Approach
 
-- Doesn't fix everything.
+- Doesn't address LockAssertion annotation misuse
 - Additional changes needed / rebasing needed on other PRs.
+- Introduces a new macro
 
 #### Advantages of NA Approach
 
