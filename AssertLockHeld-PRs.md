@@ -87,6 +87,7 @@ I (@ajtowns) think there are four underlying issues here:
   | Alternate suggestion                                         | RuntimeAssertLockHeld           | CompileTimeAssertLockHeld          |
   | Alternate suggestion                                         | AssertLockHeld                  | RedundantlyAssertLockHeld          |
   | Alternate suggestion                                         | UnprovenAssertLockHeld          | ProvenAssertLockHeld               |
+  | Alternate suggestion                                         | UnsafelyAssertLockHeld          | AssertLockHeld                     |
   | Other suggestions?                                           |                                 |                                    |
 
 #### Advantages of PA Approach
