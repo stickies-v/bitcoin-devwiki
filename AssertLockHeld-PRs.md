@@ -26,6 +26,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 #### Advantages of 1A Approach
 
+- One type of assert and not two. No confusion!
 - Gets rid of `AssertLockHeld` calls which the compiler guarantees can never trigger at runtime, and which are not applied consistently in existing code
 - Gets rid of `LockAssertion` class which is easily confused with `AssertLockHeld`, declares unused variable names, reports line numbers incorrectly, and is broken according to clang developers
 - Falls back to runtime checks infrequently only where compile time checks don't work, and only requires a single assert macro `AssertLockHeld` 
@@ -33,7 +34,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 #### Disadvantages of 1A Approach
 
-- Will only detect problems if using Clang and configured with `--enable-debug` (not enabled by default).
+- Will only detect problems locally if using Clang and configured with `--enable-debug` (not enabled by default). Checks are enforced on every PR and on the master branch in QA.
 - Problems are reported in the form of compile time warnings which can be missed unless configured with `--enable-werror` (not enabled by default).
 - May not detect problems if [Clang has bugs](https://github.com/bitcoin/bitcoin/pull/19865#issuecomment-687604066). There is already some strange behavior that the amount of warnings produced [depends on the order of the attributes](https://github.com/bitcoin/bitcoin/pull/19668#discussion_r467244459).
 - [Known limitations exist](https://clang.llvm.org/docs/ThreadSafetyAnalysis.html#limitations).
