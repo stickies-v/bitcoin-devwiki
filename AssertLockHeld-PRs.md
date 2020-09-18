@@ -38,13 +38,13 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 - May not detect problems if [Clang has bugs](https://github.com/bitcoin/bitcoin/pull/19865#issuecomment-687604066). Clang is spooky. There is some strange behavior that the amount of warnings produced [depends on the order of the attributes](https://github.com/bitcoin/bitcoin/pull/19668#discussion_r467244459) and static thread analysis has [known limitations](https://clang.llvm.org/docs/ThreadSafetyAnalysis.html#limitations).
 - Despite being a 3-line scripted diff, it is an intrusive patch that touches lots of code.
 - Current implementation makes AssertLockHeld less consistent with AssertLockNotHeld. Former tells the compiler the capability is held, while latter checks that the compiler already knows the capability is not held. This inconsistency just happens because AssertLockNotHeld isn't updated by the current PR. But it could be be updated if desired to make a slightly different safety/flexibility/consistency choice.
+- May hurt readability. Even though the `AssertLockHeld` calls this change removes are redundant in terms of static analysis, because `AssertLockHeld` calls appear in function definitions not function declarations, they can provide additional context clues while reading function definitions.
 
 #### Advantages of 2A Approach
 
 - Despite still requiring two different assert implementations `AssertLockHeld` and `WeaklyAssertLockHeld`, it at least names them consistently, and tries to nudge in direction of avoiding the weaker assert in cases where the stronger assert can be used.
 - It documents previously undocumented assert functions to explain what each does
 - Unlike 1A approach, it does not drop runtime checks. This means if compile time checking is broken or disabled and thread sanitizer is broken or disabled, there is an extra level of checking
-- Redundant `AssertLockHeld` calls may help with readability because unlike `EXCLUSIVE_LOCKS_REQUIRED` annotations you can see them in the body of the function, not just attached to the function declaration.
 - Like 1A approach, fixes LockAssertion annotation bug and usability problems by deleting LockAssertion
 
 #### Disadvantages of 2A Approach
