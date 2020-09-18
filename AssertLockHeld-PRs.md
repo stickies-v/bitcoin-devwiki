@@ -33,7 +33,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 #### Disadvantages of 1A Approach
 
-- Will only detect problems locally if using Clang and configured with `--enable-debug` (not enabled by default). Checks are enforced on every PR and on the master branch in QA.
+- Will only detect problems locally if using Clang and configured with `--enable-debug` (not enabled by default). But checks are enforced on every PR and on the master branch in QA.
 - Problems are reported in the form of compile time warnings which can be missed unless configured with `--enable-werror` (not enabled by default locally, but enabled in QA).
 - May not detect problems if [Clang has bugs](https://github.com/bitcoin/bitcoin/pull/19865#issuecomment-687604066). Clang is spooky. There is some strange behavior that the amount of warnings produced [depends on the order of the attributes](https://github.com/bitcoin/bitcoin/pull/19668#discussion_r467244459) and static thread analysis has [known limitations](https://clang.llvm.org/docs/ThreadSafetyAnalysis.html#limitations).
 - Despite being a 3-line scripted diff, it is an intrusive patch that touches lots of code.
