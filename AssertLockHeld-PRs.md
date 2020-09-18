@@ -8,7 +8,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 - **PA** *Proper asserts* [#19929](https://github.com/bitcoin/bitcoin/pull/19929): An approach that applied thread safety annotations as documented to avoid cases where the compiler might make incorrect assumptions.
 
-- **QFA** *Quick fix asserts* [#19970](https://github.com/bitcoin/bitcoin/pull/19970): just fixes the bugs in LockAssertion (so no need for unused variable names, and file/line numbers are reported correctly).
+- **QFA** *Quick fix asserts* [#19970](https://github.com/bitcoin/bitcoin/pull/19970): fixes usability issues in LockAssertion (so no need for unused variable names, and file/line numbers are reported correctly) and introduces a new LOCK_ASSERTION macro to wrap it
 
 - **NA** *Naked assert* [[1]](http://www.erisian.com.au/bitcoin-core-dev/log-2020-09-17.html#l-650)[[2]](https://reviews.llvm.org/D87629#2272676)[[3]](https://reviews.llvm.org/D87629#2278073): Don't annotate AssertLockHeld() with any compile time attributes and leave it pure run time. Orthogonal and can be combined with any of the approaches above.
 
