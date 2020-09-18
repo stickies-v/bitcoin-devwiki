@@ -35,18 +35,17 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 #### Disadvantages of 1A Approach
 
 - Will only detect problems locally if using Clang and configured with `--enable-debug` (not enabled by default). Checks are enforced on every PR and on the master branch in QA.
-- Problems are reported in the form of compile time warnings which can be missed unless configured with `--enable-werror` (not enabled by default).
-- May not detect problems if [Clang has bugs](https://github.com/bitcoin/bitcoin/pull/19865#issuecomment-687604066). There is already some strange behavior that the amount of warnings produced [depends on the order of the attributes](https://github.com/bitcoin/bitcoin/pull/19668#discussion_r467244459).
-- [Known limitations exist](https://clang.llvm.org/docs/ThreadSafetyAnalysis.html#limitations).
-- Despite being a 3-line scripted diff, it is an intrusive patch that touches lots of code
+- Problems are reported in the form of compile time warnings which can be missed unless configured with `--enable-werror` (not enabled by default locally, but enabled in QA).
+- May not detect problems if [Clang has bugs](https://github.com/bitcoin/bitcoin/pull/19865#issuecomment-687604066). Clang is spooky. There is some strange behavior that the amount of warnings produced [depends on the order of the attributes](https://github.com/bitcoin/bitcoin/pull/19668#discussion_r467244459) and static thread analysis has [known limitations](https://clang.llvm.org/docs/ThreadSafetyAnalysis.html#limitations).
+- Despite being a 3-line scripted diff, it is an intrusive patch that touches lots of code.
 
 #### Advantages of 2A Approach
 
-- Gets of broken `LockAssertion` class similar to 1A above
-- Requires two different assert implementations `AssertLockHeld` and `WeaklyAssertLockHeld` but uses naming to indicate stronger assert should be preferred and adds documentation to help explain what they each do.
-- Unlike 1A approach, does not drop runtime checks. This means if compile time checking is broken or disabled and thread sanitizer is broken or disabled, there is an extra level of checking
+- Despite still requiring two different assert implementations `AssertLockHeld` and `WeaklyAssertLockHeld`, it at least names them consistently, and tries to nudge in direction of avoiding the weaker assert in cases where the stronger assert can be used.
+- It documents previously undocumented assert functions to explain what each does
+- Unlike 1A approach, it does not drop runtime checks. This means if compile time checking is broken or disabled and thread sanitizer is broken or disabled, there is an extra level of checking
 - Redundant `AssertLockHeld` calls may help with readability because unlike `EXCLUSIVE_LOCKS_REQUIRED` annotations you can see them in the body of the function, not just attached to the function declaration.
-- Fixes LockAssertion annotation bug and usability problems by deleting LockAssertion
+- Like 1A approach, fixes LockAssertion annotation bug and usability problems by deleting LockAssertion
 
 #### Disadvantages of 2A Approach
 
@@ -96,10 +95,10 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 #### Advantages of NA Approach
 
-- Conceptually simpler to keep runtime & compile time checks separate and allow AssertLockHeld to be use freely in any context without having any impact on the compiler
+- Conceptually simpler to keep run-time and compile-time checks separate and allow AssertLockHeld to be use freely in any context without having an impact on the compiler's static analysis
 
 #### Disadvantages of NA Approach
 
-- Hurts readability. If AssertLockHeld is annotated with ASSERT_EXCLUSIVE_LOCK a reader can be sure that the compiler has verified the lock is held at the point of the assert. If it's not annotated, the assertion is an unproven claim that has only been verified by runtime tests passing
+- Hurts readability. If AssertLockHeld is annotated with ASSERT_EXCLUSIVE_LOCK, a reader can be sure that the compiler has verified the lock is held at the point of the assert. Without the annotation, the assert statement is an unproven claim only checked by runtime tests
 
-- Less safe. AssertLockHeld has a greater likelihood of aborting if the compiler hasn't proven the lock is held at the location
+- Less safe. AssertLockHeld has a greater likelihood of aborting if the compiler hasn't already proven the lock is held where it's called
