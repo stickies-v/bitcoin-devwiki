@@ -62,7 +62,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
   | Post-[#19668](https://github.com/bitcoin/bitcoin/pull/19668) | LockAssertion                   | AssertLockHeld                     |
   | 1A approach                                                  | AssertLockHeld                  | _(doesn't exist)_                  |
   | 2A approach                                                  | WeaklyAssertLockHeld            | AssertLockHeld                     |
-  | QF approach                                                  | LOCK_ASSERTION                  | AssertLockHeld                     |
+  | QFA approach                                                 | LOCK_ASSERTION                  | AssertLockHeld                     |
   | Alternate suggestion                                         | LOCK_ALREADY_HELD               | AssertLockHeld                     |     
   | Alternate suggestion                                         | RuntimeAssertLockHeld           | AssertLockHeld                     |
   | Alternate suggestion                                         | RuntimeAssertLockHeld           | CompileTimeAssertLockHeld          |
