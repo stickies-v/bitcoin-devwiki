@@ -28,9 +28,8 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 - One type of assert and not two. No confusion!
 - Gets rid of `AssertLockHeld` calls which the compiler guarantees can never trigger at runtime, and which are not applied consistently in existing code
-- Gets rid of `LockAssertion` class which is easily confused with `AssertLockHeld`, declares unused variable names, reports line numbers incorrectly, and is broken according to clang developers
-- Falls back to runtime checks infrequently only where compile time checks don't work, and only requires a single assert macro `AssertLockHeld` 
-- Fixes LockAssertion annotation bug and usability problems by deleting LockAssertion
+- Gets rid of `LockAssertion` class which is easily confused with `AssertLockHeld`, declares unused variable names, reports line numbers incorrectly, and uses EXCLUSIVE_LOCK_FUNCTION incorrectly according to clang developers
+- Falls back to runtime checks only where compile time checks don't work, reducing noise and the need for two assert macros
 
 #### Disadvantages of 1A Approach
 
@@ -38,6 +37,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 - Problems are reported in the form of compile time warnings which can be missed unless configured with `--enable-werror` (not enabled by default locally, but enabled in QA).
 - May not detect problems if [Clang has bugs](https://github.com/bitcoin/bitcoin/pull/19865#issuecomment-687604066). Clang is spooky. There is some strange behavior that the amount of warnings produced [depends on the order of the attributes](https://github.com/bitcoin/bitcoin/pull/19668#discussion_r467244459) and static thread analysis has [known limitations](https://clang.llvm.org/docs/ThreadSafetyAnalysis.html#limitations).
 - Despite being a 3-line scripted diff, it is an intrusive patch that touches lots of code.
+- Current implementation makes AssertLockHeld less consistent with AssertLockNotHeld. Former tells the compiler the capability is held, while latter checks that the compiler already knows the capability is not held. This inconsistency just happens because AssertLockNotHeld isn't updated by the current PR. But it could be be updated if desired to make a slightly different safety/flexibility/consistency choice.
 
 #### Advantages of 2A Approach
 
@@ -51,6 +51,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 - Requires two different assert implementations instead of one.
 - Unlike 1A approach, does not clean up inconsistent runtime assertions in current code. It keeps developer notes recommendation to add them more places.
+- Like 1A approach, introduces a minor inconsistency between AssertLockHeld and AssertLockNotHeld. But this is a tradeoff and implementation detail and could be tweaked if desired (see 1A disadvantages).
 - `WeaklyAssertLockHeld` name may be [confusing](https://github.com/bitcoin/bitcoin/pull/19918#issuecomment-694486228). Since both asserts do exactly the same thing at runtime and only compile time annotations differ, different naming schemes are possible. Feel free to add suggestions below:
 
   |                                                              | ASSERT_EXCLUSIVE_LOCK assert    | EXCLUSIVE_LOCKS_REQUIRED assert | Naked assert   |
