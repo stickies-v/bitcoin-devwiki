@@ -2,7 +2,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 ### Summary of approaches
 
-- **1A** *One assert* [#19865](https://github.com/bitcoin/bitcoin/pull/19865): Gets rid of runtime asserts that are redundant with compile time checks, only keeping them in cases where compile time checks don't work. Gets rid of multiple assert implementations. `AssertLockHeld` is the only one and it is restored to have the same definition it had from [2018](https://github.com/bitcoin/bitcoin/pull/13423) until [recently](https://github.com/bitcoin/bitcoin/pull/19668).
+- **1A** *One assert* [#19865](https://github.com/bitcoin/bitcoin/pull/19865): Removes runtime asserts and uses only compile time warnings, only keeping runtime asserts in cases where compile time checks don't work. Gets rid of multiple assert implementations. `AssertLockHeld` is the only one and it is restored to have the same definition it had from [2018](https://github.com/bitcoin/bitcoin/pull/13423) until [recently](https://github.com/bitcoin/bitcoin/pull/19668).
 
 - **2A** *Two asserts* [#19918](https://github.com/bitcoin/bitcoin/pull/19918): Keeps runtime checks and uses two assert implementations instead of one: `AssertLockHeld` and `WeaklyAssertLockHeld`. The names are intentionally chosen so people favor the strong assertion instead of the weak assertion whenever possible, and there's never a question about which is better to use.
 
@@ -52,7 +52,10 @@ I (@ajtowns) think there are four underlying issues here:
 
 #### Disadvantages of 1A Approach
 
-- May not detect race conditions or deadlocks if compile time checks are broken or disabled and thread sanitizer is broken or disabled. Compile time checks always run on CI but are not supported by all compilers locally
+- Will only detect problems if using Clang and configured with `--enable-debug` (not enabled by default).
+- Problems are reported in the form of compile time warnings which can be missed unless configured with `--enable-werror` (not enabled by default).
+- May not detect problems if [Clang has bugs](https://github.com/bitcoin/bitcoin/pull/19865#issuecomment-687604066). There is already some strange behavior that the amount of warnings produced [depends on the order of the attributes](https://github.com/bitcoin/bitcoin/pull/19668#discussion_r467244459).
+- [Known limitations exist](https://clang.llvm.org/docs/ThreadSafetyAnalysis.html#limitations).
 - Intrusive patch that touches lots of code
 
 #### Advantages of 2A Approach
