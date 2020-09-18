@@ -2,7 +2,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 ### Summary of approaches
 
-- **1A** *One assert* [#19865](https://github.com/bitcoin/bitcoin/pull/19865): Removes runtime asserts and uses only compile time warnings, only keeping runtime asserts in cases where compile time checks don't work. Gets rid of multiple assert implementations. `AssertLockHeld` is the only one and it is restored to have the same definition it had from [2018](https://github.com/bitcoin/bitcoin/pull/13423) until [recently](https://github.com/bitcoin/bitcoin/pull/19668).
+- **1A** *One assert* [#19865](https://github.com/bitcoin/bitcoin/pull/19865): Removes runtime asserts and uses compile time static analysis, only keeping runtime asserts in cases where compile time checks don't work. Gets rid of multiple assert implementations. `AssertLockHeld` is the only assert and it is restored to have the same definition it had from [2018](https://github.com/bitcoin/bitcoin/pull/13423) until [recently](https://github.com/bitcoin/bitcoin/pull/19668).
 
 - **2A** *Two asserts* [#19918](https://github.com/bitcoin/bitcoin/pull/19918): Keeps runtime checks and uses two assert implementations instead of one: `AssertLockHeld` and `WeaklyAssertLockHeld`. The names are intentionally chosen so people favor the strong assertion instead of the weak assertion whenever possible, and there's never a question about which is better to use.
 
