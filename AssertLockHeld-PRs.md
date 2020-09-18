@@ -8,7 +8,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 - **PA** *Proper asserts* [#19929](https://github.com/bitcoin/bitcoin/pull/19929): An approach that applied thread safety annotations as documented to avoid cases where the compiler might make incorrect assumptions.
 
-- **QF** *Quick fix* [#19970](https://github.com/bitcoin/bitcoin/pull/19970) just fixes the bugs in LockAssertion (so no need for unused variable names, and file/line numbers are reported correctly).
+- **QFA** *Quick fix asserts* [#19970](https://github.com/bitcoin/bitcoin/pull/19970): just fixes the bugs in LockAssertion (so no need for unused variable names, and file/line numbers are reported correctly).
 
 - **NA** *Naked assert* [[1]](http://www.erisian.com.au/bitcoin-core-dev/log-2020-09-17.html#l-650)[[2]](https://reviews.llvm.org/D87629#2272676)[[3]](https://reviews.llvm.org/D87629#2278073): Don't annotate AssertLockHeld() with any compile time attributes and leave it pure run time. Orthogonal and can be combined with any of the approaches above.
 
@@ -33,17 +33,6 @@ I (@ajtowns) think there are four underlying issues here:
 
 - It has some non-thread-safety related bugs
 - An upstream clang dev has [frowned on the dummy SCOPED_LOCKABLE approach](https://reviews.llvm.org/D87629#2272676) ("please don't use ACQUIRE when the capability is assumed to be held previously.")
-
-#### Advantages of QF Approach
-
-- Addresses (1)
-- Fixes easy bugs quickly
-- Doesn't make anything worse
-
-#### Disadvantages of QF Approach
-
-- Doesn't fix everything.
-- Additional changes needed / rebasing needed on other PRs.
 
 #### Advantages of 1A Approach
 
@@ -102,13 +91,23 @@ I (@ajtowns) think there are four underlying issues here:
 
 - Various practical drawbacks [#19929 (comment)](https://github.com/bitcoin/bitcoin/pull/19929#issuecomment-690358411)
 
+#### Advantages of QFA Approach
+
+- Addresses (1)
+- Fixes easy bugs quickly
+- Doesn't make anything worse
+
+#### Disadvantages of QFA Approach
+
+- Doesn't fix everything.
+- Additional changes needed / rebasing needed on other PRs.
+
 #### Advantages of NA Approach
 
 - Conceptually simpler to keep runtime & compile time checks separate and allow AssertLockHeld to be use freely in any context without having any impact on the compiler
 
-#### Disadvantages of PA Approach
+#### Disadvantages of NA Approach
 
 - Hurts readability. If AssertLockHeld is annotated with ASSERT_EXCLUSIVE_LOCK a reader can be sure that the compiler has verified the lock is held at the point of the assert. If it's not annotated, the assertion is an unproven claim that has only been verified by runtime tests passing
 
 - Less safe. AssertLockHeld has a greater likelihood of aborting if the compiler hasn't proven the lock is held at the location
-
