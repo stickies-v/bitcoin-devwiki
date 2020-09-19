@@ -10,7 +10,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 - **QFA** *Quick fix asserts* [#19970](https://github.com/bitcoin/bitcoin/pull/19970): Fixes usability issues in LockAssertion (so no need for unused variable names, and file/line numbers are reported correctly) and introduces a new LOCK_ASSERTION macro to wrap it.
 
-- **HA** *Hidden asserts* [#19979](https://github.com/bitcoin/bitcoin/pull/19979): Instead of informing thread analysis that an lock is held with an ASSERT_EXCLUSIVE_LOCK call, make the analysis thinking lock is provably held (when it is only unprovably held) by using an EXCLUSIVE_LOCKS_REQUIRED on a lambda assigned to a type-erased std::function
+- **HA** *Hidden asserts* [#19979](https://github.com/bitcoin/bitcoin/pull/19979): Instead of informing thread analysis that a lock is held with an ASSERT_EXCLUSIVE_LOCK assert, make the analysis think lock is provably held (when it is only unprovably held) by using an EXCLUSIVE_LOCKS_REQUIRED on a type-erased lambda assigned to std::function.
 
 - **NA** *Naked asserts* [[1]](http://www.erisian.com.au/bitcoin-core-dev/log-2020-09-17.html#l-650)[[2]](https://reviews.llvm.org/D87629#2272676)[[3]](https://reviews.llvm.org/D87629#2278073): Avoids annotating AssertLockHeld() with any compile time attributes, leaving it pure run time. This change is orthogonal and can be combined with any of the approaches above.
 
