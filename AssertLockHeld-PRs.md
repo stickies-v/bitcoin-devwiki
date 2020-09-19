@@ -75,7 +75,7 @@ Avoids annotating AssertLockHeld() with any compile time attributes, leaving it 
   | Alternate suggestion                                         | UnprovenAssertLockHeld          | ProvenAssertLockHeld            |                |
   | Alternate suggestion                                         | UnsafelyAssertLockHeld          | AssertLockHeld                  |                |
   | Alternate suggestion                                         | UnprovablyAssertLockHeld        | AssertLockHeld                  |                |
-  | Alternate suggestion | [ASSERT_EXCLUSIVE_LOCK_REQUIREMENT_SATISFIED](https://github.com/bitcoin/bitcoin/pull/19918#issuecomment-695173118) | AssertLockHeld | |
+  | Alternate suggestion | [ASSERT_&#8203;EXCLUSIVE_&#8203;LOCK_&#8203;REQUIREMENT_&#8203;SATISFIED](https://github.com/bitcoin/bitcoin/pull/19918#issuecomment-695173118) | AssertLockHeld | |
   | Other suggestions?                                           |                                 |                                 |                |
 
   (*) LockAnnotation, LockAssertion, and LOCK_ASSERTION are shown in the ASSERT_EXCLUSIVE_LOCK column of this table because they emulate ASSERT_EXCLUSIVE_LOCK functions. But the emulation isn't 100%, and has a few differences (see QFA Approach sections below for details)
