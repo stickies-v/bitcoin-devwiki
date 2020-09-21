@@ -37,7 +37,7 @@ Follow-up on "What would a good transaction propagation framework look like? See
 
 gleb: opened 4 addr-related Prs ([#19843](https://github.com/bitcoin/bitcoin/pull/19843), [#19869](https://github.com/bitcoin/bitcoin/pull/19869), [#19906](https://github.com/bitcoin/bitcoin/pull/19906), [#19860](https://github.com/bitcoin/bitcoin/pull/19860)) over the last 10 days. Addr needs attention, and his future work is blocked. Some of them are refactoring, others have important implications and bug fixes. [#19843](https://github.com/bitcoin/bitcoin/pull/19843) is a little refactor which will unlock his future work.
 
-jnewbery: Still encouraged review of the remaining backport #19606. It's not a totally clean backport, but it shouldn't be impossible to review.
+jnewbery: Still encouraged review of the remaining backport [#19606](https://github.com/bitcoin/bitcoin/pull/19606). It's not a totally clean backport, but it shouldn't be impossible to review.
 
 jonatack: Quick reminder to review the bip155 and bip324 implementation PRs and it would be great to have #19643 in master, and it seems RFM.
 
