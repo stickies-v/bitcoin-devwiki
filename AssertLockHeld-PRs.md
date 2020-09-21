@@ -4,7 +4,7 @@ Wiki page to compare different PRs changing [`AssertLockHeld`](https://github.co
 
 - **1A** *One assert* [#19865](https://github.com/bitcoin/bitcoin/pull/19865): Removes runtime asserts and uses compile time static analysis, only keeping runtime asserts in cases where compile time checks don't work. Gets rid of multiple assert implementations. `AssertLockHeld` is the only assert and it is restored to have the same definition it had from [2018](https://github.com/bitcoin/bitcoin/pull/13423) until [recently](https://github.com/bitcoin/bitcoin/pull/19668).
 
-- **2A** *Two asserts* [#19918](https://github.com/bitcoin/bitcoin/pull/19918): Keeps runtime checks and uses two assert implementations instead of one: `AssertLockHeld` and `WeaklyAssertLockHeld`. The names are intentionally chosen so people favor the strong assertion instead of the weak assertion whenever possible, and there's never a question about which is better to use.
+- **2A** *Two asserts* [#19918](https://github.com/bitcoin/bitcoin/pull/19918): Keeps runtime checks and uses two assert implementations instead of one: `AssertLockHeld` and `AssertLockHeldUnverified`. The names are intentionally chosen so people favor the verified assertion instead of the unverified assertion whenever possible, and there's never a question about which is better to use.
 
 - **PA** *Proper asserts* [#19929](https://github.com/bitcoin/bitcoin/pull/19929): Currently abandoned/closed approach that applied thread safety annotations as documented to avoid cases where the compiler might make incorrect assumptions.
 
@@ -46,7 +46,7 @@ Avoids annotating AssertLockHeld() with any compile time attributes, leaving it 
 
 #### Advantages of 2A Approach
 
-- Despite still requiring two different assert implementations `AssertLockHeld` and `WeaklyAssertLockHeld`, it at least names them consistently, and tries to nudge in direction of avoiding the weaker assert in cases where the stronger assert can be used.
+- Despite still requiring two different assert implementations `AssertLockHeld` and `AssertLockHeldUnverified`, it at least names them consistently, and tries to nudge in direction of avoiding the unverified assert in cases where the verified assert can be used.
 - It documents previously undocumented assert functions to explain what each does
 - Unlike 1A approach, it does not drop runtime checks. This means if compile time checking is broken or disabled and thread sanitizer is broken or disabled, there is an extra level of checking
 - Like 1A approach, fixes LockAssertion annotation bug and usability problems by deleting LockAssertion
@@ -56,7 +56,7 @@ Avoids annotating AssertLockHeld() with any compile time attributes, leaving it 
 - Requires two different assert implementations instead of one.
 - Unlike 1A approach, does not clean up inconsistent runtime assertions in current code. It keeps developer notes recommendation to add them more places.
 - Like 1A approach, introduces a minor inconsistency between AssertLockHeld and AssertLockNotHeld. But this is a tradeoff and implementation detail and could be tweaked if desired (see 1A disadvantages).
-- `WeaklyAssertLockHeld` name may be [confusing](https://github.com/bitcoin/bitcoin/pull/19918#issuecomment-694486228). Since both asserts do exactly the same thing at runtime and only compile time annotations differ, different naming schemes are possible. Feel free to add suggestions below:
+- `AssertLockHeldUnverified` name may be [confusing](https://github.com/bitcoin/bitcoin/pull/19918#issuecomment-694486228). Since both asserts do exactly the same thing at runtime and only compile time annotations differ, different naming schemes are possible. Feel free to add suggestions below:
 
   |                                                              | ASSERT_EXCLUSIVE_LOCK assert    | EXCLUSIVE_LOCKS_REQUIRED assert | Naked assert   |
   |--------------------------------------------------------------|---------------------------------|---------------------------------| -------------- |
@@ -66,9 +66,10 @@ Avoids annotating AssertLockHeld() with any compile time attributes, leaving it 
   | Post-[#16034](https://github.com/bitcoin/bitcoin/pull/16034) | AssertLockHeld & LockAssertion* |                                 |                |
   | Post-[#19668](https://github.com/bitcoin/bitcoin/pull/19668) | LockAssertion                   | AssertLockHeld                  |                |
   | 1A approach                                                  | AssertLockHeld                  |                                 |                |
-  | 2A approach                                                  | WeaklyAssertLockHeld            | AssertLockHeld                  |                |
+  | 2A approach                                                  | AssertLockHeldUnverified        | AssertLockHeld                  |                |
   | QFA approach                                                 | LOCK_ASSERTION*                 | AssertLockHeld                  |                |
   | Alternate suggestion                                         | LOCK_ALREADY_HELD               | AssertLockHeld                  |                |
+  | Alternate suggestion                                         | WeaklyAssertLockHeld            | AssertLockHeld                  |                |
   | Alternate suggestion                                         | RuntimeAssertLockHeld           | AssertLockHeld                  |                |
   | Alternate suggestion                                         | RuntimeAssertLockHeld           | CompileTimeAssertLockHeld       |                |
   | Alternate suggestion                                         | AssertLockHeld                  | RedundantlyAssertLockHeld       |                |
