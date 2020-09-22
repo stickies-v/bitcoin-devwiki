@@ -5,7 +5,7 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 - 11 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-11-15.00.html)), ([summary](#11-aug-2020))
 - 25 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-25-15.00.log.html)), ([summary](#25-aug-2020))
 - 8 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-08-15.00.log.html)), ([summary](#8-sept-2020))
-- 22 September 2020
+- 22 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-22-15.00.log.html))
 - 6 October 2020
 - 20 October 2020
 - 3 November 2020
@@ -27,10 +27,14 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
+## 06 Oct 2020
+
+_Feel free to propose a topic for the upcoming meeting_
+
 ## 22 Sept 2020
 
 - Follow-up on "What would a good transaction propagation framework look like? See a first draw Transactions propagation design goals [#19820](https://github.com/bitcoin/bitcoin/issues/19820) (ariard)
-- Overview of [https://github.com/bitcoin/bitcoin/pull/19988](https://github.com/bitcoin/bitcoin/pull/19988) (motivation/design philosphy rather than technical details that can be found in the PR)
+- Overview of [https://github.com/bitcoin/bitcoin/pull/19988](https://github.com/bitcoin/bitcoin/pull/19988) (motivation/design philosophy rather than technical details that can be found in the PR)
 
 ## 8 Sept 2020
 
@@ -115,7 +119,7 @@ Additionally, sdaftuar has small topology improvements in mind, specifically pic
 ### Topic: Goals for 0.21 (50 days/7 weeks until feature freeze)
   - tx overhaul ([#19184](http://github.com/bitcoin/bitcoin/pull/19184)), sipa will open review again soon
   - addrv2 ([#19031](http://github.com/bitcoin/bitcoin/pull/19031)) - confirmed by the author to be mostly implementation work (desirable for 0.21 essential for 0.22 since Tor v2 deprecation begins Sept 15, 2020 & will be removed July 15, 2021)
-  - progress on p2p testing ([#19035](http://github.com/bitcoin/bitcoin/pull/19035))
+  - progress on p2p testing ([#19315](http://github.com/bitcoin/bitcoin/pull/19315))
   - erlay ([#18261](http://github.com/bitcoin/bitcoin/pull/18261)) may have to wait until 0.22
 
 ### Topic: service flags on signet and problems with tx relay of time-sensitive transactions
