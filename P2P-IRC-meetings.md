@@ -5,7 +5,7 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 - 11 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-11-15.00.html)), ([summary](#11-aug-2020))
 - 25 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-25-15.00.log.html)), ([summary](#25-aug-2020))
 - 8 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-08-15.00.log.html)), ([summary](#8-sept-2020))
-- 22 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-22-15.00.log.html))
+- 22 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-22-15.00.log.html)), ([summary](#22-sept-2020)) 
 - 6 October 2020
 - 20 October 2020
 - 3 November 2020
@@ -33,8 +33,28 @@ _Feel free to propose a topic for the upcoming meeting_
 
 ## 22 Sept 2020
 
-- Follow-up on "What would a good transaction propagation framework look like? See a first draw Transactions propagation design goals [#19820](https://github.com/bitcoin/bitcoin/issues/19820) (ariard)
-- Overview of [https://github.com/bitcoin/bitcoin/pull/19988](https://github.com/bitcoin/bitcoin/pull/19988) (motivation/design philosophy rather than technical details that can be found in the PR)
+### Topic: rename feelers to probes (gleb)
+In #[19958](https://github.com/bitcoin/bitcoin/pull/19958), gleb suggested renaming "feeler" connections to "probes" throughout the codebase. Feelers currently capture two distinct features: feelers and test-before-evict. There was some support of renaming, but also hesitation, so gleb plans to drop the rename and focus on improving the documentation.
+
+### Topic: Transaction propagation design goals - see #19820 (ariard)
+
+ariard expressed concern for higher-level protocols (like Lightning) currently being designed and deployed with a dependency on implicit assumptions of the transaction relay network and mempool behavior.
+
+sipa recognized that anything that relies on specific properties of transaction relay being guaranteed is broken. sdaftuar noted that transaction relay works well for transactions whose inputs are all confirmed though aj remarked that it might not be the case if a transaction is RBF'ing something else that was previously relayed.
+
+sipa thought it is a good idea to better analyze and document the design goals for transactions as well as strive for useful features for common cases in higher-level protocols, but that the results of these efforts will not be guarantees.
+
+Regarding specific solutions, ariard proposed that better documentation of the relay policy and adding something like package relay would be helpful. While sdaftuar thought that package relay still needs to be fleshed out, it led him to wonder whether it is reasonable to ask whether relay policy changes should always be documented in a BIP so that wallet authors can take those changes into account. ariard added that there is no BIP for the [CPFP carve-out](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-November/016518.html), for example, and that developers are reusing it beyond Lightning. Since none of the relay policy is documented today (except for BIP125), this leads to the concern of the consequences of tightening a relay policy rule when others have built on it being liberal?
+
+jnewbery did not believe that the p2p policy belongs in BIPs, but rather that the [dev wiki](https://github.com/bitcoin-core/bitcoin-devwiki/wiki) would be an appropriate place for it. luke-jr clarified that strict policy changes don't require a BIP, but that changes that external developers should design around does belong in a BIP. sdaftuar summary of this was that wallet authors should use their best understanding of what policy rules are deployed on the network to generate transactions that will propagate well but shouldn't rely on that for security.
+
+### Topic: Overview of [#19988](https://github.com/bitcoin/bitcoin/pull/19988) - motivation/design philosophy rather than technical details that can be found in the PR (sipa)
+
+Bitcoin Core's transaction fetching logic has grown over time with various data structures needed for coordination and an unclear specification of what they actually implement. There are biases in favor/against fetching from certain nodes, but they are all implemented indirectly through random delays and insertions/lookups in maps that are hard to reason about. Instead, [#19988](https://github.com/bitcoin/bitcoin/pull/19988) creates a clear specification of what should be fetched. This provides something that can be defined in a simple data structure and then has one class that encapsulates an efficient implementation of it. To test it, sipa wrote a fuzz tester containing a naive reimplementation with the exact same behavior as in the efficient boost::multi_index based implementation and tries to find sequences of operations that make them diverge.
+
+The goal of merging this before the 0.21 feature freeze on Oct 15 jnewbery noted was ambitious given that the patch is +2000/-450 LOC. However, aj added that adding this patch early in a cycle would make backporting other p2p things (i.e., from 0.22pre to 0.21) harder.
+
+sipa noted that most of the code is fuzzing and tests, but the non-test code was hairy. sipa encourages reviewers to look at the fuzz test first. Even ignoring the fuzzing aspect, the naive reimplementation provides a good reference for what the patch *should* do.
 
 ## 8 Sept 2020
 
