@@ -1,4 +1,4 @@
-The [process separation project](https://github.com/bitcoin/bitcoin/projects/10) builds new `bitcoin-node`, `bitcoin-wallet`,
+### The [process separation project](https://github.com/bitcoin/bitcoin/projects/10) builds new `bitcoin-node`, `bitcoin-wallet`,
 and `bitcoin-gui` executables that isolate node, wallet, and gui functionality in different
 processes and communicate with each other across sockets.
 
