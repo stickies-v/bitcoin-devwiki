@@ -6,7 +6,7 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 - 25 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-25-15.00.log.html)), ([summary](#25-aug-2020))
 - 8 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-08-15.00.log.html)), ([summary](#8-sept-2020))
 - 22 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-22-15.00.log.html)), ([summary](#22-sept-2020)) 
-- 6 October 2020
+- 6 October 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-10-06-15.00.log.html))
 - 20 October 2020
 - 3 November 2020
 - 17 November 2020
@@ -27,9 +27,15 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-## 06 Oct 2020
+## 20 Oct 2020
 
 _Feel free to propose a topic for the upcoming meeting_
+
+## 06 Oct 2020
+
+No suggested topics.
+
+jnewbery: "The high priority PRs right now are taproot, tx request overhaul and torv3. It'd be great if they could all land before feature freeze."
 
 ## 22 Sept 2020
 
