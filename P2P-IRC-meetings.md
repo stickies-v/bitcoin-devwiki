@@ -7,7 +7,7 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 - 8 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-08-15.00.log.html)), ([summary](#8-sept-2020))
 - 22 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-22-15.00.log.html)), ([summary](#22-sept-2020)) 
 - 6 October 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-10-06-15.00.log.html))
-- 20 October 2020
+- 20 October 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-10-20-15.00.log.html)), ([summary]((#20-oct-2020))) 
 - 3 November 2020
 - 17 November 2020
 - 1 December 2020
@@ -27,11 +27,30 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-## 20 Oct 2020
+## 03 Nov 2020
 
 _Feel free to propose a topic for the upcoming meeting_
 
-1. Remove timestamps from `addr` messages? It seems like the timestamp is only used to leak information about our recent connectivity. It doesn't look like we use it to make decisions about who to connect to. (sdaftuar/jnewbery)
+## 20 Oct 2020
+
+### Topic: priorities:
+
+  - jnewbery: Backport of wtxid relay to 0.20, [#19606](http://github.com/bitcoin/bitcoin/pull/19606)
+
+### Topic: Remove timestamps from addr messages? It seems like the timestamp is only used to leak information about our recent connectivity. It doesn't look like we use it to make decisions about who to connect to. (sdaftuar/jnewbery)
+
+sdaftuar and jnewbery were discussing the interaction around block-relay-only peers, where we don't want to leak any information. They observed that right now in master, we directly leak the time we connected to a block-relay-only peer after we disconnect from that peer and include the address in a getaddr response. This can be fixed, but it led to wondering what good does this timestamp provide? Bitcoin Core rarely uses these timestamps -- it is used occasionally to filter out responses to getaddr requests and used sometimes to evict things from the new table, but we do not use it for determining who to connect to. In the places where they are used, they could likely be replaced without much trouble using nlasttry and nlastsuccess.
+
+ariard observed that even if Bitcoin Core's addrman does not use it, that doesn't mean it's not used by some other bitcoin clients to decide its peering. sdaftuar agreed but thought it might be worth asking how much good these timestamps do since they are necessarily unverifiable data. jnewbery offered that using timestamps is already a well-known way of [inferring network topology](https://www.cs.umd.edu/projects/coinscope/coinscope.pdf), and this is a tradeoff between helping a (theoretical) alternative implementation make better decisions about who to connect to versuslot protecting our own privacy. By default, we should always lean towards protecting our privacy unless doing so would be detrimental to the network as a whole. All agreed this change should be advertised on the mailing list.
+
+
+### Topic: PR to fix some interactions between addrman and block-relay-only peers
+
+After looking into how eviction works from the new and tried tables, sdaftuar decided it makes sense for block-relay-only peers to be moved to the tried table (see [#20187](https://github.com/bitcoin/bitcoin/issues/20187)). This is a reversal from his initial inclination, but there remains lots to consider, particularly related to privacy issues that are hard to reason about. One problem is whether the timestamps returned in getaddr messages for those peers will stick out. sipa added that this is a balance between not updating addrman to minimize detectability of block-only connections and updating it to make sure the node keeps good ones.
+
+### MISC:
+
+jnewbery thought another piece of (almost) useless data that we could stop sharing is the start_height in the version message, but it didn't fit in with today's discussion.
 
 ## 06 Oct 2020
 
