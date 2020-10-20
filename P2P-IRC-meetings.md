@@ -31,6 +31,8 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 _Feel free to propose a topic for the upcoming meeting_
 
+1. Remove timestamps from `addr` messages? It seems like the timestamp is only used to leak information about our recent connectivity. It doesn't look like we use it to make decisions about who to connect to.
+
 ## 06 Oct 2020
 
 No suggested topics.
