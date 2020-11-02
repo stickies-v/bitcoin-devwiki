@@ -29,7 +29,9 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 ## 03 Nov 2020
 
-_Feel free to propose a topic for the upcoming meeting_
+- peers.dat versioning. A recent PR (https://github.com/bitcoin/bitcoin/pull/19954) meant that in future it won't be possible to make changes to the peers.dat file format in a forwards-compatible way (i.e. it won't be possible to downgrade to a Bitcoin Core version from before the peers.dat version change and keep the addrman records). https://github.com/bitcoin/bitcoin/pull/20284 has been opened to address that.
+
+    A previous change (https://github.com/bitcoin/bitcoin/pull/16702) partially broke backwards-compatibility (users upgrading to v0.20 had records from the new table deleted). 16702 also means that whenever a new asmap is provided, records from the new table will be deleted.
 
 ## 20 Oct 2020
 
