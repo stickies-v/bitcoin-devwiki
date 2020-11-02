@@ -33,6 +33,8 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
     A previous change (https://github.com/bitcoin/bitcoin/pull/16702) partially broke backwards-compatibility (users upgrading to v0.20 had records from the new table deleted). 16702 also means that whenever a new asmap is provided, records from the new table will be deleted.
 
+- I2P support, some background at https://github.com/vasild/bitcoin/wiki/I2P-connectivity
+
 ## 20 Oct 2020
 
 ### Topic: priorities:
