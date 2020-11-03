@@ -35,7 +35,9 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 - I2P support, some background at https://github.com/vasild/bitcoin/wiki/I2P-connectivity
 
-- Reducing CVE-2020-26895 class of bugs and Tx-standardness (ariard) : Prior to v0.10.0-beta, a malicious peer could force an lnd node to accept a high-S ECDSA signature when updating new off-chain states. Though the signatures are valid according to consensus rules, the mempool policy would reject transactions containing high-S values, potentially leading to loss of funds if time-sensitive transactions cannot be relayed and confirmed. Transaction-relay policy is an area of high-concern for off-chain protocosl, how to mitigate against this class of bugs in the future is an open question. Building out a libtxstandardness library to make the tx-standardness verification available to other applications might be a solution.
+- Reducing CVE-2020-26895 class of bugs and Tx-standardness (ariard) : Prior to v0.10.0-beta, a malicious peer could force an lnd node to accept a high-S ECDSA signature when updating new off-chain states. Though the signatures are valid according to consensus rules, the mempool policy would reject transactions containing high-S values, potentially leading to loss of funds if time-sensitive transactions cannot be relayed and confirmed. 
+
+Transaction-relay policy is an area of high-concern for off-chain protocosl, how to mitigate against this class of bugs in the future is an open question. Building out a libtxstandardness library to make the tx-standardness verification available to other applications might be a solution.
 
 
 ## 20 Oct 2020
