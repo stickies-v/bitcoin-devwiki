@@ -8,7 +8,7 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 - 22 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-22-15.00.log.html)), ([summary](#22-sept-2020)) 
 - 6 October 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-10-06-15.00.log.html))
 - 20 October 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-10-20-15.00.log.html)), ([summary](#20-oct-2020)) 
-- 3 November 2020
+- 3 November 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-11-03-15.00.log.html)), ([summary](#04-nov-2020)) 
 - 17 November 2020
 - 1 December 2020
 - 15 December 2020
@@ -35,11 +35,19 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 ## 03 Nov 2020
 
-- peers.dat versioning. A recent PR (https://github.com/bitcoin/bitcoin/pull/19954) meant that in future it won't be possible to make changes to the peers.dat file format in a forwards-compatible way (i.e. it won't be possible to downgrade to a Bitcoin Core version from before the peers.dat version change and keep the addrman records). https://github.com/bitcoin/bitcoin/pull/20284 has been opened to address that.
+### Topic: addrman file versioning (jnewbery)
 
-    A previous change (https://github.com/bitcoin/bitcoin/pull/16702) partially broke backwards-compatibility (users upgrading to v0.20 had records from the new table deleted). 16702 also means that whenever a new asmap is provided, records from the new table will be deleted.
+While reviewing [#19954](https://github.com/bitcoin/bitcoin/pull/19954#discussion_r515607619), jnewbery realized that old versions of peers.dat were not guaranteed to fail to parse after the upgrade to 0.21. vasild opened #20284 to address the issue. This mitigation is needed so that a user can upgrade, make changes to peers.dat and then downgrade (at least one version) and still parse the peers.dat. sdaftuar suggested to rename the peers.dat file for 0.21, and migrate data from the old file to the new one though this strategy would require updating a lot of documentation. jnewbery floated the possibility of moving the peers.dat to sqlite.
 
-- I2P support, some background at https://github.com/vasild/bitcoin/wiki/I2P-connectivity
+A previous change [#16702](https://github.com/bitcoin/bitcoin/pull/16702) partially broke backward-compatibility (users upgrading to v0.20 had records from the new table deleted). #16702 also means that whenever a new asmap is provided, records from the new table will be deleted.
+
+### Topic: I2P support, some background at [vasild/bitcoin/wiki/I2P-connectivity](https://github.com/vasild/bitcoin/wiki/I2P-connectivity) (vasild)
+
+Sdaftuar asked for clarification on how I2P and Tor addresses get gossiped to peers that support the network type. Sipa replied that I2P/cjdns do not get rumored by the current code (see [#20119](https://github.com/bitcoin/bitcoin/issues/20119)).
+
+Reachable networks get rumored 2x, unreachable ipv4/ipv6/torv2/torv3 get rumored 1.5x, and unreachable others do not get rumored at all (see [#19728](https://github.com/bitcoin/bitcoin/issues/19728)). [#20254](https://github.com/bitcoin/bitcoin/issues/20254) makes I2P reachable. Tor remains unreachable and has no from address. (It was also mentioned that I2P has P2P encryption by default!)
+
+Sdaftuar asked how it is decided what address to advertise as given the node is reachable in multiple ways? Sipa responded that among the local addresses compatible with that peer, the one that has received the most mentions in incoming version messages. (This reminded sipa that Tor v3/I2P/cjdns can't be put in version messages, so those will never receive any mentions). Wumpus added that there was the idea to add that address in the 'sendaddrv2' message. Sdaftuar suggested that if there is an attempt to bootstrap a new type of address, it is necessary to actively advertise that address even to peers who don't understand it so that eventually, peers that do support it will receive it. vasild noted that it was decided not to relay I2P addresses by nodes that are connected to I2P (at least in the 0.21 release).
 
 ## 20 Oct 2020
 
