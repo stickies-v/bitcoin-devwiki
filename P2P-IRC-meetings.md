@@ -9,7 +9,7 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 - 6 October 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-10-06-15.00.log.html))
 - 20 October 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-10-20-15.00.log.html)), ([summary](#20-oct-2020)) 
 - 3 November 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-11-03-15.00.log.html)), ([summary](#04-nov-2020)) 
-- 17 November 2020
+- 17 November 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-11-17-15.00.moin.txt)), ([summary](#17-nov-2020)) 
 - 1 December 2020
 - 15 December 2020
 - 29 December 2020
@@ -27,11 +27,61 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
+## 1 Dec 2020
+
+_Feel free to propose a topic for the upcoming meeting_
+
 ## 17 Nov 2020
 
-- Reducing CVE-2020-26895 class of bugs and Tx-standardness (ariard) : Prior to v0.10.0-beta, a malicious peer could force an lnd node to accept a high-S ECDSA signature when updating new off-chain states. Though the signatures are valid according to consensus rules, the mempool policy would reject transactions containing high-S values, potentially leading to loss of funds if time-sensitive transactions cannot be relayed and confirmed. 
+### Priorities for 0.22
 
-  Transaction-relay policy is an area of high-concern for off-chain protocosl, how to mitigate at best against this class of bugs in the future is an open question. Building out a libtxstandardness library to make the tx-standardness verification available to other applications might be a solution.
+sdaftuar suggested erlay to which ariard, jonatack agreed  
+
+ariard is waiting for [#19160](https://github.com/bitcoin/bitcoin/pull/19160] before proceeding with altnet  
+
+jonatack mentioned BIP 324 implementation to which troygiorshev agreed  
+
+jnewbery seeks to progress clarifying the net/net_processing and net_processing  
+
+sdaftuar plans to work on block-relay-only peering, though he is stuck on some annoying addr-relay things that might hold him up  
+
+troygiorshev reminded reviewers about per-Peer Message logging [#19509](https://github.com/bitcoin/bitcoin/issues/19509)  
+
+ariard plans to work on a better version of [#18797](https://github.com/bitcoin/bitcoin/issues/18797) and better understand transaction-standardness before going back to package relay  
+
+amiti hopes to make progress on [#19315](https://github.com/bitcoin/bitcoin/issues/19315) (adding full-relay and block-relay-only to tests) and reviving transaction rebroadcast  
+
+(Note: these were individual's [priorities in August](https://github.com/bitcoin-core/bitcoin-devwiki/wiki/P2P-IRC-meetings#topic-individual-priorities))
+
+### Topic: Touch base on wtxid backport (aj)
+
+[#20399](https://github.com/bitcoin/bitcoin/issues/20399) proposes to revert wtxid relay from 0.20 ([#19606](https://github.com/bitcoin/bitcoin/pull/19606)) and [#20317](https://github.com/bitcoin/bitcoin/issues/20317) is a fix up of the orphan handling regression.
+
+sdaftuar thought that he wasn't sure that we should have backported wtxid-relay to the 0.20 branch. Knowing that there was a crashing bug in that line of work heightens the sense that backporting a feature is not a great idea. He didn't believe that backporting it was a requirement in the first place, but saw the reasoning that it was a nice-to-have. Given that it indeed turned out to be risky, he was in favor of dropping it, as there's no compelling reason for backport after [#19620](https://github.com/bitcoin/bitcoin/issues/19620) either. Falling back on the principle of only backporting bugfixes seems like the prudent thing to do.
+
+jnewbery noted that people agreed in the original meeting that it should have been backported, and then he has raised reviewing the PR in several meetings since then without objection. He didn't think the presence of a bug that was caught in review and fixed in the follow-up changes the facts but could understand that it makes people nervous.
+
+Even so, it was decided that [#20399](https://github.com/bitcoin/bitcoin/issues/20399) should be done to revert the backport and [#20317](https://github.com/bitcoin/bitcoin/issues/20317) would be closed.
+
+### Topic: Reducing [CVE-2020-26895](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2020-26895) class of bugs and Tx-standardness. (ariard)
+
+_Prior to v0.10.0-beta, a malicious peer could force an lnd node to accept a high-S ECDSA signature when updating new off-chain states. Though the signatures are valid according to consensus rules, the mempool policy would reject transactions containing high-S values, potentially leading to loss of funds if time-sensitive transactions cannot be relayed and confirmed. Transaction-relay policy is an area of high-concern for off-chain protocols. How to best mitigate against this class of bugs in the future remains an open question. Building out a libtxstandardness library to make the tx-standardness verification available to other applications might be a solution._
+
+In some cases, LND would accept a transaction signature that Bitcoin Core would not relay or mine by default. When the transaction containing the unrelayable signature fails to confirm, a timelock eventually expires, and the attacker is able to steal funds they previously paid to the vulnerable user. ([source bitcoin optech newsletter](https://bitcoinops.org/en/newsletters/2020/10/28/#cve-2020-26895-acceptance-of-non-standard-signatures))
+
+ariard started by apologizing for the previous discussion of this issue since it was difficult to explain before the public disclosure. This is not the first time that a Lightning Network implementation has had issues with tx-standardness. C-Lightning [had an issue](https://github.com/bitcoin/bitcoin/issues/13283) a couple of years ago with minimum relay fees. ariard contended that there is a class of vulnerabilities with any time-sensitive protocols built on top of the base layer, and ways to mitigate it correctly remain unclear.
+
+luke-jr proposed be strict on the transaction form. One cannot rely on node/relay policies, so doing what one can to pass them seems like the best option.
+
+While `testmempoolaccept` only tells you about your own policy, sdaftuar offered a belt and suspenders approach to enforce a strict transaction form and double-check against testmempoolaccept. Though luke-jr pointed out that double-checking against your own node makes sense, it ultimately shouldn't be your security check.
+
+ariard also brought up that mobile LN nodes won't have a mempool but are required to verify that the chain of transactions built from a particular UTXO (commitment transaction + HTLC transaction) are transaction-relay compliant. He worried that your full-node ultimately decides the validity of LN transactions that both you and your counter-party must agree to.
+
+ariard speculated that in the future, we might have fixed-fee commitment transactions and their feerate adjusted by a CPFP+package relay, to which aj added that we'd expect testmempoolaccept to support packages (which glozow is currently working on). testmempoolaccept currently requires all inputs to be available in mempool or UTXO set, so if you're testing validity further down a chain, it won't work. jnewbery agreed that testmempoolaccept does require the full UTXO set, but one could imagine a version where you provide the inputs, like `signrawtransaction`. Still, the concern remains whether all the mempool checks would be satisfied if the checks were abstracted into its own module/library, especially since some important ones are inside the script interpreter.
+
+luke-jr argued that this is not possible to have certainty since nodes will relay what they want, and there are no consensus rules forcing relay rules. He and sdaftuar were clear that there is no such thing as "bitcoin's tx relay rules." Their suggestion was to narrow what is accepted to a small enough subset that it will likely always be relayable both now and in the future. Testing validity against various full-node implementations would be a nice backup to make sure the assumptions aren't broken or that the code hasn't changed. aj pointed out that this isn't very robust against hostile peers who have access to your codebase to find checks you forgot to implement and is also hard to fuzz test for valid-but-non-standard sigs and the like.
+
+The meeting closed with ariard announcing his intention to rework [#18797](https://github.com/bitcoin/bitcoin/issues/18797) as a check on top of ATMP.
 
 ## 03 Nov 2020
 
