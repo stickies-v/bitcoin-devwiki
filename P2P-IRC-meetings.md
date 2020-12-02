@@ -10,7 +10,8 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 - 20 October 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-10-20-15.00.log.html)), ([summary](#20-oct-2020)) 
 - 3 November 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-11-03-15.00.log.html)), ([summary](#04-nov-2020)) 
 - 17 November 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-11-17-15.00.moin.txt)), ([summary](#17-nov-2020)) 
-- 1 December 2020
+- 1 December 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-12-01-15.00.moin.txt)), ([summary](#1-dec-2020)) 
+- 8 December 2020
 - 15 December 2020
 - 29 December 2020
 - etc
@@ -27,9 +28,25 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-## 1 Dec 2020
+## 8 Dec 2020
 
 _Feel free to propose a topic for the upcoming meeting_
+
+## 1 Dec 2020
+
+### Topic: p2p fuzzing (michaelfolkson)
+
+### Topic: Transaction pinning / package relay (ariard)
+
+Another case of transaction-pinning [was recently found](https://bitcoinops.org/en/newsletters/2020/09/16/#stealing-onchain-fees-from-ln-htlcs) after the merging of [new anchor spec](https://github.com/lightningnetwork/lightning-rfc/pull/803). The attack is explained in detail [here](https://github.com/t-bast/lightning-docs/blob/master/pinning-attacks.md).
+
+sipa opined that DoS protection will always result in an inability to accept transactions in some scenarios where that transaction would have been accepted from p2p in another state. We can reduce the set of situations that can happen using better algorithms, but the problem in a generic sense seems inherent. ariard agreed and pointed to his [June mailing list post](https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-June/002758.html#:~:text=Scenario%203).
+
+cdecker added that alternative transport over the lightning overlay is not intended to be a complete solution. It just reduces the effectiveness of pinning by making it less likely to succeed. He hoped that it'd be attractive for miners to listen to the overlay since the feerate is higher (even though they don't beat the absolute fee, which is not the miner's primary motivation). If there's interest from miners to get access cdecker offered to write up a faux-bitcoin-node that acts as a bridge between bitcoin p2p and the ln overlay relay network.
+
+### Topic: Erlay BIP updates (gleb)
+
+Sometimes reconciliation fails initially because the first sketch is insufficient or because it's too small and allows to decode up to N differences. If it fails, the Erlay protocol makes another attempt. There are two independent alternatives to do this while still being 100% efficient: bisection and extension — the original proposal used bisection because it spent fewer CPU cycles on computing sketches. In practice, the implementation turned out to be too complicated on the Bitcoin Core p2p protocol side. So gleb switched the code to do sketch extensions instead. It's much less code, the code complexity is now more aligned with general Bitcoin project complexity, and, if need be, it's also easier to extend to allow to make multiple attempts. It's a bit more CPU expensive doesn't matter because we expect sketches of low capacity. For more rationale, see the [updated BIP](https://github.com/bitcoin/bips/pull/899).
 
 ## 17 Nov 2020
 
