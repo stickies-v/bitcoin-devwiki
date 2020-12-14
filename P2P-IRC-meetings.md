@@ -36,7 +36,7 @@ _Feel free to propose a topic for the upcoming meeting_
 
 Which PR reviews stand-out as productive and which were unproductive ? What can we learn from these examples ?
 
-P2P PRs on last 12 months (non-exhaustive):
+Review-intensive P2P PRs on last 12 months (non-exhaustive):
 * [#16702](https://github.com/bitcoin/bitcoin/pull/16702)
 * [#17428](https://github.com/bitcoin/bitcoin/pull/17428)
 * [#18038](https://github.com/bitcoin/bitcoin/pull/18038)
