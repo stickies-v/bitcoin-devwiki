@@ -32,6 +32,27 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 _Feel free to propose a topic for the upcoming meeting_
 
+### Topic: Review of the P2P Review Process (ariard)
+
+Which PR reviews stand-out as productive and which were unproductive ? What can we learn from these examples ?
+
+P2P PRs on last 12 months (non-exhaustive):
+* [#16702](https://github.com/bitcoin/bitcoin/pull/16702)
+* [#17428](https://github.com/bitcoin/bitcoin/pull/17428)
+* [#18038](https://github.com/bitcoin/bitcoin/pull/18038)
+* [#18044](https://github.com/bitcoin/bitcoin/pull/18044)
+* [#18876](https://github.com/bitcoin/bitcoin/pull/18876)
+* [#18991](https://github.com/bitcoin/bitcoin/pull/18991)
+* [#19107](https://github.com/bitcoin/bitcoin/pull/19107)
+* [#19219](https://github.com/bitcoin/bitcoin/pull/19219)
+* [#19301](https://github.com/bitcoin/bitcoin/pull/19031)
+* [#19316](https://github.com/bitcoin/bitcoin/pull/19316)
+* [#19398](https://github.com/bitcoin/bitcoin/issues/19398)
+* [#19858](https://github.com/bitcoin/bitcoin/pull/19858)
+* [#19954](https://github.com/bitcoin/bitcoin/pull/19954)
+* [#19988](https://github.com/bitcoin/bitcoin/pull/19988)
+
+
 ## 1 Dec 2020
 
 ### Topic: p2p fuzzing (michaelfolkson)
