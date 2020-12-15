@@ -11,9 +11,7 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 - 3 November 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-11-03-15.00.log.html)), ([summary](#04-nov-2020)) 
 - 17 November 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-11-17-15.00.moin.txt)), ([summary](#17-nov-2020)) 
 - 1 December 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-12-01-15.00.moin.txt)), ([summary](#1-dec-2020)) 
-- 8 December 2020
 - 15 December 2020
-- 29 December 2020
 - etc
 
 [Google calendar](https://calendar.google.com/calendar?cid=MTFwcXZkZ3BkOTlubGliZjliYTg2MXZ1OHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ) for all Bitcoin Core irc meetings.
@@ -28,7 +26,7 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-## 8 Dec 2020
+## 15 Dec 2020
 
 _Feel free to propose a topic for the upcoming meeting_
 
