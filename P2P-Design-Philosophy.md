@@ -6,7 +6,7 @@ We can't rely on inbound peers to be honest, because they are initiated by other
 
 Therefore, in order to try to be connected to the honest network, we focus on having good outbound peers, as we get to choose who those are.
 
-Note that non-listening nodes have no inbound peers, while all nodes should have 8 outbound peers by default. If we're unable to achieve 8 outbound peers for some reason, there's a good chance we have bigger problems on our hands (ie massive network failure!). This document assumes that we have plenty of outbound peers to choose from, and doesn't address the ways we protect against not having sufficient peers to connect to.
+Note that non-listening nodes have no inbound peers, while all nodes should have 10 outbound peers by default (8 of which are relaying transactions, and 2 of which are only relaying blocks/headers). If we're unable to achieve 10 outbound peers for some reason, there's a good chance we have bigger problems on our hands (ie massive network failure!). This document assumes that we have plenty of outbound peers to choose from, and doesn't address the ways we protect against not having sufficient peers to connect to.
 
 For the sake of this document, we generally operate under the assumption that we have no useful inbound peers, as this is the most generic case (though it's worth analyzing to ensure that the presence of inbound peers can't interfere or attack the logic described).
 
@@ -14,7 +14,9 @@ For the sake of this document, we generally operate under the assumption that we
 
 ### Case 1. Our outbound peers never announce a block to us.
 
-If all our peers do this, then our tip may never update.  Our peers may be honest, and this can just be a case of blocks being found slowly, or our peers may have different consensus rules or are just refusing to relay valid blocks, and we should try to find new peers.  We deal with this via the stale-tip check, introduced in #11560:
+If all our peers do this, then our tip may never update.  Our peers may be honest, and this can just be a case of blocks being found slowly, or our peers may have different consensus rules or are just refusing to relay valid blocks, and we should try to find new peers.  We deal with this in two ways:
+
+#### The stale-tip check, introduced in #11560:
 
 - Our tip is potentially "stale" if it hasn't updated in > 30 minutes. We check this on a 10-minute timer.
 - If our tip is stale, we stop using our feeler connection, and instead make a 9th outbound connection.
@@ -34,6 +36,27 @@ Design consideration:
    and (c) only connect and evict a 9th peer once every 10 minutes.
 
 - Note that we do not require that our outbound peers be the ones that advance our chain, in order to remain connected to all of them. If an inbound peer is announcing blocks to us quickly, then we may be the ones that relay blocks to our outbound peers first and keep them in sync. In this situation there's nothing inherently wrong with our peering (and our links to our outbound peers may be keeping the network connected, such as if we're a big miner). Of course if we were to lose that inbound peer, and that was our only connection to the honest network, then at some point (after 30 minutes) this logic will allow us to start looking for new outbound peers to get reconnected to the honest network.
+
+#### Periodic block-relay-only connections for syncing headers
+
+The second way we deal with this is by periodically opening a block-relay-only connection for the purpose of syncing our tip and then disconnecting, regardless of how often our tip has been updating (since #19858):
+
+- Every 5 minutes (on average), prioritize creating a temporary block-relay-only connection to a peer selected from our addrman (in lieu of a feeler connection).
+  * If we fail to connect for any reason after picking one address to try from our addrman, give up until our 5 minute (poisson timer) goes off again.
+- Stay connected long enough to sync headers (just as we do with the extra full-relay connection described above, when our tip is stale).
+- Every 45 seconds, check to see if we're over our maximum number of block-relay-peers, and if we are, we potentially disconnect one:
+  * Disconnect the newest block-relay-only peer if we haven't received a new block from that peer.
+  * Disconnect the second-youngest block-relay-only peer if, instead, the newest peer has given us a block more recently than it.
+
+Design considerations:
+
+- Avoid putting too much load on the network.
+  * We only try to connect once every 5 minutes to avoid holding connection slots open on the network for an inordinate amount of time.
+  * We use block-relay-only connections because they are very low bandwidth.
+- Allow replacing an existing connection for a new connection if we learn of a new block.  It's fairly unlikely that in normal/honest conditions that we'll learn of a new block from our newest peer (some ways that can happen: all our peers are withholding the best block from us; our peers are themselves partitioned off from the most-work chain somehow; there's a network split and we learn of a competing chain with the same work as our chain).  If it does happen, we probably are better off staying connected to the new peer so that if their chain has more work or ends up with more work that we're more likely to learn about it than from our existing peers.
+- Only rotate the youngest peer, to avoid creating attack vectors where both our block-relay-only peer slots could be taken over by an entity that just tries to serve blocks the fastest.  At most one of our two peers could be taken over this way right now.
+- Protect against attacks that stale-tip checking woulnd't protect against.
+  * As the stale-tip check only fires if our tip hasn't updated in a while, an eclipsing adversary that is feeding us blocks slowly could prevent us from using that logic to look for honest peers.  Since these connections fire every 5 minutes regardless of what our tip is doing, as long as we have a single peer in our addrman that has the most work chain, we should eventually find it.
 
 ### Case 2. All outbound peers are on incompatible/invalid chains.
 
