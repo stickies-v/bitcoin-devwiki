@@ -1,4 +1,4 @@
-Release notes for https://github.com/bitcoin/bitcoin/pull/20852
+Release notes for https://github.com/bitcoin/bitcoin/pull/20852 and https://github.com/bitcoin/bitcoin/pull/20904
 
 Done here to avoid churn in the git repo.
 
