@@ -1,18 +1,22 @@
 **15:00 UTC alternate Tuesdays on the #bitcoin-core-dev channel on Freenode**
 
-Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss P2P PRs and issues in Bitcoin Core. Meetings will be held on:
+Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
 
-- 11 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-11-15.00.html)), ([summary](#11-aug-2020))
-- 25 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-25-15.00.log.html)), ([summary](#25-aug-2020))
-- 8 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-08-15.00.log.html)), ([summary](#8-sept-2020))
-- 22 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-22-15.00.log.html)), ([summary](#22-sept-2020)) 
-- 6 October 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-10-06-15.00.log.html))
-- 20 October 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-10-20-15.00.log.html)), ([summary](#20-oct-2020)) 
-- 3 November 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-11-03-15.00.log.html)), ([summary](#04-nov-2020)) 
-- 17 November 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-11-17-15.00.moin.txt)), ([summary](#17-nov-2020)) 
-- 1 December 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-12-01-15.00.moin.txt)), ([summary](#1-dec-2020)) 
-- 15 December 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-12-15-15.01.moin.txt))
 - 12 January 2021
+
+<details><summary>Previous meetings</summary>
+
+- 15 December 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-12-15-15.01.moin.txt))
+- 1 December 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-12-01-15.00.moin.txt)), ([summary](#1-dec-2020)) 
+- 17 November 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-11-17-15.00.moin.txt)), ([summary](#17-nov-2020)) 
+- 3 November 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-11-03-15.00.log.html)), ([summary](#04-nov-2020)) 
+- 20 October 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-10-20-15.00.log.html)), ([summary](#20-oct-2020)) 
+- 6 October 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-10-06-15.00.log.html))
+- 22 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-22-15.00.log.html)), ([summary](#22-sept-2020)) 
+- 8 September 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-09-08-15.00.log.html)), ([summary](#8-sept-2020))
+- 25 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-25-15.00.log.html)), ([summary](#25-aug-2020))
+- 11 August 2020 ([log](http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-08-11-15.00.html)), ([summary](#11-aug-2020))
+</details>
 
 [Google calendar](https://calendar.google.com/calendar?cid=MTFwcXZkZ3BkOTlubGliZjliYTg2MXZ1OHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ) for all Bitcoin Core irc meetings.
 
@@ -28,7 +32,9 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 ## 12 Jan 2021
 
-_Feel free to propose a topic for the upcoming meeting_
+- `disabletx` P2P message ([mailing list post](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018340.html), [PR](https://github.com/bitcoin/bitcoin/pull/20726)) (sdaftuar)
+
+_Feel free to propose additional topics for the upcoming meeting_
 
 ## 15 Dec 2020
 
