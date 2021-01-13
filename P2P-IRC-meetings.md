@@ -58,7 +58,7 @@ ariard: reviewing erlay/package testmempoolaccept and updating [#20277](https://
 
 ### Topic: disabletx P2P message (sdaftuar)
 
-[#20726](https://github.com/bitcoin/bitcoin/pull/20726), [mailing list post](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018340.html). (sdaftuar plans to mark #20726 ready for review once a BIP number is assigned.)
+[#20726](https://github.com/bitcoin/bitcoin/pull/20726), [mailing list post](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018340.html), [Optech Newletter](https://bitcoinops.org/en/newsletters/2021/01/13/#proposed-disabletx-message). (sdaftuar plans to mark #20726 ready for review once a BIP number is assigned.)
 
 This proposal's overarching goal is to increase the number of inbound connection slots on the network to feel good about increasing the number of block-relay-only connections. Block-relay-only connections add security to the network by increasing its partition resistance at relatively low resource cost. But to do that, we need to give nodes a way to know that an inbound peer is a block-relay-only peer. Currently, block-relay-only peers use the `fRelay` flag from BIP37 to instruct their peers they don't want transactions, but BIP37 allows for transaction relay to resume with a FILTERCLEAR message.
 
