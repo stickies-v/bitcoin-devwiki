@@ -2,9 +2,13 @@
 
 Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
 
-- 12 January 2021
+- 26 January 2021
 
-<details><summary>Previous meetings</summary>
+Previous meetings:
+
+- 12 January 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-01-12-15.00.moin.txt)), ([summary](#12-jan-2021)) 
+
+<details><summary>Meeting Archive</summary>
 
 - 15 December 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-12-15-15.01.moin.txt))
 - 1 December 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-12-01-15.00.moin.txt)), ([summary](#1-dec-2020)) 
@@ -30,9 +34,7 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-## 12 Jan 2021
-
-- `disabletx` P2P message ([mailing list post](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018340.html), [PR](https://github.com/bitcoin/bitcoin/pull/20726)) (sdaftuar)
+## 26 Jan 2021
 
 - `connection type` updates, naming cleanup, GUI/-netinfo implementation status (jonatack)
   - [Bitcoin Core PR #20729](https://github.com/bitcoin/bitcoin/pull/20729) - standardize on `outbound-{full, block}-relay` connection type naming
@@ -43,8 +45,33 @@ Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss
 
 - high-level `p2p` logging category, issue: https://github.com/bitcoin/bitcoin/issues/20576 (jonatack)
 
-
 _Feel free to propose additional topics for the upcoming meeting_
+
+## 12 Jan 2021
+
+### Topic: P2P priorities
+
+vasild: [#20788](https://github.com/bitcoin/bitcoin/issues/20788), which would help #19203 and #20685 to move forward  
+jonatack: [#20197](https://github.com/bitcoin/bitcoin/pull/20197) and adding more unit test coverage to the eviction logic  
+jnewbery: progress [#19398](https://github.com/bitcoin/bitcoin/issues/19398). He is currently waiting for [#20811](https://github.com/bitcoin/bitcoin/issues/20811) because he thinks the remaining changes are less disruptive after that.  
+ariard: reviewing erlay/package testmempoolaccept and updating [#20277](https://github.com/bitcoin/bitcoin/issues/20277) with the latest feedback from sdaftuar
+
+### Topic: disabletx P2P message (sdaftuar)
+
+[#20726](https://github.com/bitcoin/bitcoin/pull/20726), [mailing list post](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018340.html). (sdaftuar plans to mark #20726 ready for review once a BIP number is assigned.)
+
+This proposal's overarching goal is to increase the number of inbound connection slots on the network to feel good about increasing the number of block-relay-only connections. Block-relay-only connections add security to the network by increasing its partition resistance at relatively low resource cost. But to do that, we need to give nodes a way to know that an inbound peer is a block-relay-only peer. Currently, block-relay-only peers use the `fRelay` flag from BIP37 to instruct their peers they don't want transactions, but BIP37 allows for transaction relay to resume with a FILTERCLEAR message.
+
+This proposes adding a new p2p message (`disabletx`), which indicates that a connection will not relay transactions for its lifetime. This, in turn, allows us to write code to increase the number of connections by reserving additional slots for disabletx-peers.
+
+amiti wondered whether the current proposal is a disabletx message that explicitly disables transactions and implicitly disables addresses with the thinking is that in the future, we could introduce a message that explicitly enables addresses. sdaftuar responded that block-relay-only connections currently have no way to communicate that they also don't want addr messages, and his proposal is to have the BIP "RECOMMEND" that we not send addrs to peers sending disabletx
+with the idea being that in the future, we should adopt some kind of addr relay negotiation protocol, which would then take precedence. However, sdaftuar believes that designing an addr relay protocol will take some work, and he isn't ready to propose one now until a few questions around what the goals of addr relay should be and how best to achieve them are more clearly defined. For example, the long term design might be more of a toggle (like with transactions), and we might want to communicate information about particular networks (as described in BIP 155). It remains unclear what the different handling should be for different networks (i.e., addresses we understand versus ones that we don't).
+
+vasild pointed out that transaction relay is unrelated to addr relay and that linking both together under disabletx would be confusing. sdaftuar responded that both are related to block-relay-only peer logic, which is the only thing that will be using this at the start. Software that ignores the addr-relay suggestion will not be in violation of the design, but it accommodates our desired behavior today. vasild wondered whether relayblocksonly instead of disabletx more clear (relay only blocks and nothing else - no tx, no addr). sdaftuar pointed out that was his first approach, but [received feedback](https://github.com/bitcoin/bitcoin/pull/20726#discussion_r548352366) that having a BIP that governed too much behavior was also confusing or bad protocol design for future compatibility. The current approach is narrow and just specifies required behavior for transaction-relay but provides an implication for other behavior in the absence of protocol support. Ultimately, sdaftuar thinks neither proposal would inhibit his implementation nor future protocol extensions.
+
+sdaftuar posed to the group the question of whether nodes should relay addrs to software sending disabletx. He opined that relaying addrs to inbound-block-relay-only peers would be a problem and strictly worse than not relaying addrs. One of the drawbacks to increasing the number of inbound-block-relay-only peers is that we create addr-relay black holes (peers that don't connect the graph), which will prevent the addition of more block-relay connections. This was originally discussed in [#15759](https://github.com/bitcoin/bitcoin/pull/15759#issuecomment-480400958), which was one of the reasons that only two outbound block-relay-only connections were added at that time.
+
+jnewbery asked whether sdaftuar had thoughts about what a future addr relay negotiation method would look. sdaftuar's naive guess is that adding some kind of feature negotiation where we signal support (not sure 0/1 or if more precision is necessary) for different networks (as defined in BIP 155) would be desirable. However, he thinks there needs to be a discussion on addr relay goals, come up with some relay policies to address those goals, and then make sure the design supports those relay policies. There is currently no writeup anywhere on how addr relay should work, and addr relay remains an understudied topic. Without further research, his guess about a future addr relay negotiation method would be difficult to defend. That said, he thought progress on adding block-relay-only connections would be possible while deferring the design of an actual addr relay protocol to the future. In the meantime, he wants to make sure that people are comfortable with not relaying addrs to disabletx peers.
 
 ## 15 Dec 2020
 
