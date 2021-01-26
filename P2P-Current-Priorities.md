@@ -20,3 +20,9 @@ What are you currently working on in the P2P realm? (Add your github username an
 ### @jonatack 2021-20-27
 
 * eviction protection for onion and i2p peers [#20197](https://github.com/bitcoin/bitcoin/pull/20197)
+
+### @vasild 2021-01-26
+
+* Code review while waiting input on:
+  * [#20685 Add I2P support using I2P SAM](https://github.com/bitcoin/bitcoin/pull/20685)
+  * [#20788 net: add RAII socket and use it instead of bare SOCKET](https://github.com/bitcoin/bitcoin/pull/20788)
