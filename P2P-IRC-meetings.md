@@ -1,15 +1,15 @@
 **15:00 UTC alternate Tuesdays on the #bitcoin-core-dev channel on Freenode**
 
-Join us for a fortnightly (that's every two weeks, folks) IRC meeting to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
+Join us for an IRC meeting every two weeks to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
 
-- 26 January 2021
+- 9 February 2021
 
 Previous meetings:
 
-- 12 January 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-01-12-15.00.moin.txt)), ([summary](#12-jan-2021)) 
-
 <details><summary>Meeting Archive</summary>
 
+- 26 January 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-01-26-15.00.moin.txt))
+- 12 January 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-01-12-15.00.moin.txt)), ([summary](#12-jan-2021)) 
 - 15 December 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-12-15-15.01.moin.txt))
 - 1 December 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-12-01-15.00.moin.txt)), ([summary](#1-dec-2020)) 
 - 17 November 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-11-17-15.00.moin.txt)), ([summary](#17-nov-2020)) 
@@ -30,7 +30,7 @@ Previous meetings:
 
 ### Topics
 
-1. **Focus and priorities**: Everyone will have a chance to share what they're working on and prioritizing.
+1. **[Focus and priorities](https://github.com/bitcoin-core/bitcoin-devwiki/wiki/P2P-Current-Priorities)**: We'll discuss what people are working on and prioritizing.
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
@@ -47,7 +47,7 @@ Previous meetings:
 
 ## 26 Jan 2021
 
-_Feel free to propose additional topics for the upcoming meeting_
+_Nothing discussed_
 
 ## 12 Jan 2021
 
