@@ -34,7 +34,7 @@ Previous meetings:
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-## 26 Jan 2021
+## 9 Feb 2021
 
 - `connection type` updates, naming cleanup, GUI/-netinfo implementation status (jonatack)
   - [Bitcoin Core PR #20729](https://github.com/bitcoin/bitcoin/pull/20729) - standardize on `outbound-{full, block}-relay` connection type naming
@@ -46,6 +46,8 @@ Previous meetings:
 - high-level `p2p` logging category, issue: https://github.com/bitcoin/bitcoin/issues/20576 (jonatack)
 
 _Feel free to propose additional topics for the upcoming meeting_
+
+## 26 Jan 2021
 
 ## 12 Jan 2021
 
