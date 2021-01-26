@@ -45,9 +45,9 @@ Previous meetings:
 
 - high-level `p2p` logging category, issue: https://github.com/bitcoin/bitcoin/issues/20576 (jonatack)
 
-_Feel free to propose additional topics for the upcoming meeting_
-
 ## 26 Jan 2021
+
+_Feel free to propose additional topics for the upcoming meeting_
 
 ## 12 Jan 2021
 
