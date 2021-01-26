@@ -11,8 +11,15 @@ What are you currently working on in the P2P realm? (Add your github username an
 
 ### @jnewbery 2021-01-27
 
-* Move application layer data from net to net_processing [#19398](https://github.com/bitcoin/bitcoin/issues/19398)
-
+- Move application layer data from net to net_processing:
+  - [#19398](https://github.com/bitcoin/bitcoin/issues/19398) describes the high-level design
+  - [#20721](https://github.com/bitcoin/bitcoin/pull/20721) is the next PR in the series - moves ping data from net to net_processing
+- Clean up addrman:
+  - [#20557](https://github.com/bitcoin/bitcoin/pull/20557) fixes some deserialization bugs introduced in [#16702](https://github.com/bitcoin/bitcoin/pull/16702)
+  - [#20228](https://github.com/bitcoin/bitcoin/pull/20228) makes addrman a top-level component, allowing ctor arguments to be passed directly from init and removing boilerplate code from CConnman
+  - [#20233](https://github.com/bitcoin/bitcoin/pull/20233) makes consistency checks a runtime option, so they can be used in unit/functional/fuzz tests.
+- Review and help AJ's general cleanups [#20758](https://github.com/bitcoin/bitcoin/pull/20758)
+- Review and help Carl's de-globalize chainstate manager [#20158](https://github.com/bitcoin/bitcoin/pull/20158) (this is mostly in validation but touches the net_processing-validation interface a lot).
 ### @sdaftuar 2021-01-27
 
 * disabletx [code=#20726](https://github.com/bitcoin/bitcoin/pull/20726) [bip=#1025](https://github.com/bitcoin/bips/pull/1052) [-dev thread](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018340.html)
