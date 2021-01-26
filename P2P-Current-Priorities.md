@@ -16,3 +16,7 @@ What are you currently working on in the P2P realm? (Add your github username an
 ### @sdaftuar 2021-01-27
 
 * disabletx [code=#20726](https://github.com/bitcoin/bitcoin/pull/20726) [bip=#1025](https://github.com/bitcoin/bips/pull/1052) [-dev thread](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018340.html)
+
+### @jonatack 2021-20-27
+
+* eviction protection for onion and i2p peers [#20197](https://github.com/bitcoin/bitcoin/pull/20197)
