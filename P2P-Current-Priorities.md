@@ -28,6 +28,12 @@ What are you currently working on in the P2P realm? (Add your github username an
 
 * eviction protection for onion and i2p peers [#20197](https://github.com/bitcoin/bitcoin/pull/20197)
 
+### @MarcoFalke 2021-20-26
+
+* Fuzzing p2p:
+* https://github.com/bitcoin/bitcoin/pull/20915  fuzz: Fail if message type is not fuzzed
+* https://github.com/bitcoin/bitcoin/pull/20995  fuzz: Avoid initializing version to less than MIN_PEER_PROTO_VERSION 
+
 ### @vasild 2021-01-26
 
 * Code review while waiting input on:
