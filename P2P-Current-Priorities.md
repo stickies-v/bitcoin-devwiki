@@ -7,7 +7,7 @@ What are you currently working on in the P2P realm? (Add your github username an
 
 ### @amitiuttarwar 2021-01-27
 
-* tx rebroadcast
+* tx rebroadcast [#21061](https://github.com/bitcoin/bitcoin/pull/21061)
 
 ### @jnewbery 2021-01-27
 
@@ -22,7 +22,10 @@ What are you currently working on in the P2P realm? (Add your github username an
 - Review and help Carl's de-globalize chainstate manager [#20158](https://github.com/bitcoin/bitcoin/pull/20158) (this is mostly in validation but touches the net_processing-validation interface a lot).
 ### @sdaftuar 2021-01-27
 
-* disabletx [code=#20726](https://github.com/bitcoin/bitcoin/pull/20726) [bip=#1025](https://github.com/bitcoin/bips/pull/1052) [-dev thread](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018340.html)
+* disabletx
+  * [code=#20726](https://github.com/bitcoin/bitcoin/pull/20726)
+  * [bip=#1025](https://github.com/bitcoin/bips/pull/1052)
+  * [-dev thread](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018340.html)
 
 ### @jonatack 2021-20-27
 
@@ -31,8 +34,8 @@ What are you currently working on in the P2P realm? (Add your github username an
 ### @MarcoFalke 2021-20-26
 
 * Fuzzing p2p:
-* https://github.com/bitcoin/bitcoin/pull/20915  fuzz: Fail if message type is not fuzzed
-* https://github.com/bitcoin/bitcoin/pull/20995  fuzz: Avoid initializing version to less than MIN_PEER_PROTO_VERSION 
+  * https://github.com/bitcoin/bitcoin/pull/20915  fuzz: Fail if message type is not fuzzed
+  * https://github.com/bitcoin/bitcoin/pull/20995  fuzz: Avoid initializing version to less than MIN_PEER_PROTO_VERSION 
 
 ### @vasild 2021-01-26
 
