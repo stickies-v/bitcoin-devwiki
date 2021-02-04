@@ -2,6 +2,14 @@
 
 ## Basic Usability Issues
 
+### Overall Unreliability
+
+GitHub makes comments in long threads inaccessible via it's site. https://twitter.com/jfnewbery/status/1354744697093283847
+
+The comments need to be recovered manually from past emails or metadata dumps.
+
+It was also observed that complete issues or pull requests simply disappeared without notice.
+
 ### Spam/Lack of Moderator Queue
 
 The repo has thousands of subscribers, so any spam contribution or otherwise inappropriate comment will reach all those inboxes before being deleted by a maintainer.
