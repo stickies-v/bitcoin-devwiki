@@ -23,15 +23,17 @@ https://twitter.com/MarcoFalke/status/1355097159113322497
 ```
 https://github.com/bitcoin/bitcoin/issues/15847 | Feedback for GitHub CEO · Issue #15847 · bitcoin/bitcoin · GitHub
 https://github.com/bitcoin/bitcoin/issues/20227 | Dependency on GitHub · Issue #20227 · bitcoin/bitcoin · GitHub
-https://github.com/bitcoin/bitcoin/issues/16472 | Github started banning/restricting whole countries · Issue #16472 · bitcoin/bitcoin · GitHub
-https://github.com/bitcoin/bitcoin/issues/13411 | Moving to self-hosted issue and patch management · Issue #13411 · bitcoin/bitcoin · GitHub
+ · Issue #16472 · bitcoin/bitcoin · GitHub
 ```
 
 ## Centralization/Single Point of Failure
 
 The repo is primarily accessed through GitHub, which might (even against their will) shut down hosting at any point in time.
 
-Instead of hopping to another centralized provider or self-hosted single point of failure, a goal should be to evaluate decentralized or federated hosters.
+Instead of hopping to another centralized provider or self-hosted single point of failure, a goal should be to evaluate decentralized or federated hosters. See also:
+
+* https://github.com/bitcoin/bitcoin/issues/13411 (Moving to self-hosted issue and patch management)
+* https://github.com/bitcoin/bitcoin/issues/16472 (Github started banning/restricting whole countries)
 
 # Alternatives
 
