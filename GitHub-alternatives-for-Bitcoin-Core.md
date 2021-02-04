@@ -43,3 +43,4 @@ Possible alternatives:
 - [Radicle](https://radicle.xyz/)
 - [git-bug](https://github.com/MichaelMure/git-bug)
 - [bugs-everywhere](https://bugs-everywhere.readthedocs.io/en/latest/tutorial.html)
+- [Darcs](http://darcs.net)
