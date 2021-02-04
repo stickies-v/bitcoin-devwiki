@@ -49,3 +49,4 @@ Instead of hopping to another centralized provider or self-hosted single point o
 - [git-bug](https://github.com/MichaelMure/git-bug)
 - [bugs-everywhere](https://bugs-everywhere.readthedocs.io/en/latest/tutorial.html)
 - [Darcs](http://darcs.net)
+- [pijul](https://pijul.org) (a modern alternative to Darcs)
