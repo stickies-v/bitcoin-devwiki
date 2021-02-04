@@ -36,7 +36,13 @@ Instead of hopping to another centralized provider or self-hosted single point o
 
 # Alternatives
 
-Possible alternatives:
+## Evaluation Scheme
+
+* How does it integrate with CI?
+* Does it have feature-parity with GitHub reviews (e.g. resolving inline review comments)?
+* How is the "sign-up" handled?
+
+## Possible alternatives:
 
 - [git-appraise](https://github.com/google/git-appraise)
 - [Radicle](https://radicle.xyz/)
