@@ -23,7 +23,6 @@ https://twitter.com/MarcoFalke/status/1355097159113322497
 ```
 https://github.com/bitcoin/bitcoin/issues/15847 | Feedback for GitHub CEO · Issue #15847 · bitcoin/bitcoin · GitHub
 https://github.com/bitcoin/bitcoin/issues/20227 | Dependency on GitHub · Issue #20227 · bitcoin/bitcoin · GitHub
- · Issue #16472 · bitcoin/bitcoin · GitHub
 ```
 
 ## Centralization/Single Point of Failure
