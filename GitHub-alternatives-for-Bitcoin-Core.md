@@ -16,6 +16,8 @@ The repo has thousands of subscribers, so any spam contribution or otherwise ina
 
 GitHub fails to provide simple and effective tools (such as rate limits for non-members or a moderator queue) to fight low-quality content.
 
+https://twitter.com/MarcoFalke/status/1355097159113322497
+
 ### Others
 
 ```
