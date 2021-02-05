@@ -13,6 +13,8 @@ _Discovery_ is:
 * `dynamic` means the vuln was triggered by none of the fuzz inputs in qa-assets, but can be found with an existing fuzz target and enough CPU time
 * `mod` means the vuln was triggered by a fuzz target that isn't publicly available or a fuzz target that is locally modified.
 
+The remaining columns follow the definitions from https://en.bitcoin.it/wiki/Common_Vulnerabilities_and_Exposures
+
 
 | Unique ID           | Discovery | Severity | Attack is... | Flaw                  |
 |---------------------|-----------|----------|--------------|-----------------------|
