@@ -6,6 +6,7 @@ _Unique Id_ is:
 
 * _pull-nnnn_ for vulns that exist(ed) on the pull request with given id
 * _master-ffff_ for vulns that exist on the master branch as of the given commit id
+* _undisclosed-yyyy-mm-dd_ for undisclosed vulns that have been reported on that day
 
 _Discovery_ is:
 
@@ -16,8 +17,9 @@ _Discovery_ is:
 The remaining columns follow the definitions from https://en.bitcoin.it/wiki/Common_Vulnerabilities_and_Exposures
 
 
-| Unique ID           | Discovery | Severity | Attack is... | Flaw                  |
-|---------------------|-----------|----------|--------------|-----------------------|
-| pull-18808          | qa-assets | DoS      | easy         | Missing nullptr check https://github.com/bitcoin/bitcoin/pull/18808#discussion_r417307258 |
-| master-9efd86a      | mod       | DoS      | easy         | Assert on untrusted input https://github.com/bitcoin/bitcoin/pull/20317#issuecomment-723047111 |
-| pull-21043          | mod       | none     | easy         | signed integer overflow in version message processing https://github.com/bitcoin/bitcoin/pull/21043 |
+| Unique ID              | Discovery | Severity | Attack is... | Flaw                  |
+|------------------------|-----------|----------|--------------|-----------------------|
+| pull-18808             | qa-assets | DoS      | easy         | Missing nullptr check https://github.com/bitcoin/bitcoin/pull/18808#discussion_r417307258 |
+| master-9efd86a         | mod       | DoS      | easy         | Assert on untrusted input https://github.com/bitcoin/bitcoin/pull/20317#issuecomment-723047111 |
+| pull-21043             | mod       | none     | easy         | signed integer overflow in version message processing https://github.com/bitcoin/bitcoin/pull/21043 |
+| undisclosed-2020-10-09 | dynamic   | Netsplit | Very hard    | Undisclosed flaw |
