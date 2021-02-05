@@ -5,7 +5,7 @@ This includes vulns found on pull requests. Vulns found on released versions are
 _Unique Id_ is:
 
 * _pull-nnnn_ for vulns that only exist(ed) on the pull request with given id
-* _master-ffff_ for vulns that exist(ed) on the master branch as of the given commit id
+* _master-ffff_ for vulns that exist on the master branch as of the given commit id
 
 _Discovery_ is:
 
