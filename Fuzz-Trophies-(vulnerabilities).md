@@ -23,7 +23,7 @@ The remaining columns follow the definitions from https://en.bitcoin.it/wiki/Com
 | master-9efd86a         | mod       | DoS      | easy         | Assert on untrusted input https://github.com/bitcoin/bitcoin/pull/20317#issuecomment-723047111 |
 | undisclosed-2020-10-09 | mod       | Netsplit | Very hard    | Undisclosed flaw |
 
-## Non-Exploitable Issues Found by Fuzzing
+## Non-Exploitable Issues
 
 Issues without Severity
 
