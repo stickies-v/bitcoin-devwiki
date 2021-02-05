@@ -31,3 +31,4 @@ Issues without Severity
 |------------------------|-----------|-----------------------|
 | pull-21043             | mod       | signed integer overflow in version message processing https://github.com/bitcoin/bitcoin/pull/21043 |
 | pull-19237             | qa-assets | CPubKey deserialization reads uninitialized memory https://github.com/bitcoin/bitcoin/issues/19235 |
+| pull-18162             | qa-assets | Uninitialized read in FormatISO8601DateTime https://github.com/bitcoin/bitcoin/pull/18162 |
