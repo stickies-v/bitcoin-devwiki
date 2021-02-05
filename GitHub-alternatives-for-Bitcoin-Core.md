@@ -41,6 +41,8 @@ Instead of hopping to another centralized provider or self-hosted single point o
 * How does it integrate with CI?
 * Does it have feature-parity with GitHub reviews (e.g. resolving inline review comments)?
 * How is the "sign-up" handled?
+* How is spam dealt with?
+* How well-maintained are they?
 
 ## Possible alternatives:
 
