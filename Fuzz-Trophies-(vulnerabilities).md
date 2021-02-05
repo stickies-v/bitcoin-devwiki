@@ -22,4 +22,4 @@ The remaining columns follow the definitions from https://en.bitcoin.it/wiki/Com
 | pull-18808             | qa-assets | DoS      | easy         | Missing nullptr check https://github.com/bitcoin/bitcoin/pull/18808#discussion_r417307258 |
 | master-9efd86a         | mod       | DoS      | easy         | Assert on untrusted input https://github.com/bitcoin/bitcoin/pull/20317#issuecomment-723047111 |
 | pull-21043             | mod       | none     | easy         | signed integer overflow in version message processing https://github.com/bitcoin/bitcoin/pull/21043 |
-| undisclosed-2020-10-09 | dynamic   | Netsplit | Very hard    | Undisclosed flaw |
+| undisclosed-2020-10-09 | mod       | Netsplit | Very hard    | Undisclosed flaw |
