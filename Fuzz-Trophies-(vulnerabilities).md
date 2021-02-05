@@ -17,3 +17,4 @@ _Discovery_ is:
 | Unique ID           | Discovery | Severity | Attack is... | Flaw                  |
 |---------------------|-----------|----------|--------------|-----------------------|
 | pull-18808          | qa-assets | high     | easy         | Missing nullptr check https://github.com/bitcoin/bitcoin/pull/18808#discussion_r417307258 |
+| master-9efd86a      | mod       | high     | easy         | Assert on untrusted input https://github.com/bitcoin/bitcoin/pull/20317#issuecomment-723047111 |
