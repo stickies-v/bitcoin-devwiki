@@ -52,3 +52,5 @@ Instead of hopping to another centralized provider or self-hosted single point o
 - [bugs-everywhere](https://bugs-everywhere.readthedocs.io/en/latest/tutorial.html)
 - [Darcs](http://darcs.net)
 - [pijul](https://pijul.org) (a modern alternative to Darcs)
+- [Gitea](https://gitea.io/)
+- [Gogs](https://gogs.io/)
