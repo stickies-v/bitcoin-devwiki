@@ -46,11 +46,16 @@ Instead of hopping to another centralized provider or self-hosted single point o
 
 ## Possible alternatives:
 
+### "Decentralized"
+
 - [git-appraise](https://github.com/google/git-appraise)
 - [Radicle](https://radicle.xyz/)
 - [git-bug](https://github.com/MichaelMure/git-bug)
 - [bugs-everywhere](https://bugs-everywhere.readthedocs.io/en/latest/tutorial.html)
 - [Darcs](http://darcs.net)
 - [pijul](https://pijul.org) (a modern alternative to Darcs)
+
+### Self-hosted
+- Gitlab
 - [Gitea](https://gitea.io/)
 - [Gogs](https://gogs.io/)
