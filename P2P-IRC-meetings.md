@@ -36,15 +36,6 @@ Previous meetings:
 
 ## 9 Feb 2021
 
-- `connection type` updates, naming cleanup, GUI/-netinfo implementation status (jonatack)
-  - [Bitcoin Core PR #20729](https://github.com/bitcoin/bitcoin/pull/20729) - standardize on `outbound-{full, block}-relay` connection type naming
-  - [Bitcoin Core PR #20764](https://github.com/bitcoin/bitcoin/pull/20764) - add connection types to -netinfo
-  - [GUI PR #163](https://github.com/bitcoin-core/gui/pull/163) - peer details: replace direction with connection type (merged)
-  - [GUI PR #179](https://github.com/bitcoin-core/gui/pull/179) - add direction and type columns to the peers window
-  - [GUI PR #180](https://github.com/bitcoin-core/gui/pull/180) - peer details: connection type follow-ups
-
-- high-level `p2p` logging category, issue: https://github.com/bitcoin/bitcoin/issues/20576 (jonatack)
-
 ## 26 Jan 2021
 
 _Nothing discussed_
