@@ -1,9 +1,10 @@
 What are you currently working on in the P2P realm? (Add your github username and the date, and any projects in bullet points, and a link to the PR, gist, branch etc where you're working)
 
-### @ajtowns 2021-01-27
+### @ajtowns 2021-02-09
 
-* Some net_processing clean ups [#20758](https://github.com/bitcoin/bitcoin/pull/20758)
-* Logging improvements [#20724](https://github.com/bitcoin/bitcoin/pull/20724)
+* Some net_processing clean ups [#20758](https://github.com/bitcoin/bitcoin/pull/20758) - [#20942](https://github.com/bitcoin/bitcoin/pull/20758) removes the next set of globals, after that is splitting out orphan handling to a separate module
+* UASF/bip8 safety cf [#19573](https://github.com/bitcoin/pull/19573)
+* want to see erlay and dandelion
 
 ### @amitiuttarwar 2021-01-27
 
@@ -21,6 +22,7 @@ What are you currently working on in the P2P realm? (Add your github username an
   - [#20233](https://github.com/bitcoin/bitcoin/pull/20233) makes consistency checks a runtime option, so they can be used in unit/functional/fuzz tests.
 - Review and help AJ's general cleanups [#20758](https://github.com/bitcoin/bitcoin/pull/20758)
 - Review and help Carl's de-globalize chainstate manager [#20158](https://github.com/bitcoin/bitcoin/pull/20158) (this is mostly in validation but touches the net_processing-validation interface a lot).
+
 ### @sdaftuar 2021-01-27
 
 * disabletx
