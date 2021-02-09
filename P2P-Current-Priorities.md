@@ -33,6 +33,7 @@ What are you currently working on in the P2P realm? (Add your github username an
 ### @jonatack 2021-20-27
 
 * eviction protection for onion and i2p peers [#20197](https://github.com/bitcoin/bitcoin/pull/20197)
+* standardize the outbound full/block relay naming (one commit, scripted diff) [#20729](https://github.com/bitcoin/bitcoin/pull/20729)
 
 ### @MarcoFalke 2021-20-26
 
