@@ -13,9 +13,10 @@ What are you currently working on in the P2P realm? (Add your github username an
 
 ### @ariard 2021-02-09
 
-* stop to process unrequested txn : https://github.com/bitcoin/bitcoin/pull/20277
-* review erlay
-* altnet : move personal notes under some wiki project page, work on a production branch on top of [#19160](https://github.com/bitcoin/bitcoin/pull/19160), headers over DNS as first integration
+- stop to process unrequested txn : https://github.com/bitcoin/bitcoin/pull/20277
+   - see ML proposal : https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-February/018391.html
+- review erlay
+- altnet : move personal notes under some wiki project page, work on a production branch on top of [#19160](https://github.com/bitcoin/bitcoin/pull/19160), headers over DNS as first integration
 
 ### @jnewbery 2021-02-09
 
