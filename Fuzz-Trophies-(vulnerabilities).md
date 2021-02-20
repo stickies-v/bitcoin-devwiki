@@ -10,7 +10,7 @@ _Unique Id_ is:
 
 _Discovery_ is:
 
-* `qa-assets` means the vuln was triggered by a one of the inputs in https://github.com/bitcoin-core/qa-assets
+* `qa-assets` means the vuln was triggered by one of the inputs in https://github.com/bitcoin-core/qa-assets
 * `dynamic` means the vuln was triggered by none of the fuzz inputs in qa-assets, but can be found with an existing fuzz target and enough CPU time
 * `mod` means the vuln was triggered by a fuzz target that isn't publicly available or a fuzz target that is locally modified.
 
