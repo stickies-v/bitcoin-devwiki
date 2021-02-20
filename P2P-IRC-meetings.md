@@ -1,8 +1,8 @@
-**15:00 UTC alternate Tuesdays on the #bitcoin-core-dev channel on Freenode**
+~**15:00 UTC alternate Tuesdays on the #bitcoin-core-dev channel on Freenode**~
 
 Join us for an IRC meeting every two weeks to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
 
-- 23 February 2021
+- 23 February 2021 at **21:00 UTC (NOTE UPDATED TIME)**
 
 Previous meetings:
 
