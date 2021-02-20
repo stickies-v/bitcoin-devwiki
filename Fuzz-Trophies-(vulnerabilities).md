@@ -29,6 +29,7 @@ Issues without Severity
 
 | Unique ID              | Discovery | Flaw                  |
 |------------------------|-----------|-----------------------|
+| pull-20867             | qa-assets | implicit-integer-sign-change in multisig policy https://github.com/bitcoin/bitcoin/pull/20867#issuecomment-782474611 |
 | pull-21043             | mod       | signed integer overflow in version message processing https://github.com/bitcoin/bitcoin/pull/21043 |
 | pull-19237             | qa-assets | CPubKey deserialization reads uninitialized memory https://github.com/bitcoin/bitcoin/issues/19235 |
 | pull-18162             | qa-assets | Uninitialized read in FormatISO8601DateTime https://github.com/bitcoin/bitcoin/pull/18162 |
