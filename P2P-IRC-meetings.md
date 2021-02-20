@@ -2,7 +2,7 @@
 
 Join us for an IRC meeting every two weeks to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
 
-- 9 February 2021
+- 23 February 2021
 
 Previous meetings:
 
@@ -34,7 +34,15 @@ Previous meetings:
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-## 9 Feb 2021
+## 23 Feb 2021
+
+- **Orphan reprocessing** (jnewbery)
+  - see discussion about orphan processing in PR 21224 ([here](https://github.com/bitcoin/bitcoin/pull/21224#issuecomment-781741925) onwards)
+    - [Previous IRC discussion](http://www.erisian.com.au/bitcoin-core-dev/log-2020-07-02.html#l-325)
+    - [Move orphan reprocessing to global](https://github.com/bitcoin/bitcoin/pull/19364)
+    - [Add txorphanage](https://github.com/bitcoin/bitcoin/pull/21148)
+- **Peer rate-limiting** (jnewbery)
+  - see discussion about peer rate-limiting in PR 21224 ([here](https://github.com/bitcoin/bitcoin/pull/21224#issuecomment-781567152) onwards)
 
 ## 26 Jan 2021
 
