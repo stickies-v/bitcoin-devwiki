@@ -39,7 +39,7 @@ What are you currently working on in the P2P realm? (Add your github username an
 
 ### @jonatack 2021-02-20
 
-* eviction protection for onion and i2p peers [#20197](https://github.com/bitcoin/bitcoin/pull/20197)
+* Eviction protection for inbound onion peers and I2P peers, refactor, add unit tests [#20197](https://github.com/bitcoin/bitcoin/pull/20197)
 
 ### @MarcoFalke 2021-01-26
 
