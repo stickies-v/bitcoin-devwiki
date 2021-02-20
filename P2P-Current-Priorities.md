@@ -37,12 +37,11 @@ What are you currently working on in the P2P realm? (Add your github username an
   * [bip=#1025](https://github.com/bitcoin/bips/pull/1052)
   * [-dev thread](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018340.html)
 
-### @jonatack 2021-20-27
+### @jonatack 2021-02-20
 
 * eviction protection for onion and i2p peers [#20197](https://github.com/bitcoin/bitcoin/pull/20197)
-* standardize the outbound full/block relay naming (one commit, scripted diff) [#20729](https://github.com/bitcoin/bitcoin/pull/20729)
 
-### @MarcoFalke 2021-20-26
+### @MarcoFalke 2021-01-26
 
 * Fuzzing p2p:
   * https://github.com/bitcoin/bitcoin/pull/20915  fuzz: Fail if message type is not fuzzed
@@ -52,4 +51,3 @@ What are you currently working on in the P2P realm? (Add your github username an
 
 * Code review while waiting input on:
   * [#20685 Add I2P support using I2P SAM](https://github.com/bitcoin/bitcoin/pull/20685)
-  * [#20788 net: add RAII socket and use it instead of bare SOCKET](https://github.com/bitcoin/bitcoin/pull/20788)
