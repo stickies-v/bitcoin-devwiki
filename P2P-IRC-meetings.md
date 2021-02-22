@@ -8,6 +8,7 @@ Previous meetings:
 
 <details><summary>Meeting Archive</summary>
 
+- 09 February 2021 ([log](http://www.erisian.com.au/bitcoin-core-dev/log-2021-02-09.html#l-325)), ([summary](#09-feb-2021))
 - 26 January 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-01-26-15.00.moin.txt))
 - 12 January 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-01-12-15.00.moin.txt)), ([summary](#12-jan-2021)) 
 - 15 December 2020 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2020/bitcoin-core-dev.2020-12-15-15.01.moin.txt))
@@ -43,6 +44,23 @@ Previous meetings:
     - [Add txorphanage](https://github.com/bitcoin/bitcoin/pull/21148)
 - **Peer rate-limiting** (jnewbery)
   - see discussion about peer rate-limiting in PR 21224 ([here](https://github.com/bitcoin/bitcoin/pull/21224#issuecomment-781567152) onwards)
+
+## 09 Feb 2021
+
+
+## Topic: State of Erlay implementation (gleb)
+
+[#18261](https://github.com/bitcoin/bitcoin/pull/18261) needs a couple more high-level code review to evaluate the approach. The next step would be to split the PR into five or so parts and merge one by one, but gleb would prefer a high-level check first to ensure the code structure overall makes sense and there aren't any implementation-specific blockers.
+
+sipa mentioned that he addressed some of the comments in [minisketch#28](https://github.com/sipa/minisketch/pull/28) (updated: merged Feb 19, 2021).
+
+## Other updates and requested review
+
+amiti announced that she has a PR open to introduce new node-level rebroadcast functionality at [#21061](https://github.com/bitcoin/bitcoin/pull/21061) and would appreciate review.
+
+jonatack encouraged reviewers to test and review the [I2P PR](https://github.com/bitcoin/bitcoin/pull/20685) that adds the invisible internet project to the P2P networks. jonatack and wumpus have been running I2P nodes without any problems. vasild planned on getting [#20788](https://github.com/bitcoin/bitcoin/pull/20788) merged first (update: merged on Feb 11, 2021), which would simplify [#20685](https://github.com/bitcoin/bitcoin/pull/20685).
+
+aj asked for review on [#20942](https://github.com/bitcoin/bitcoin/issues/20942)
 
 ## 26 Jan 2021
 
