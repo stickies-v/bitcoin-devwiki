@@ -60,7 +60,7 @@ amiti announced that she has a PR open to introduce new node-level rebroadcast f
 
 jonatack encouraged reviewers to test and review the [I2P PR](https://github.com/bitcoin/bitcoin/pull/20685) that adds the invisible internet project to the P2P networks. jonatack and wumpus have been running I2P nodes without any problems. vasild planned on getting [#20788](https://github.com/bitcoin/bitcoin/pull/20788) merged first (update: merged on Feb 11, 2021), which would simplify [#20685](https://github.com/bitcoin/bitcoin/pull/20685).
 
-aj asked for review on [#20942](https://github.com/bitcoin/bitcoin/issues/20942)
+aj asked for review on [#20942](https://github.com/bitcoin/bitcoin/issues/20942) (update: merged on Feb 15, 2021)
 
 ## 26 Jan 2021
 
