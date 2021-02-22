@@ -13,7 +13,6 @@ What are you currently working on in the P2P realm? (Add your github username an
 ### @amitiuttarwar 2021-01-27
 
 * tx rebroadcast [#21061](https://github.com/bitcoin/bitcoin/pull/21061)
-* small PR that breaks out a unit test helper from 21061 [#21121](https://github.com/bitcoin/bitcoin/pull/21121)
 
 ### @ariard 2021-02-09
 
