@@ -42,7 +42,11 @@ What are you currently working on in the P2P realm? (Add your github username an
 
 ### @jonatack 2021-02-20
 
-* Eviction protection for inbound onion peers and I2P peers, refactor, add unit tests [#20197](https://github.com/bitcoin/bitcoin/pull/20197)
+Seeking feedback on protection ratios for localhost vs onion vs I2P peers in the inbound eviction logic, see [#20197](https://github.com/bitcoin/bitcoin/pull/20197).
+* Protect onion peers in AttemptToEvictConnection + refactor and add test coverage [#20197](https://github.com/bitcoin/bitcoin/pull/20197)
+* Protect I2P peers in AttemptToEvictConnection + unit tests [#21261](https://github.com/bitcoin/bitcoin/pull/21261) (please review 20197 and 20685 first)
+* Reviewing/testing #20685 that adds I2P support
+* Following/reviewing disabletx (#20726) and don't process unrequested txns (#20277)
 
 ### @MarcoFalke 2021-01-26
 
