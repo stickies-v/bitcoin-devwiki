@@ -57,3 +57,6 @@ Seeking feedback on protection ratios for localhost vs onion vs I2P peers in the
 
 * Code review while waiting input on:
   * [#20685 Add I2P support using I2P SAM](https://github.com/bitcoin/bitcoin/pull/20685)
+
+### @naumenkogs 2021-02-23
+* [Erlay](https://github.com/bitcoin/bitcoin/pull/18261)
