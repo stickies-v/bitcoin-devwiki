@@ -25,7 +25,7 @@ What are you currently working on in the P2P realm? (Add your github username an
 
 - Move application layer data from net to net_processing:
   - [#19398](https://github.com/bitcoin/bitcoin/issues/19398) describes the high-level design
-  - [#20721](https://github.com/bitcoin/bitcoin/pull/20721) is the next PR in the series - moves ping data from net to net_processing
+  - [#21236](https://github.com/bitcoin/bitcoin/pull/21236) is the next PR in the series - Extract addr send functionality into MaybeSendAddr()
 - Clean up addrman:
   - ~[#20557](https://github.com/bitcoin/bitcoin/pull/20557) fixes some deserialization bugs introduced in [#16702](https://github.com/bitcoin/bitcoin/pull/16702)~
   - [#20228](https://github.com/bitcoin/bitcoin/pull/20228) makes addrman a top-level component, allowing ctor arguments to be passed directly from init and removing boilerplate code from CConnman
