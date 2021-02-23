@@ -37,6 +37,7 @@ Previous meetings:
 
 ## 23 Feb 2021
 
+- **Erlay update** (gleb)
 - **Orphan reprocessing** (jnewbery)
   - see discussion about orphan processing in PR 21224 ([here](https://github.com/bitcoin/bitcoin/pull/21224#issuecomment-781741925) onwards)
     - [Previous IRC discussion](http://www.erisian.com.au/bitcoin-core-dev/log-2020-07-02.html#l-325)
