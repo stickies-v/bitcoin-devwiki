@@ -44,7 +44,7 @@ Previous meetings:
     - [Add txorphanage](https://github.com/bitcoin/bitcoin/pull/21148)
 - **Peer rate-limiting** (jnewbery)
   - see discussion about peer rate-limiting in PR 21224 ([here](https://github.com/bitcoin/bitcoin/pull/21224#issuecomment-781567152) onwards)
-
+- **Dandelion update** (ajtowns)
 ## 09 Feb 2021
 
 
