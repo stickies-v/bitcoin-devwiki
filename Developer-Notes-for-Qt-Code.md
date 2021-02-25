@@ -6,12 +6,12 @@
 
 ## Backward Compatibility
 
-The source code must be compatible with the [minimum required](https://github.com/bitcoin/bitcoin/blob/master/doc/dependencies.md) Qt version which is set in the `configure.ac`:
+The source code must be compatible with the [minimum required](https://github.com/bitcoin/bitcoin/blob/master/doc/dependencies.md) Qt version which is set in `configure.ac`:
 ```sh
 BITCOIN_QT_CONFIGURE([5.5.1])
 ```
 
-If an optional feature requires Qt higher version, or a feature was replaced by another one, use `QT_VERSION` and `QT_VERSION_CHECK` macros:
+If an optional feature requires a higher version of Qt, or if a feature was replaced by another one, use the `QT_VERSION` and `QT_VERSION_CHECK` macros:
 
 ```cpp
 #include <QDate>
@@ -29,9 +29,9 @@ QDateTime StartOfDay(const QDate& date)
 
 ```
 
-Do not compare `QT_VERSION` directly to Qt version of the form `0xMMNNPP` (MM = major, NN = minor, PP = patch) as such an approach is less readable and more error prone.
+Do not compare versions of `QT_VERSION` using the form `0xMMNNPP` (MM = major, NN = minor, PP = patch), as this approach is less readable and more error-prone.
 
-Every time the minimum required Qt version is bumped, `grep` all of the `QT_VERSION` instances and adjust/remove them accordingly.
+Every time the minimum required Qt version is bumped, `grep` or `git grep` all of the `QT_VERSION` instances and adjust/remove them accordingly.
 
 ## `QObject` Subclassing Style
 
@@ -61,17 +61,17 @@ private Q_SLOTS:
 };
 ```
 
-Note that `Q_SIGNALS` and `Q_SLOTS` macros are used instead of the `signals` and `slots` keywords of the Qt `moc` (Meta-Object Compiler). It prevents potential conflicts with a 3rd party signal/slot mechanism.
+Use the `Q_SIGNALS` and `Q_SLOTS` macros instead of the `signals` and `slots` keywords of the Qt `moc` (Meta-Object Compiler). This prevents potential conflicts with 3rd party signal/slot mechanisms.
 
 ## Debugging Tips
 
-For debugging, including signal to slot connection issues, one could use the `QT_FATAL_WARNINGS` environment variable:
+For debugging, including signal to slot connection issues, you can use the `QT_FATAL_WARNINGS` environment variable:
 
 ```sh
 $ QT_FATAL_WARNINGS=1 src/qt/bitcoin-qt -printtoconsole -debug=qt
 ```
 
-This tip could be [combined](https://github.com/bitcoin/bitcoin/pull/16118#issuecomment-503184695) with a debugger.
+This tip can be [combined](https://github.com/bitcoin/bitcoin/pull/16118#issuecomment-503184695) with a debugger.
 
 ***
 
