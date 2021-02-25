@@ -1,3 +1,9 @@
+### Contents
+
+1. [Backward Compatibility](#backward-compatibility)
+2. [`QObject` Subclassing Style](#qobject-subclassing-style)
+3. [Debugging Tips](#debugging-tips)
+
 ## Backward Compatibility
 
 The source code must be compatible with the [minimum required](https://github.com/bitcoin/bitcoin/blob/master/doc/dependencies.md) Qt version which is set in the `configure.ac`:
@@ -57,6 +63,15 @@ private Q_SLOTS:
 
 Note that `Q_SIGNALS` and `Q_SLOTS` macros are used instead of the `signals` and `slots` keywords of the Qt `moc` (Meta-Object Compiler). It prevents potential conflicts with a 3rd party signal/slot mechanism.
 
+## Debugging Tips
+
+For debugging, including signal to slot connection issues, one could use the `QT_FATAL_WARNINGS` environment variable:
+
+```sh
+$ QT_FATAL_WARNINGS=1 src/qt/bitcoin-qt -printtoconsole -debug=qt
+```
+
+This tip could be [combined](https://github.com/bitcoin/bitcoin/pull/16118#issuecomment-503184695) with a debugger.
 
 ***
 
