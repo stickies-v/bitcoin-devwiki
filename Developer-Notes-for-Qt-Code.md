@@ -65,7 +65,7 @@ Use the `Q_SIGNALS` and `Q_SLOTS` macros instead of the `signals` and `slots` ke
 
 ## Debugging Tips
 
-For debugging, including signal to slot connection issues, you can use the `QT_FATAL_WARNINGS` environment variable:
+For debugging, including signal-to-slot connection issues, you can use the `QT_FATAL_WARNINGS` environment variable:
 
 ```sh
 $ QT_FATAL_WARNINGS=1 src/qt/bitcoin-qt -printtoconsole -debug=qt
