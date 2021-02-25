@@ -1,5 +1,3 @@
-# Developer Notes for Qt Code
-
 ## Backward Compatibility
 
 The source code must be compatible with the [minimum required](https://github.com/bitcoin/bitcoin/blob/master/doc/dependencies.md) Qt version which is set in the `configure.ac`:
