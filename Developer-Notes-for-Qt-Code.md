@@ -29,7 +29,7 @@ QDateTime StartOfDay(const QDate& date)
 
 ```
 
-Do not compare versions of `QT_VERSION` using the form `0xMMNNPP` (MM = major, NN = minor, PP = patch), as this approach is less readable and more error-prone.
+Do not compare versions of `QT_VERSION` directly using `0xMMNNPP` (MM = major, NN = minor, PP = patch), as this approach is less readable and more error-prone.
 
 Every time the minimum required Qt version is bumped, `grep` or `git grep` all of the `QT_VERSION` instances and adjust/remove them accordingly.
 
