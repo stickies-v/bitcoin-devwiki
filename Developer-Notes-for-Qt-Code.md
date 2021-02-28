@@ -8,7 +8,7 @@
 
 The source code must be compatible with the [minimum required](https://github.com/bitcoin/bitcoin/blob/master/doc/dependencies.md) Qt version which is set in `configure.ac`:
 ```sh
-BITCOIN_QT_CONFIGURE([5.5.1])
+BITCOIN_QT_CONFIGURE([5.9.5])
 ```
 
 If an optional feature requires a higher version of Qt, or if a feature was replaced by another one, use the `QT_VERSION` and `QT_VERSION_CHECK` macros:
