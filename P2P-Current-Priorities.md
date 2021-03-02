@@ -40,12 +40,10 @@ What are you currently working on in the P2P realm? (Add your github username an
   * [bip=#1025](https://github.com/bitcoin/bips/pull/1052)
   * [-dev thread](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018340.html)
 
-### @jonatack 2021-02-23
+### @jonatack 2021-03-03
 
-Seeking feedback on protection ratios for localhost vs onion vs I2P peers in the inbound peer eviction logic, see [#20197](https://github.com/bitcoin/bitcoin/pull/20197).
 * Protect onion peers in AttemptToEvictConnection + refactor and add test coverage: [#20197](https://github.com/bitcoin/bitcoin/pull/20197)
-* Protect I2P peers in AttemptToEvictConnection + unit tests: [#21261](https://github.com/bitcoin/bitcoin/pull/21261) (please review #20197 and #20685 first)
-* Reviewing #20685 that adds I2P support, disabletx (#20726), and plan to review don't process unrequested txns (#20277)
+* Pass `uint16 CService::port` as uint16 [#21328](https://github.com/bitcoin/bitcoin/pull/21328)
 
 ### @MarcoFalke 2021-01-26
 
