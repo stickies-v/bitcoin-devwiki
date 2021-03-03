@@ -50,10 +50,11 @@ What are you currently working on in the P2P realm? (Add your github username an
   * https://github.com/bitcoin/bitcoin/pull/20915  fuzz: Fail if message type is not fuzzed
   * https://github.com/bitcoin/bitcoin/pull/20995  fuzz: Avoid initializing version to less than MIN_PEER_PROTO_VERSION 
 
-### @vasild 2021-01-26
+### @vasild 2021-03-03
 
-* Code review while waiting input on:
-  * [#20685 Add I2P support using I2P SAM](https://github.com/bitcoin/bitcoin/pull/20685)
+* Extend I2P test coverage (new unit and fuzz tests)
+* Review as many PRs from this page as possible
+* Implement CJDNS support
 
 ### @naumenkogs 2021-02-23
 * [Erlay](https://github.com/bitcoin/bitcoin/pull/18261)
