@@ -1,13 +1,14 @@
-~**15:00 UTC alternate Tuesdays on the #bitcoin-core-dev channel on Freenode**~
+**21:00 UTC alternate Tuesdays on the #bitcoin-core-dev channel on Freenode**
 
 Join us for an IRC meeting every two weeks to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
 
-- 23 February 2021 at **21:00 UTC (NOTE UPDATED TIME)**
+- 09 March 2021 at 21:00 UTC
 
 Previous meetings:
 
 <details><summary>Meeting Archive</summary>
 
+- 23 February 2021 at **21:00 UTC (NOTE UPDATED TIME)**
 - 09 February 2021 ([log](http://www.erisian.com.au/bitcoin-core-dev/log-2021-02-09.html#l-325)), ([summary](#09-feb-2021))
 - 26 January 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-01-26-15.00.moin.txt))
 - 12 January 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-01-12-15.00.moin.txt)), ([summary](#12-jan-2021)) 
