@@ -1,8 +1,79 @@
 ### Contents
 
+1. [Git Tips](#git-tips)
 1. [Backward Compatibility](#backward-compatibility)
-2. [`QObject` Subclassing Style](#qobject-subclassing-style)
-3. [Debugging Tips](#debugging-tips)
+1. [`QObject` Subclassing Style](#qobject-subclassing-style)
+1. [Debugging Tips](#debugging-tips)
+
+## Git Tips
+
+The [GUI repo](https://github.com/bitcoin-core/gui) and the main [Bitcoin Core repo](https://github.com/bitcoin/bitcoin)
+share the same commit history. If you are going to contribute, including reviewing, to both of the repo, it is
+recommended to have them locally.
+
+### GUI Repo Setup
+
+1. Log in [GitHub](https://github.com) (in command examples the GitHub username _"satoshi"_ used), open the [GUI repo](https://github.com/bitcoin-core/gui), and [fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) it.
+
+2. Clone the repo locally:
+```sh
+$ git clone https://github.com/bitcoin-core/gui.git && cd gui
+```
+
+3. Set up your forked repo as a local git remote:
+```sh
+$ git remote add satoshi https://github.com/satoshi/gui.git
+$ git config remote.pushDefault satoshi
+```
+
+The current result could be verified:
+```sh
+$ git remote -v
+origin	https://github.com/bitcoin-core/gui.git (fetch)
+origin	https://github.com/bitcoin-core/gui.git (push)
+satoshi	https://github.com/satoshi/gui.git (fetch)
+satoshi	https://github.com/satoshi/gui.git (push)
+```
+
+4. To synchronize (any time you want) your local and forked repos:
+```sh
+$ git switch master
+$ git pull --ff-only
+$ git push
+```
+
+Note: Just after cloning repos are already synchronized.
+
+### Pull Request Reviewing
+
+The recommended way to review a pull request (PR) is do it locally because it allows you to build binaries and test them.
+In command examples [PR 42](https://github.com/bitcoin-core/gui/pull/42) is used.
+
+Fetch PR branch to the local repo:
+```sh
+$ git fetch origin pull/42/head:pr42.01 && git switch pr42.01
+```
+
+It is useful to use separated local branches for every fetching. Optionally, branch names could include a sequence number
+(as in example above) or a convenient date/time presentation.
+
+When a PR author updates her branch, it is easy to check the changes:
+```sh
+$ git diff pr42.03 pr42.04
+```
+
+Even if a PR branch was rebased, it is still easy to check the changes:
+```sh
+$ git range-diff master pr42.03 pr42.04
+```
+
+Note: Git [branches are cheap to create and destroy](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell#ch03-git-branching).
+
+After PR merging, all of the review branches could be removed:
+```sh
+$ git switch master
+$ git branch -D $(git branch | grep pr42)
+```
 
 ## Backward Compatibility
 
