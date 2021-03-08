@@ -8,7 +8,7 @@ Previous meetings:
 
 <details><summary>Meeting Archive</summary>
 
-- 23 February 2021 at **21:00 UTC (NOTE UPDATED TIME)**
+- 23 February 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-02-23-21.00.log.html))
 - 09 February 2021 ([log](http://www.erisian.com.au/bitcoin-core-dev/log-2021-02-09.html#l-325)), ([summary](#09-feb-2021))
 - 26 January 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-01-26-15.00.moin.txt))
 - 12 January 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-01-12-15.00.moin.txt)), ([summary](#12-jan-2021)) 
@@ -38,7 +38,7 @@ Previous meetings:
 
 ## 9 Mar 2021
 
-- Feel free to update this page with proposed meeting topics.
+- **addrman and eclipse attack doc** (ajonas)
 
 ## 23 Feb 2021
 
