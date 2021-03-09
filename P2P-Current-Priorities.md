@@ -27,7 +27,6 @@ What are you currently working on in the P2P realm? (Add your github username an
   - [#19398](https://github.com/bitcoin/bitcoin/issues/19398) describes the high-level design
   - [#21236](https://github.com/bitcoin/bitcoin/pull/21236) is the next PR in the series - Extract addr send functionality into MaybeSendAddr()
 - Clean up addrman:
-  - ~[#20557](https://github.com/bitcoin/bitcoin/pull/20557) fixes some deserialization bugs introduced in [#16702](https://github.com/bitcoin/bitcoin/pull/16702)~
   - [#20228](https://github.com/bitcoin/bitcoin/pull/20228) makes addrman a top-level component, allowing ctor arguments to be passed directly from init and removing boilerplate code from CConnman
   - [#20233](https://github.com/bitcoin/bitcoin/pull/20233) makes consistency checks a runtime option, so they can be used in unit/functional/fuzz tests.
 - Review and help AJ's general cleanups [#20758](https://github.com/bitcoin/bitcoin/pull/20758)
