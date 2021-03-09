@@ -38,7 +38,7 @@ Previous meetings:
 
 ## 9 Mar 2021
 
-- **addrman and eclipse attack [doc](https://github.com/bitcoin-core/bitcoin-devwiki/wiki/Addrman-and-eclipse-attacks)** (ajonas)
+- Feel free to update this page with proposed meeting topics.
 
 ## 23 Feb 2021
 
