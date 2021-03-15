@@ -29,8 +29,14 @@ Issues without Severity
 
 | Unique ID              | Discovery | Found by       | Flaw                  |
 |------------------------|-----------|----------------|-----------------------|
-| pull-18162             | qa-assets | practicalswift | Uninitialized read in FormatISO8601DateTime ([details](https://github.com/bitcoin/bitcoin/pull/18162)) |
-| pull-18242             | qa-assets | practicalswift | Uninitialized read in case of invalid P2P command name ([details](https://github.com/bitcoin/bitcoin/pull/18242#issuecomment-593674721)) |
-| pull-19237             | qa-assets | practicalswift | CPubKey deserialization reads uninitialized memory ([details](https://github.com/bitcoin/bitcoin/issues/19235)) |
+| pull-10977             | mod       | practicalswift | Use of uninitialized memory (UUM) in RPC command getnetworkinfo ([details](https://github.com/bitcoin/bitcoin/pull/10977)) |
+| pull-13546             | mod       | practicalswift | Use of uninitialized memory (UUM) in CWallet::CreateTransaction ([details](https://github.com/bitcoin/bitcoin/pull/13546)) |
+| pull-13712             | qa-assets | practicalswift | Use of uninitialized memory (UUM) in ParseHDKeypath ([details](https://github.com/bitcoin/bitcoin/pull/13712))
+| pull-17642             | mod       | practicalswift | Use of uninitialized memory (UUM) in RPC command bumpfee ([details](https://github.com/bitcoin/bitcoin/issues/17642)) |
+| pull-17624             | mod       | practicalswift | Use of uninitialized memory (UUM) when receiving a transaction we already have ([details](https://github.com/bitcoin/bitcoin/issues/17624)) |
+| pull-18162             | qa-assets | practicalswift | Use of uninitialized memory (UUM) in FormatISO8601DateTime ([details](https://github.com/bitcoin/bitcoin/pull/18162)) |
+| pull-18242             | qa-assets | practicalswift | Use of uninitialized memory (UUM) in case of invalid P2P command name ([details](https://github.com/bitcoin/bitcoin/pull/18242#issuecomment-593674721)) |
+| pull-18261             | qa-assets | practicalswift | Use of uninitialized memory (UUM) in Erlay P2P code ([details](https://github.com/bitcoin/bitcoin/pull/18261#issuecomment-596803815))
+| pull-19237             | qa-assets | practicalswift | Use of uninitialized memory (UUM) in CPubKey deserialization code ([details](https://github.com/bitcoin/bitcoin/issues/19235)) |
 | pull-20867             | qa-assets | darosior       | implicit-integer-sign-change in multisig policy ([details](https://github.com/bitcoin/bitcoin/pull/20867#issuecomment-782474611)) |
-| pull-21043             | mod       | Crypt-iQ       | signed integer overflow in version message processing ([details](https://github.com/bitcoin/bitcoin/pull/21043)) |
+| pull-21043             | mod       | Crypt-iQ       | Signed integer overflow in version message processing ([details](https://github.com/bitcoin/bitcoin/pull/21043)) |
