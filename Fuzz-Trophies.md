@@ -36,6 +36,7 @@ Issues without Severity
 | pull-10977             | mod       | practicalswift | Use of uninitialized memory (UUM) in RPC command getnetworkinfo ([details](https://github.com/bitcoin/bitcoin/pull/10977)) |
 | pull-13546             | mod       | practicalswift | Use of uninitialized memory (UUM) in CWallet::CreateTransaction ([details](https://github.com/bitcoin/bitcoin/pull/13546)) |
 | pull-13712             | qa-assets | practicalswift | Use of uninitialized memory (UUM) in ParseHDKeypath ([details](https://github.com/bitcoin/bitcoin/pull/13712))
+| pull-16800             | qa-assets | practicalswift | Multiple Miniscript issues: heap out-of-bounds read, stack depth DoS, assertion failure, unhandled exception ([details](https://github.com/bitcoin/bitcoin/pull/16800#issuecomment-527797423), [details](https://github.com/bitcoin/bitcoin/pull/16800#issuecomment-530808234), [details](https://github.com/bitcoin/bitcoin/pull/16800#issuecomment-530876527))
 | pull-17149             | qa-assets | practicalswift | Multiple PSBT issues: heap use after free, signed integer overflows, etc. ([details](https://github.com/bitcoin/bitcoin/issues/17149)) |
 | pull-17501             | qa-assets | practicalswift | Base58 decoding is done without checking that the input size is reasonable ([details](https://github.com/bitcoin/bitcoin/issues/17501)) |
 | pull-17642             | mod       | practicalswift | Use of uninitialized memory (UUM) in RPC command bumpfee ([details](https://github.com/bitcoin/bitcoin/issues/17642)) |
