@@ -4,6 +4,7 @@ This includes vulns found on pull requests. Vulns found on released versions are
 
 _Unique Id_ is:
 
+* _cve-yyyy-nnn_ for vulns with assigned CVE (Common Vulnerabilities and Exposures) identifiers
 * _pull-nnnn_ for vulns that exist(ed) on the pull request with given id
 * _master-ffff_ for vulns that exist on the master branch as of the given commit id
 * _undisclosed-yyyy-mm-dd_ for undisclosed vulns that have been reported on that day
@@ -19,6 +20,9 @@ The remaining columns follow the definitions from https://en.bitcoin.it/wiki/Com
 
 | Unique ID              | Discovery | Severity | Attack is... | Found by       | Flaw                 |
 |------------------------|-----------|----------|--------------|----------------|----------------------|
+| cve-2017-18350         | qa-assets | DoS      | easy         | practicalswift | SOCKS5 buffer overflow ([details](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-November/017453.html)) |
+| cve-2018-20586         | mod       | log injection | easy         | practicalswift | Log injection vulnerability ([details](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-November/017487.html)) |
+| cve-2019-18936         | qa-assets | DoS      | easy         | practicalswift | DoS in UniValue which is triggerable via RPC interface ([details](https://nvd.nist.gov/vuln/detail/CVE-2019-18936)) |
 | pull-18808             | qa-assets | DoS      | easy         | MarcoFalke     | Missing nullptr check ([details](https://github.com/bitcoin/bitcoin/pull/18808#discussion_r417307258)) |
 | master-9efd86a         | mod       | DoS      | easy         | practicalswift | Assert on untrusted input ([details](https://github.com/bitcoin/bitcoin/pull/20317#issuecomment-723046620), [details](https://github.com/bitcoin/bitcoin/pull/20317#issuecomment-723047111)) |
 | undisclosed-2020-10-09 | mod       | Netsplit | Very hard    | practicalswift | Undisclosed flaw |
