@@ -17,19 +17,19 @@ _Discovery_ is:
 The remaining columns follow the definitions from https://en.bitcoin.it/wiki/Common_Vulnerabilities_and_Exposures
 
 
-| Unique ID              | Discovery | Severity | Attack is... | Flaw                  |
-|------------------------|-----------|----------|--------------|-----------------------|
-| pull-18808             | qa-assets | DoS      | easy         | Missing nullptr check https://github.com/bitcoin/bitcoin/pull/18808#discussion_r417307258 |
-| master-9efd86a         | mod       | DoS      | easy         | Assert on untrusted input https://github.com/bitcoin/bitcoin/pull/20317#issuecomment-723047111 |
-| undisclosed-2020-10-09 | mod       | Netsplit | Very hard    | Undisclosed flaw |
+| Unique ID              | Discovery | Severity | Attack is... | Found by       | Flaw                 |
+|------------------------|-----------|----------|--------------|----------------|----------------------|
+| pull-18808             | qa-assets | DoS      | easy         | MarcoFalke     | Missing nullptr check ([details](https://github.com/bitcoin/bitcoin/pull/18808#discussion_r417307258)) |
+| master-9efd86a         | mod       | DoS      | easy         | practicalswift | Assert on untrusted input ([details](https://github.com/bitcoin/bitcoin/pull/20317#issuecomment-723046620), [details](https://github.com/bitcoin/bitcoin/pull/20317#issuecomment-723047111)) |
+| undisclosed-2020-10-09 | mod       | Netsplit | Very hard    | practicalswift | Undisclosed flaw |
 
 ## Non-Exploitable Issues
 
 Issues without Severity
 
-| Unique ID              | Discovery | Flaw                  |
-|------------------------|-----------|-----------------------|
-| pull-20867             | qa-assets | implicit-integer-sign-change in multisig policy https://github.com/bitcoin/bitcoin/pull/20867#issuecomment-782474611 |
-| pull-21043             | mod       | signed integer overflow in version message processing https://github.com/bitcoin/bitcoin/pull/21043 |
-| pull-19237             | qa-assets | CPubKey deserialization reads uninitialized memory https://github.com/bitcoin/bitcoin/issues/19235 |
-| pull-18162             | qa-assets | Uninitialized read in FormatISO8601DateTime https://github.com/bitcoin/bitcoin/pull/18162 |
+| Unique ID              | Discovery | Found by       | Flaw                  |
+|------------------------|-----------|----------------|-----------------------|
+| pull-20867             | qa-assets | darosior       | implicit-integer-sign-change in multisig policy ([details](https://github.com/bitcoin/bitcoin/pull/20867#issuecomment-782474611)) |
+| pull-21043             | mod       | Crypt-iQ       | signed integer overflow in version message processing ([details](https://github.com/bitcoin/bitcoin/pull/21043)) |
+| pull-19237             | qa-assets | practicalswift | CPubKey deserialization reads uninitialized memory ([details](https://github.com/bitcoin/bitcoin/issues/19235)) |
+| pull-18162             | qa-assets | practicalswift | Uninitialized read in FormatISO8601DateTime ([details](https://github.com/bitcoin/bitcoin/pull/18162)) |
