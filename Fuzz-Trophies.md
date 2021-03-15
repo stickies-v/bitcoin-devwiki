@@ -36,11 +36,22 @@ Issues without Severity
 | pull-10977             | mod       | practicalswift | Use of uninitialized memory (UUM) in RPC command getnetworkinfo ([details](https://github.com/bitcoin/bitcoin/pull/10977)) |
 | pull-13546             | mod       | practicalswift | Use of uninitialized memory (UUM) in CWallet::CreateTransaction ([details](https://github.com/bitcoin/bitcoin/pull/13546)) |
 | pull-13712             | qa-assets | practicalswift | Use of uninitialized memory (UUM) in ParseHDKeypath ([details](https://github.com/bitcoin/bitcoin/pull/13712))
+| pull-17149             | qa-assets | practicalswift | Multiple PSBT issues: heap use after free, signed integer overflows, etc. ([details](https://github.com/bitcoin/bitcoin/issues/17149)) |
+| pull-17501             | qa-assets | practicalswift | Base58 decoding is done without checking that the input size is reasonable ([details](https://github.com/bitcoin/bitcoin/issues/17501)) |
 | pull-17642             | mod       | practicalswift | Use of uninitialized memory (UUM) in RPC command bumpfee ([details](https://github.com/bitcoin/bitcoin/issues/17642)) |
 | pull-17624             | mod       | practicalswift | Use of uninitialized memory (UUM) when receiving a transaction we already have ([details](https://github.com/bitcoin/bitcoin/issues/17624)) |
+| pull-17718             | qa-assets | practicalswift | DecodeBase58 is too liberal when decoding ([details](https://github.com/bitcoin/bitcoin/issues/17718)) |
+| pull-18033             | qa-assets | practicalswift | Heap buffer-overflow in GetMappedAS ([details](https://github.com/bitcoin/bitcoin/issues/18033)) |
 | pull-18162             | qa-assets | practicalswift | Use of uninitialized memory (UUM) in FormatISO8601DateTime ([details](https://github.com/bitcoin/bitcoin/pull/18162)) |
 | pull-18242             | qa-assets | practicalswift | Use of uninitialized memory (UUM) in case of invalid P2P command name ([details](https://github.com/bitcoin/bitcoin/pull/18242#issuecomment-593674721)) |
 | pull-18261             | qa-assets | practicalswift | Use of uninitialized memory (UUM) in Erlay P2P code ([details](https://github.com/bitcoin/bitcoin/pull/18261#issuecomment-596803815))
+| pull-18858             | qa-assets | practicalswift | Signed integer overflow in CCoinsViewCache::GetValueIn ([details](https://github.com/bitcoin/bitcoin/issues/18858)) |
 | pull-19237             | qa-assets | practicalswift | Use of uninitialized memory (UUM) in CPubKey deserialization code ([details](https://github.com/bitcoin/bitcoin/issues/19235)) |
+| pull-19930             | qa-assets | guidovranken   | Signed integer overflow in SipHasher ([details](https://github.com/bitcoin/bitcoin/issues/19930)) |
+| pull-20135             | qa-assets | practicalswift | Invalid integer negation in abs64 ([details](https://github.com/bitcoin/bitcoin/issues/20135)) |
+| pull-20402             | qa-assets | practicalswift | Invalid integer negation in FormatMoney reachable via RPC call decoderawtransaction ([details](https://github.com/bitcoin/bitcoin/issues/20402)) |
+| pull-20607             | qa-assets | practicalswift | Signed integer overflow in CFeeRate::GetFee reachable via RPC call analyzepsbt ([details](https://github.com/bitcoin/bitcoin/issues/20607)) |
+| pull-20626             | qa-assets | practicalswift | Signed integer overflow in CTxMemPool::PrioritiseTransaction reachable via RPC call prioritisetransaction ([details](https://github.com/bitcoin/bitcoin/issues/20626)) |
 | pull-20867             | qa-assets | darosior       | implicit-integer-sign-change in multisig policy ([details](https://github.com/bitcoin/bitcoin/pull/20867#issuecomment-782474611)) |
+| pull-20914             | qa-assets | practicalswift | Null pointer derefence in CBlockIndexWorkComparator::operator() reachable via RPC call invalidateblock ([details](https://github.com/bitcoin/bitcoin/issues/20914)) |
 | pull-21043             | mod       | Crypt-iQ       | Signed integer overflow in version message processing ([details](https://github.com/bitcoin/bitcoin/pull/21043)) |
