@@ -33,3 +33,4 @@ Issues without Severity
 | pull-21043             | mod       | Crypt-iQ       | signed integer overflow in version message processing ([details](https://github.com/bitcoin/bitcoin/pull/21043)) |
 | pull-19237             | qa-assets | practicalswift | CPubKey deserialization reads uninitialized memory ([details](https://github.com/bitcoin/bitcoin/issues/19235)) |
 | pull-18162             | qa-assets | practicalswift | Uninitialized read in FormatISO8601DateTime ([details](https://github.com/bitcoin/bitcoin/pull/18162)) |
+| pull-18242             | qa-assets | practicalswift | Uninitialized read in case of invalid P2P command name ([details](https://github.com/bitcoin/bitcoin/pull/18242#issuecomment-593674721)) |
