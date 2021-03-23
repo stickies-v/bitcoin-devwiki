@@ -41,8 +41,7 @@ What are you currently working on in the P2P realm? (Add your github username an
 
 ### @jonatack 2021-03-08
 
-* [#20197](https://github.com/bitcoin/bitcoin/pull/20197) Protect onion peers in `AttemptToEvictConnection` + refactor and add unit tests
-* [#21328](https://github.com/bitcoin/bitcoin/pull/21328) Pass uint16 `CService::port` as uint16 `Port`
+* [#20197](https://github.com/bitcoin/bitcoin/pull/20197) Protect onion peers in `AttemptToEvictConnection` + refactor and add unit tests (has ACKs by vasild and sipa, Concept ACKs/feedback by sdaftuar, gmaxwell, practicalswift)
 
 ### @MarcoFalke 2021-01-26
 
