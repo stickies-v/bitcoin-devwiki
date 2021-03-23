@@ -2,12 +2,13 @@
 
 Join us for an IRC meeting every two weeks to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
 
-- 09 March 2021 at 21:00 UTC
+- 23 March 2021 at 21:00 UTC
 
 Previous meetings:
 
 <details><summary>Meeting Archive</summary>
 
+- 9 March 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-03-09-21.00.log.html))
 - 23 February 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-02-23-21.00.log.html))
 - 09 February 2021 ([log](http://www.erisian.com.au/bitcoin-core-dev/log-2021-02-09.html#l-325)), ([summary](#09-feb-2021))
 - 26 January 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-01-26-15.00.moin.txt))
@@ -36,9 +37,12 @@ Previous meetings:
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-## 9 Mar 2021
+## 23 Mar 2021
 
 - Feel free to update this page with proposed meeting topics.
+
+## 9 Mar 2021
+
 - **Erlay update** (gleb)
 
 ## 23 Feb 2021
@@ -55,14 +59,13 @@ Previous meetings:
 
 ## 09 Feb 2021
 
-
-## Topic: State of Erlay implementation (gleb)
+### Topic: State of Erlay implementation (gleb)
 
 [#18261](https://github.com/bitcoin/bitcoin/pull/18261) needs a couple more high-level code review to evaluate the approach. The next step would be to split the PR into five or so parts and merge one by one, but gleb would prefer a high-level check first to ensure the code structure overall makes sense and there aren't any implementation-specific blockers.
 
 sipa mentioned that he addressed some of the comments in [minisketch#28](https://github.com/sipa/minisketch/pull/28) (updated: merged Feb 19, 2021).
 
-## Other updates and requested review
+### Other updates and requested review
 
 amiti announced that she has a PR open to introduce new node-level rebroadcast functionality at [#21061](https://github.com/bitcoin/bitcoin/pull/21061) and would appreciate review.
 
