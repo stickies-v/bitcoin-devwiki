@@ -35,7 +35,9 @@ Previous meetings:
 
 1. **[Focus and priorities](https://github.com/bitcoin-core/bitcoin-devwiki/wiki/P2P-Current-Priorities)**: We'll discuss what people are working on and prioritizing.
 
-2. **????**: Feel free to suggest topics for the upcoming meeting below.
+2. Erlay update by gleb.
+
+3. **????**: Feel free to suggest topics for the upcoming meeting below.
 
 ## 23 Mar 2021
 
