@@ -14,20 +14,20 @@ recommended to have them locally.
 
 ### GUI Repo Setup
 
-1. Log in [GitHub](https://github.com) (in command examples the GitHub username _"satoshi"_ used), open the [GUI repo](https://github.com/bitcoin-core/gui), and [fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) it.
+1. Log into [GitHub](https://github.com), navigate to the [GUI repo](https://github.com/bitcoin-core/gui), and [fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) it.
 
-2. Clone the repo locally:
+2. Clone the GUI repo locally:
 ```sh
 $ git clone https://github.com/bitcoin-core/gui.git && cd gui
 ```
 
-3. Set up your forked repo as a local git remote:
+3. Set up your forked repo as a local git remote (_"satoshi"_ is used as an example GitHub username)::
 ```sh
 $ git remote add satoshi https://github.com/satoshi/gui.git
 $ git config remote.pushDefault satoshi
 ```
 
-The current result could be verified:
+4. Verify steps were performed correctly:
 ```sh
 $ git remote -v
 origin	https://github.com/bitcoin-core/gui.git (fetch)
@@ -36,41 +36,45 @@ satoshi	https://github.com/satoshi/gui.git (fetch)
 satoshi	https://github.com/satoshi/gui.git (push)
 ```
 
-4. To synchronize (any time you want) your local and forked repos:
+5. To synchronize your local and forked repos:
 ```sh
 $ git switch master
 $ git pull --ff-only
 $ git push
 ```
 
-Note: Just after cloning repos are already synchronized.
+### Reviewing Pull Request
 
-### Pull Request Reviewing
+The following highlights important steps of the review process using [PR 42](https://github.com/bitcoin-core/gui/pull/42) as an example.
 
-The recommended way to review a pull request (PR) is do it locally because it allows you to build binaries and test them.
-In command examples [PR 42](https://github.com/bitcoin-core/gui/pull/42) is used.
+#### Fetch PR branch
 
-Fetch PR branch to the local repo:
+It is recommended to review pull requests (PR) locally as this allows you to build binaries and test functionality.
+
+To fetch the PR branch to your local repo, run the following command:
 ```sh
 $ git fetch origin pull/42/head:pr42.01 && git switch pr42.01
 ```
 
-It is useful to use separated local branches for every fetching. Optionally, branch names could include a sequence number
-(as in example above) or a convenient date/time presentation.
+This command clones [PR 42](https://github.com/bitcoin-core/gui/pull/42) into a new branch named `pr42.01` then switches to it. This example branch name includes a sequence number `.01`. Sequence numbers make it convenient to compare how the PR changes as development occurs.
 
-When a PR author updates her branch, it is easy to check the changes:
+#### PR is updated
+
+As a PR goes through the review process, changes are made. When changes occur, you must re-fetch the PR to test it locally. It is recommended to use separate local branches for every fetch. Each fetch should increment the sequence number used.
+
+To examine differences between updates:
 ```sh
 $ git diff pr42.03 pr42.04
 ```
 
-Even if a PR branch was rebased, it is still easy to check the changes:
+To examine differences when a PR is rebased:
 ```sh
 $ git range-diff master pr42.03 pr42.04
 ```
 
-Note: Git [branches are cheap to create and destroy](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell#ch03-git-branching).
+#### PR is merged
 
-After PR merging, all of the review branches could be removed:
+You can delete all local branches of the PR after it has been successfully merged:
 ```sh
 $ git switch master
 $ git branch -D $(git branch | grep pr42)
@@ -78,7 +82,7 @@ $ git branch -D $(git branch | grep pr42)
 
 ## Backward Compatibility
 
-The source code must be compatible with the [minimum required](https://github.com/bitcoin/bitcoin/blob/master/doc/dependencies.md) Qt version which is set in `configure.ac`:
+The source code must always maintain compatibility with the [minimum required](https://github.com/bitcoin/bitcoin/blob/master/doc/dependencies.md) Qt version, which is set in `configure.ac`:
 ```sh
 BITCOIN_QT_CONFIGURE([5.9.5])
 ```
@@ -107,7 +111,7 @@ Every time the minimum required Qt version is bumped, `grep` or `git grep` for a
 
 ## `QObject` Subclassing Style
 
-When sublassing the `QObject` class follow the pattern below:
+When subclassing the `QObject` class follow the pattern below:
 
 ```cpp
 #include <QObject>
@@ -137,13 +141,15 @@ Use the `Q_SIGNALS` and `Q_SLOTS` macros instead of the `signals` and `slots` ke
 
 ## Writing Code for Translation
 
-It is assumed that developers follow those guides:
+It is assumed that developers follow these guides:
 - [Translation Process](https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md)
 - [Translation Strings Policy](https://github.com/bitcoin/bitcoin/blob/master/doc/translation_strings_policy.md)
 
 ### Translation in C++ Code
 
-1. To translate a string literal (quoted text) that will be presented to the user, use the [`QObject::tr`](https://doc.qt.io/qt-5.12/qobject.html#tr) function which returns a translated `QString` object:
+#### String Literals
+
+To translate a string literal (quoted text), use the [`QObject::tr`](https://doc.qt.io/qt-5.12/qobject.html#tr) function which returns a translated `QString` object:
 
 - within classes that are derived from the `QObject`:
 ```cpp
@@ -168,10 +174,11 @@ QString NetworkToQString(Network net)
 }
 ```
 
-2. Some substrings are unknown at the compile time or are not intended to be translated, e.g., error messages, command line options, default file names etc.
-In such cases it is recommended:
-- to avoid unwanted translation, and
-- do not break the whole string into fragments those are translated separately
+#### Substrings
+
+Some substrings are unknown at compile-time or are not intended to be translated, e.g., error messages, command line options, default file names, etc. In such cases, it is recommended to:
+- avoid unwanted translation
+- not break up the whole string into fragments that are translated separately
 
 To achieve both goals, use numbered place markers with the [`QString::arg`](https://doc.qt.io/qt-5.12/qstring.html#arg) function:
 
@@ -196,11 +203,11 @@ QString EditAddressDialog::getDuplicateAddressWarning() const
 }
 ```
 
-The order of the numbered place markers can change when strings are translated into other languages, but each `arg` will still replace the lowest numbered unreplaced place marker, no matter where it appears. Also, if place marker `%i` appears more than once in the string, the `arg` replaces all of them.
+The order of the numbered place markers can be changed when strings are translated into other languages, but each `arg` will still replace the lowest-numbered unreplaced place marker, no matter where it appears. Also, if place marker `%i` appears more than once in the string, the `arg` replaces all instances.
 
 ### Translation in Designer UI Files
 
-In Designer UI Files (`src/qt/forms/*ui`) all of `<string>` elements are subjects of translation by default. To avoid such behavior uncheck the value checkbox of the "translatable" property of the GUI element, which is not intended to be translated, or use the `notr` attribute in XML code:
+In Designer UI Files (`src/qt/forms/*ui`) all `<string>` elements are subject to translation by default. To avoid such behavior uncheck the "translatable" property checkbox of the GUI element which is not intended to be translated. Alternatively, use the `notr` attribute in XML code:
 ```xml
 <property name="placeholderText">
   <string notr="true">https://example.com/tx/%s</string>
