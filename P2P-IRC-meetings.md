@@ -2,12 +2,13 @@
 
 Join us for an IRC meeting every two weeks to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
 
-- 23 March 2021 at 21:00 UTC
+- 6 April 2021 at 21:00 UTC 
 
 Previous meetings:
 
 <details><summary>Meeting Archive</summary>
 
+- 23 March 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-03-23-21.00.log.html))
 - 9 March 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-03-09-21.00.log.html))
 - 23 February 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-02-23-21.00.log.html))
 - 09 February 2021 ([log](http://www.erisian.com.au/bitcoin-core-dev/log-2021-02-09.html#l-325)), ([summary](#09-feb-2021))
@@ -35,13 +36,14 @@ Previous meetings:
 
 1. **[Focus and priorities](https://github.com/bitcoin-core/bitcoin-devwiki/wiki/P2P-Current-Priorities)**: We'll discuss what people are working on and prioritizing.
 
-2. Erlay update by gleb.
+2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-3. **????**: Feel free to suggest topics for the upcoming meeting below.
+3. **Reduce addr blackholes #21528** (Amiti)
+ 
 
 ## 23 Mar 2021
 
-- Feel free to update this page with proposed meeting topics.
+- **Erlay update** (gleb)
 
 ## 9 Mar 2021
 
