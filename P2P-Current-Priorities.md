@@ -49,10 +49,12 @@ What are you currently working on in the P2P realm? (Add your github username an
   * https://github.com/bitcoin/bitcoin/pull/20915  fuzz: Fail if message type is not fuzzed
   * https://github.com/bitcoin/bitcoin/pull/20995  fuzz: Avoid initializing version to less than MIN_PEER_PROTO_VERSION 
 
-### @vasild 2021-03-10
+### @vasild 2021-04-01
 
-* Extend I2P test coverage (new unit and fuzz tests) https://github.com/bitcoin/bitcoin/pull/21387
-* Review as many PRs from this page as possible
+* Minor I2P tweaks
+  * https://github.com/bitcoin/bitcoin/pull/21514 p2p: Ignore ports on I2P addresses
+  * (no PR yet) Add I2P to `CNetAddr::IsRelayable()`
+  * (no PR yet) Ditch [prefer-8333 ports](https://github.com/bitcoin/bitcoin/blob/6e22b522f9505d6a3c71ef9972aea6ae3fb10d2e/src/net.cpp#L2020-L2026) for I2P
 * Implement CJDNS support
 
 ### @naumenkogs 2021-02-23
