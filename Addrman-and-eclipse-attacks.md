@@ -1,6 +1,6 @@
 # Eclipse attacks
 
-Eclipse attacks occur when a node is not connected to any honest peers on the network, and instead, its peer connections are controlled by an adversary. Once denied connectivity to the honest network, a victim can be attacked in numerous ways, such as with double-spends or funds loss on layer 2 systems (such as the Lightning Network). Mining nodes attacked in this way can be forced to waste hashpower, be commandeered in selfish mining attacks, or generally aid in causing forks on the network. 
+Eclipse attacks occur when a node’s access to information can be filtered by other malicious nodes in the network. That could be because the node is not connected to any honest peers on the network, and instead, its peer connections are controlled by an adversary. Once denied connectivity to the honest network, a victim can be attacked in numerous ways, such as with double-spends or funds loss on layer 2 systems (such as the Lightning Network). Mining nodes attacked in this way can be forced to waste hashpower, be commandeered in selfish mining attacks, or generally aid in causing forks on the network. 
 
 This document attempts to describe the mechanisms implemented in Bitcoin Core to mitigate eclipse attacks followed by open questions and areas of further research.
 
@@ -12,9 +12,9 @@ A restart-based eclipse attack occurs when the adversary is able to sufficiently
 
 The Bitcoin peer-to-peer layer supports messages that allow nodes to gossip the addresses of other nodes on the network. This allows new nodes coming online to learn of other peers, and new listening nodes (that are able to take incoming connections) can have their address gossiped so that other nodes can connect to them later.
 
-Bitcoin Core tracks addresses in an "addresses manager", known as 'AddrMan' and defined by the class `CAddrMan`, was introduced by sipa in [#787](https://github.com/bitcoin/bitcoin/pull/787). AddrMan maintains known addresses (e.g. IP and onion) of bitcoin peers on the network. While the implementation has undergone several changes, namely increasing the number of buckets for each table, the essential design remains the same.
+Bitcoin Core tracks addresses in an "addresses manager", known as 'AddrMan' and defined by the class `CAddrMan`, introduced by sipa in [#787](https://github.com/bitcoin/bitcoin/pull/787). AddrMan maintains known addresses (e.g. IP and onion) of bitcoin peers on the network. While the implementation has undergone several changes, namely increasing the number of buckets for each table, the essential design remains the same.
 
-Note that a Bitcoin node's sybil resistance requires having at least one honest peer, which provides connectivity to the honest network, and thus able to learn of newly mined blocks in some timely fashion.
+Note that a Bitcoin node's sybil resistance requires having at least one honest peer which is not eclipsed itself, which provides connectivity to the honest network, and thus able to learn of newly mined blocks in some timely fashion.
 
 ### Assumption of a healthy addrman from the start
 
@@ -24,7 +24,7 @@ When a node first comes online, it is at the mercy of the DNS seeds (or alternat
 
 Nodes store the IP addresses discovered by received [ADDR](https://developer.bitcoin.org/reference/p2p_networking.html#addr) messages in two tables: the "new" table and the "tried" table. The design goal of the address manager is to ensure that no attacker can fill the entire table with his nodes/addresses. A [comment in AddrMan.h](https://github.com/bitcoin/bitcoin/blob/be3af4f31089726267ce2dbdd6c9c153bb5aeae1/src/addrman.h#L97) outlines both the address manager's design goals and the bucketing method.
 
-Addresses that have not yet been tried go into 1024 "new" buckets. The address range (/16 for IPv4) of the source (the peer that gossiped the addr to us) determines which of the 64 buckets it randomly is assigned slots to by being cryptographic hashed. A single address can occur in up to 8 different buckets to increase selection chances of frequently seen addresses. When adding a new address to a full bucket, a randomly chosen entry (with a bias favoring less recently seen ones) is removed from it first. The new table stores the IP addresses that could potentially contain invalid or malicious addresses and could contain IPs that are not Bitcoin nodes or even unallocated IP addresses. 
+Addresses that have not yet been tried go into 1024 "new" buckets. The address range (/16 for IPv4) of the source (the peer that gossiped the addr to us) determines which of the 64 buckets it is randomly assigned to by being hashed with a cryptographic hash function. A single address can occur in up to 8 different buckets to increase selection chances of frequently seen addresses. When adding a new address to a full bucket, a randomly chosen position within a randomly chosen bucket is selected. If that position already contains an address, it uses some rules to determine if the new addr should be stored and the old addr should be evicted or if the new addr should be discarded ([code](https://github.com/bitcoin/bitcoin/blob/e08f3193b543017702d000c2263bccbefa981c14/src/addrman.cpp#L314)). The new table stores the IP addresses that could potentially contain invalid or malicious addresses and could contain IPs that are not Bitcoin nodes or even unallocated IP addresses. 
 
 Addresses of nodes known to be an accessible bitcoin node go into 256 "tried" buckets. Each address range selects eight of these buckets at random. The actual bucket is chosen from one of these, based on the full address. Bucket selection is based on cryptographic hashing, using a randomly-generated 256-bit key. This key should remain private since an adversary with knowledge of a victim’s bucket selection could more easily target peer addresses to be evicted.
 
@@ -45,6 +45,8 @@ This is the most common method for a brand new Bitcoin node to discover peers fo
 If our node is behind a [proxy](https://github.com/bitcoin/bitcoin/blob/417f95fa453d97087a33d4176523ab278bef21a1/src/net.cpp#L1742-L1743) (or if the seeder [does not support service bit filtering](https://github.com/bitcoin/bitcoin/blob/417f95fa453d97087a33d4176523ab278bef21a1/src/net.cpp#L1763-L1767) over DNS), the seeders are treated as an [AddrFetch connection](https://github.com/bitcoin/bitcoin/blob/417f95fa453d97087a33d4176523ab278bef21a1/src/net.h#L174-L180). (For more on `AddrFetch` connections, see 4 below). Nodes will engage in the Bitcoin protocol handshake and addr gossip with the seeder. The connection will disconnect soon after.
 
 There are downsides to DNS seeding. DNS seeding leaks to the ISP that the node is a running bitcoin node. Also, DNS sources can provide useless or malicious addresses. Moreover, even if the DNS request results were cryptographically signed, developers are trusted not to attack nodes starting up in the future by, for example, relegating all newcomers to a separate network and taking advantage of them later.
+
+To prevent a single malicious seeder from dominating addrman by announcing large numbers of IP addresses, [the number of IPs each seeder can contribute is limited to 256](https://github.com/bitcoin/bitcoin/blob/086226d98ae8c194a0a38b2fbfffd0dc3773e879/src/net.cpp#L1685).
 
 3. Fixed seeds
 
@@ -210,5 +212,6 @@ Should the feeler connection poll the chain tip of peers similar to the outbound
  
 7. The optimum bucket sizes and size of the new and tried tables
 
-How is the growth of the network reflected in these bucket sizes and new and tried tables? Are there enough addresses to fill up these tables? Would smaller buckets lend themselves to a more defensible position?
+How is the growth of the network reflected in these bucket sizes and new and tried tables? Are there enough addresses to fill up these tables? Would smaller buckets lend themselves to a more defensible position? 
 
+The problem we face is that the network changes in size and we might not be able to predict these changes. What is a safe number given the unpredictability?
