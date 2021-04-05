@@ -38,9 +38,13 @@ Previous meetings:
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
+## 20 Apr 2021
+
+- **Reduce addr blackholes** ([PR 21528](https://github.com/bitcoin/bitcoin/pull/21528)) (Amiti)
+
 ## 6 Apr 2021
 
-1. **Reduce addr blackholes** ([PR 21528](https://github.com/bitcoin/bitcoin/pull/21528)) (Amiti)
+- _tbd_
 
 ## 23 Mar 2021
 
