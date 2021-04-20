@@ -42,6 +42,7 @@ Previous meetings:
 
 - **Reduce addr blackholes** ([PR 21528](https://github.com/bitcoin/bitcoin/pull/21528)) (Amiti)
 - **Moving forward with asmap** (gleb)
+- **irc meetings on better L2s onchain support** (ariard)
  
 ## 6 Apr 2021
 
