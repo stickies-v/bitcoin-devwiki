@@ -39,9 +39,9 @@ What are you currently working on in the P2P realm? (Add your github username an
   * [bip=#1025](https://github.com/bitcoin/bips/pull/1052)
   * [-dev thread](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018340.html)
 
-### @jonatack 2021-03-23
+### @jonatack 2021-04-20
 
-* [#20197](https://github.com/bitcoin/bitcoin/pull/20197) Protect onion peers in `AttemptToEvictConnection` + refactor and add unit tests (has ACKs by vasild and sipa and Concept ACKs by sdaftuar, gmaxwell, practicalswift, hebasto and ariard)
+* [#21261](https://github.com/bitcoin/bitcoin/pull/21261) rewriting the inbound peer eviction to protect peers connecting via multiple special networks (onion, localhost, I2P, possibly others like CJDNS) and begin protecting I2P peers.
 
 ### @MarcoFalke 2021-01-26
 
