@@ -41,7 +41,8 @@ Previous meetings:
 ## 20 Apr 2021
 
 - **Reduce addr blackholes** ([PR 21528](https://github.com/bitcoin/bitcoin/pull/21528)) (Amiti)
-
+- **Moving forward with asmap** (gleb)
+ 
 ## 6 Apr 2021
 
 - _tbd_
