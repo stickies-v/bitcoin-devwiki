@@ -25,10 +25,9 @@ What are you currently working on in the P2P realm? (Add your github username an
 
 - Move application layer data from net to net_processing:
   - [#19398](https://github.com/bitcoin/bitcoin/issues/19398) describes the high-level design
-  - [#21236](https://github.com/bitcoin/bitcoin/pull/21236) is the next PR in the series - Extract addr send functionality into MaybeSendAddr()
+  - [#21186](https://github.com/bitcoin/bitcoin/pull/21186) is the next PR in the series - Move addr data into net_processing
 - Clean up addrman:
-  - [#20228](https://github.com/bitcoin/bitcoin/pull/20228) makes addrman a top-level component, allowing ctor arguments to be passed directly from init and removing boilerplate code from CConnman
-  - [#20233](https://github.com/bitcoin/bitcoin/pull/20233) makes consistency checks a runtime option, so they can be used in unit/functional/fuzz tests.
+  - [#20233](https://github.com/bitcoin/bitcoin/pull/20233) makes consistency checks a runtime option, so they can be used in unit/functional/fuzz tests (currently WIP)
 - Review and help AJ's general cleanups [#20758](https://github.com/bitcoin/bitcoin/pull/20758)
 - Review and help Carl's de-globalize chainstate manager [#20158](https://github.com/bitcoin/bitcoin/pull/20158) (this is mostly in validation but touches the net_processing-validation interface a lot).
 
