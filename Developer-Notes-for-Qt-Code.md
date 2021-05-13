@@ -174,6 +174,31 @@ QString NetworkToQString(Network net)
 }
 ```
 
+#### Translator Comments
+
+It is highly recommended to provide a translation context via [translator comments](https://doc.qt.io/qt-5/i18n-source-translation.html#translator-comments) to every translatable string:
+```cpp
+void BitcoinGUI::setNetworkActive(bool network_active)
+{
+    updateNetworkState();
+    m_network_context_menu->clear();
+    m_network_context_menu->addAction(
+        //: A context menu item. The "Peers tab" is an element of the "Node window".
+        tr("Show Peers tab"),
+        [this] {
+            rpcConsole->setTabFocus(RPCConsole::TabTypes::PEERS);
+            showDebugWindow();
+        });
+    m_network_context_menu->addAction(
+        network_active ?
+            //: A context menu item.
+            tr("Disable network activity") :
+            //: A context menu item. The network activity was disabled previously.
+            tr("Enable network activity"),
+        [this, new_state = !network_active] { m_node.setNetworkActive(new_state); });
+}
+```
+
 #### Substrings
 
 Some substrings are unknown at compile-time or are not intended to be translated, e.g., error messages, command line options, default file names, etc. In such cases, it is recommended to:
