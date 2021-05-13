@@ -3,6 +3,7 @@
 1. [Git Tips](#git-tips)
 1. [Backward Compatibility](#backward-compatibility)
 1. [`QObject` Subclassing Style](#qobject-subclassing-style)
+1. [Qt Signal-Slot Connection Tips](#qt-signal-slot-connection-tips)
 1. [Writing Code for Translation](#writing-code-for-translation)
 1. [Debugging Tips](#debugging-tips)
 
@@ -138,6 +139,49 @@ private Q_SLOTS:
 ```
 
 Use the `Q_SIGNALS` and `Q_SLOTS` macros instead of the `signals` and `slots` keywords of the Qt `moc` (Meta-Object Compiler). This prevents potential conflicts with 3rd party signal/slot mechanisms.
+
+## Qt Signal-Slot Connection Tips
+
+### Naming Convention
+
+Use Qt's standard `camelCase` naming convention for new signals and slots:
+```cpp
+void TransactionWidget::transactionChanged()
+...
+```
+This makes reading Qt code easier.
+
+Note. This rule is an exception from [Developer Notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#coding-style-c).
+
+### Designer UI Files Name-Based Auto-Connection
+
+Avoid the [auto-connection](https://doc.qt.io/qt-5/designer-using-a-ui-file.html#widgets-and-dialogs-with-auto-connect) feature in new code:
+- https://github.com/bitcoin/bitcoin/pull/18246
+- https://bugreports.qt.io/browse/QTBUG-76375
+
+### Signal and Slot Arguments
+
+A slot can be connected to a given signal if the signal has at least as many arguments as the slot, and there is implicit conversion among the corresponding argument types between signal and slot.
+
+The best way to drop arguments or convert them is to make it explicit by using a lambda as a slot:
+```cpp
+// The signal signature is QAbstractButton::clicked(bool checked).
+connect(ui->clearButton, &QAbstractButton::clicked, this, [this] { clear(); });
+```
+
+### Inherited Signals and Slot
+
+Use base class functions as this makes the code more general, e.g., use `QAbstractButton::clicked` instead of `QPushButton::clicked`.
+
+### Exception Handling
+
+Throwing an exception from a slot invoked by Qt's signal-slot connection mechanism is considered undefined behaviour.
+To handle possible exceptions, use `GUIUtil::ExceptionSafeConnect` function as a drop-in replacement of `QObject::connect`:
+```cpp
+// SendCoinsDialog::sendButtonClicked can throw.
+GUIUtil::ExceptionSafeConnect(ui->sendButton, &QAbstractButton::clicked,
+                              this, &SendCoinsDialog::sendButtonClicked);
+```
 
 ## Writing Code for Translation
 
