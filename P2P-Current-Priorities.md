@@ -1,14 +1,27 @@
-What are you currently working on in the P2P realm? (Add your github username and the date, and any projects in bullet points, and a link to the PR, gist, branch etc where you're working)
+What are you currently working on in the P2P realm? (Add your github username and the date, and any projects in bullet points, and a link to the PR, gist, branch etc where you're working. Don't put your entry below anyone who's more than a month out of date!)
 
-### @ajtowns 2021-02-21
+### @ajtowns 2021-05-17
 
-* Some net_processing clean ups [#20758](https://github.com/bitcoin/bitcoin/pull/20758) - next is splitting out orphan handling to a separate module [#21148](https://github.com/bitcoin/bitcoin/pull/21148)
+* Some net_processing clean ups [#20758](https://github.com/bitcoin/bitcoin/pull/20758) - current is removing g_cs_orphans lock and related changes [#21527](https://github.com/bitcoin/bitcoin/pull/21527)
 * dandelion
   - considering "dandelion-lite" (stem for exactly one hop, the flood -- no p2p changes required)
   - question is whether that provides enough benefits to be worthwhile? answer: simulate and see!
   - gulia's updated https://github.com/gfanti/dandelion-simulations/tree/dandelion-lite ; some ensuing discussion on twitter https://twitter.com/giuliacfanti/status/1362963585471815680
 * want to see erlay
 * UASF/bip8 safety cf [#19573](https://github.com/bitcoin/pull/19573)
+
+### @jonatack 2021-04-20
+
+* [#21261](https://github.com/bitcoin/bitcoin/pull/21261) rewriting the inbound peer eviction to protect peers connecting via multiple special networks (onion, localhost, I2P, possibly others like CJDNS) and begin protecting I2P peers.
+
+### @vasild 2021-04-01
+
+* Minor I2P tweaks
+  * https://github.com/bitcoin/bitcoin/pull/21514 p2p: Ignore ports on I2P addresses
+  * (no PR yet) Add I2P to `CNetAddr::IsRelayable()`
+  * (no PR yet) Ditch [prefer-8333 ports](https://github.com/bitcoin/bitcoin/blob/6e22b522f9505d6a3c71ef9972aea6ae3fb10d2e/src/net.cpp#L2020-L2026) for I2P
+  * (no PR yet) Add some basic docs/howto at `doc/i2p.md`, similarly to `doc/tor.md`
+* Implement CJDNS support
 
 ### @amitiuttarwar 2021-01-27
 
@@ -38,24 +51,11 @@ What are you currently working on in the P2P realm? (Add your github username an
   * [bip=#1025](https://github.com/bitcoin/bips/pull/1052)
   * [-dev thread](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2021-January/018340.html)
 
-### @jonatack 2021-04-20
-
-* [#21261](https://github.com/bitcoin/bitcoin/pull/21261) rewriting the inbound peer eviction to protect peers connecting via multiple special networks (onion, localhost, I2P, possibly others like CJDNS) and begin protecting I2P peers.
-
 ### @MarcoFalke 2021-01-26
 
 * Fuzzing p2p:
   * https://github.com/bitcoin/bitcoin/pull/20915  fuzz: Fail if message type is not fuzzed
   * https://github.com/bitcoin/bitcoin/pull/20995  fuzz: Avoid initializing version to less than MIN_PEER_PROTO_VERSION 
-
-### @vasild 2021-04-01
-
-* Minor I2P tweaks
-  * https://github.com/bitcoin/bitcoin/pull/21514 p2p: Ignore ports on I2P addresses
-  * (no PR yet) Add I2P to `CNetAddr::IsRelayable()`
-  * (no PR yet) Ditch [prefer-8333 ports](https://github.com/bitcoin/bitcoin/blob/6e22b522f9505d6a3c71ef9972aea6ae3fb10d2e/src/net.cpp#L2020-L2026) for I2P
-  * (no PR yet) Add some basic docs/howto at `doc/i2p.md`, similarly to `doc/tor.md`
-* Implement CJDNS support
 
 ### @naumenkogs 2021-02-23
 * [Erlay](https://github.com/bitcoin/bitcoin/pull/18261)
