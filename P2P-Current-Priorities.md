@@ -6,7 +6,7 @@ What are you currently working on in the P2P realm? (Add your github username an
 * dandelion
   - considering "dandelion-lite" (stem for exactly one hop, the flood -- no p2p changes required)
   - question is whether that provides enough benefits to be worthwhile? answer: simulate and see!
-  - gulia's updated https://github.com/gfanti/dandelion-simulations/tree/dandelion-lite ; some ensuing discussion on twitter https://twitter.com/giuliacfanti/status/1362963585471815680
+  - Giulia's updated https://github.com/gfanti/dandelion-simulations/tree/dandelion-lite ; some ensuing discussion on twitter https://twitter.com/giuliacfanti/status/1362963585471815680
 * want to see erlay
 * UASF/bip8 safety cf [#19573](https://github.com/bitcoin/pull/19573)
 
