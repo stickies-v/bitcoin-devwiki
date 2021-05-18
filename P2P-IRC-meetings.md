@@ -2,7 +2,7 @@
 
 Join us for an IRC meeting every two weeks to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
 
-- 04 May 2021 at 21:00 UTC 
+- 18 May 2021 at 21:00 UTC 
 
 Previous meetings:
 
@@ -40,7 +40,7 @@ Previous meetings:
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-## 04 May 2021
+## 18 May 2021
 
 **Feel free to suggest topics for the upcoming meeting below.**
 
