@@ -41,9 +41,13 @@ Previous meetings:
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-## 18 May 2021
+## 1 Jun 20201
 
 **Feel free to suggest topics for the upcoming meeting below.**
+
+## 18 May 2021
+
+- No topics discussed
 
 ## 20 Apr 2021
 
