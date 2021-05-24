@@ -9,6 +9,7 @@ Previous meetings:
 <details><summary>Meeting Archive</summary>
 
 - 18 May 2021 (no topics discussed)
+- 4 May 2021 (no topics discussed)
 - 20 Apr 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-04-20-21.01.log.html))
 - 6 April 2021 (no topics discussed)
 - 23 March 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-03-23-21.00.log.html))
@@ -46,6 +47,10 @@ Previous meetings:
 **Feel free to suggest topics for the upcoming meeting below.**
 
 ## 18 May 2021
+
+- No topics discussed
+
+## 4 May 2021
 
 - No topics discussed
 
