@@ -1,13 +1,14 @@
-**21:00 UTC alternate Tuesdays on the #bitcoin-core-dev channel on Freenode**
+**21:00 UTC alternate Tuesdays on the #bitcoin-core-dev channel on Libera.chat**
 
 Join us for an IRC meeting every two weeks to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
 
-- 18 May 2021 at 21:00 UTC 
+- 1 Jun 2021 at 21:00 UTC 
 
 Previous meetings:
 
 <details><summary>Meeting Archive</summary>
 
+- 18 May 2021 (no topics discussed)
 - 20 Apr 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-04-20-21.01.log.html))
 - 6 April 2021 (no topics discussed)
 - 23 March 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-03-23-21.00.log.html))
