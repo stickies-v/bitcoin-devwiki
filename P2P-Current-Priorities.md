@@ -35,15 +35,16 @@ What are you currently working on in the P2P realm? (Add your github username an
 - review erlay
 - altnet : move personal notes under some wiki project page, work on a production branch on top of [#19160](https://github.com/bitcoin/bitcoin/pull/19160), headers over DNS as first integration
 
-### @jnewbery 2021-02-09
+### @jnewbery 2021-05-30
 
 - Move application layer data from net to net_processing:
   - [#19398](https://github.com/bitcoin/bitcoin/issues/19398) describes the high-level design
-  - [#21186](https://github.com/bitcoin/bitcoin/pull/21186) is the next PR in the series - Move addr data into net_processing
+  - The next PRs in the series are built on [#21527](https://github.com/bitcoin/bitcoin/pull/21527) (net_processing: lock clean up)
+- Review tx rebroadcast [#21061](https://github.com/bitcoin/bitcoin/pull/21061)
 - Clean up addrman:
   - [#20233](https://github.com/bitcoin/bitcoin/pull/20233) makes consistency checks a runtime option, so they can be used in unit/functional/fuzz tests (currently WIP)
-- Review and help AJ's general cleanups [#20758](https://github.com/bitcoin/bitcoin/pull/20758)
-- Review and help Carl's de-globalize chainstate manager [#20158](https://github.com/bitcoin/bitcoin/pull/20158) (this is mostly in validation but touches the net_processing-validation interface a lot).
+- Review AJ's general cleanups [#20758](https://github.com/bitcoin/bitcoin/pull/20758)
+- Review Carl's de-globalize chainstate manager [#20158](https://github.com/bitcoin/bitcoin/pull/20158) (this is mostly in validation but touches the net_processing-validation interface a lot).
 
 ### @sdaftuar 2021-01-27
 
