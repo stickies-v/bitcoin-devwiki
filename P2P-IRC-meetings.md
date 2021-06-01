@@ -2,12 +2,13 @@
 
 Join us for an IRC meeting every two weeks to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
 
-- 1 Jun 2021 at 21:00 UTC 
+- 7 Jun 2021 at 21:00 UTC 
 
 Previous meetings:
 
 <details><summary>Meeting Archive</summary>
 
+- 1 June 2021 (no topics discussed)
 - 18 May 2021 (no topics discussed)
 - 4 May 2021 (no topics discussed)
 - 20 Apr 2021 ([log](https://bitcoin.jonasschnelli.ch/ircmeetings/logs/bitcoin-core-dev/2021/bitcoin-core-dev.2021-04-20-21.01.log.html))
@@ -42,9 +43,13 @@ Previous meetings:
 
 2. **????**: Feel free to suggest topics for the upcoming meeting below.
 
-## 1 Jun 20201
+## 15 Jun 2021
 
 **Feel free to suggest topics for the upcoming meeting below.**
+
+## 1 Jun 20201
+
+- No topics discussed
 
 ## 18 May 2021
 
