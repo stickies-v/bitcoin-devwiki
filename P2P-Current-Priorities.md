@@ -22,7 +22,7 @@ What are you currently working on in the P2P realm? (Add your github username an
   * (no PR yet) Add I2P to `CNetAddr::IsRelayable()`
   * Ditch [prefer-8333 ports](https://github.com/bitcoin/bitcoin/blob/6e22b522f9505d6a3c71ef9972aea6ae3fb10d2e/src/net.cpp#L2020-L2026) for I2P; done as part of [pull/22112 Force port 0 in I2P](https://github.com/bitcoin/bitcoin/pull/22112)
   * (no PR yet) Add some basic docs/howto at `doc/i2p.md`, similarly to `doc/tor.md`
-* https://github.com/bitcoin/bitcoin/pull/21878 Make all networking code mockable
+* [pull/21878 Make all networking code mockable](https://github.com/bitcoin/bitcoin/pull/21878)
 * Implement CJDNS support
 
 ### @amitiuttarwar 2021-01-27
