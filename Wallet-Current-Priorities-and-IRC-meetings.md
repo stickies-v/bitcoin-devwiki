@@ -6,3 +6,9 @@ e.g.
 
 ### @sipa 2021-06-04
 * Basic Taproot signing support for descriptor wallets (https://github.com/bitcoin/bitcoin/pull/21365) and inference support (getting the descriptor for a given scriptPubKey) with feature freeze for 22.0 (~June 14th) before the next wallet meeting
+
+### @achow101 2021-06-04
+* `OutputType::BECH32M` [#22154](https://github.com/bitcoin/bitcoin/pull/22154)
+* Coin selection upgrades
+  * Refactor `CreateTransactionInternal` [#22008](https://github.com/bitcoin/bitcoin/pull/22008)
+  * Waste metric to choose algo [#22009](https://github.com/bitcoin/bitcoin/pull/22009)
