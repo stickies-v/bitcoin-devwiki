@@ -10,9 +10,9 @@ What are you currently working on in the P2P realm? (Add your github username an
 * want to see erlay
 * UASF/bip8 safety cf [#19573](https://github.com/bitcoin/pull/19573)
 
-### @jonatack 2021-04-20
+### @jonatack 2021-06-04
 
-* [#21261](https://github.com/bitcoin/bitcoin/pull/21261) rewriting the inbound peer eviction to protect peers connecting via multiple special networks (onion, localhost, I2P, possibly others like CJDNS) and begin protecting I2P peers.
+* [#21261](https://github.com/bitcoin/bitcoin/pull/21261) rewriting the inbound peer eviction to easily protect peers connecting via multiple special networks (onion, "localhost", I2P, CJDNS) and begin protecting I2P peers.
 
 ### @vasild 2021-06-04
 
