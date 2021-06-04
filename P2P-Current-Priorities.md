@@ -14,14 +14,14 @@ What are you currently working on in the P2P realm? (Add your github username an
 
 * [#21261](https://github.com/bitcoin/bitcoin/pull/21261) rewriting the inbound peer eviction to protect peers connecting via multiple special networks (onion, localhost, I2P, possibly others like CJDNS) and begin protecting I2P peers.
 
-### @vasild 2021-06-03
+### @vasild 2021-06-04
 
 * Minor I2P tweaks
   * [pull/21514 p2p: Ignore ports on I2P addresses](https://github.com/bitcoin/bitcoin/pull/21514)
   * [pull/22112 Force port 0 in I2P](https://github.com/bitcoin/bitcoin/pull/22112)
   * (no PR yet) Add I2P to `CNetAddr::IsRelayable()`
   * Ditch [prefer-8333 ports](https://github.com/bitcoin/bitcoin/blob/6e22b522f9505d6a3c71ef9972aea6ae3fb10d2e/src/net.cpp#L2020-L2026) for I2P; done as part of [pull/22112 Force port 0 in I2P](https://github.com/bitcoin/bitcoin/pull/22112)
-  * (no PR yet) Add some basic docs/howto at `doc/i2p.md`, similarly to `doc/tor.md`
+  * (no PR yet) Add some basic docs/howto at `doc/i2p.md`, similarly to `doc/tor.md` ([hint](https://bitcoin.stackexchange.com/questions/103402/how-can-i-use-bitcoin-core-with-the-anonymous-network-protocol-i2p))
 * [pull/21878 Make all networking code mockable](https://github.com/bitcoin/bitcoin/pull/21878)
 * Implement CJDNS support
 
