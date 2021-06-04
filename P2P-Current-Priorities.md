@@ -12,7 +12,7 @@ What are you currently working on in the P2P realm? (Add your github username an
 
 ### @jonatack 2021-06-04
 
-* [#21261](https://github.com/bitcoin/bitcoin/pull/21261) rewriting the inbound peer eviction to easily protect peers connecting via multiple special networks (onion, "localhost", I2P, CJDNS) and begin protecting I2P peers.
+* [#21261](https://github.com/bitcoin/bitcoin/pull/21261) rewriting the inbound peer eviction to easily protect peers connecting via multiple special networks (onion, "localhost", I2P, CJDNS) and begin protecting I2P peers. Ttatus: ready for final review; tagged for v22.0.
 
 ### @vasild 2021-06-04
 
