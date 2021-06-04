@@ -4,4 +4,4 @@ Please update in advance of the wallet meeting held every two weeks on Friday at
 
 e.g.
 
-**@sipa 2021-06-04** Basic Taproot signing support for descriptor wallets (#21365) and inference support (getting the descriptor for a given scriptPubKey) with feature freeze for 22.0 before the next wallet meeting (~June 14th)
+**@sipa 2021-06-04** Basic Taproot signing support for descriptor wallets (#21365) and inference support (getting the descriptor for a given scriptPubKey) with feature freeze for 22.0 (~June 14th) before the next wallet meeting
