@@ -1,4 +1,4 @@
-**19:00 UTC Thursdays on the #bitcoin-core-dev channel on Libera** ([Google calendar](https://calendar.google.com/calendar?cid=MTFwcXZkZ3BkOTlubGliZjliYTg2MXZ1OHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ) for all Bitcoin Core irc meetings)
+**19:00 UTC Thursdays on the #bitcoin-core-dev channel on Libera.chat** ([Google calendar](https://calendar.google.com/calendar?cid=MTFwcXZkZ3BkOTlubGliZjliYTg2MXZ1OHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ) for all Bitcoin Core irc meetings)
 
 ### Meeting Topics
 
