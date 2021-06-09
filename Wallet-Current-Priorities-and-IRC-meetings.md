@@ -12,3 +12,5 @@ e.g.
 * Coin selection upgrades
   * Refactor `CreateTransactionInternal` [#22008](https://github.com/bitcoin/bitcoin/pull/22008)
   * Waste metric to choose algo [#22009](https://github.com/bitcoin/bitcoin/pull/22009)
+
+(@achow101 reviewing #21365 on Twitch: https://www.twitch.tv/videos/1048874953)
