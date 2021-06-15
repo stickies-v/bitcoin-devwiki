@@ -2,12 +2,13 @@
 
 Join us for an IRC meeting every two weeks to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
 
-- 7 Jun 2021 at 21:00 UTC 
+- 15 Jun 2021 at 21:00 UTC 
 
 Previous meetings:
 
 <details><summary>Meeting Archive</summary>
 
+- 15 June 2021 (no topics discussed)
 - 1 June 2021 (no topics discussed)
 - 18 May 2021 (no topics discussed)
 - 4 May 2021 (no topics discussed)
@@ -45,7 +46,7 @@ Previous meetings:
 
 ## 15 Jun 2021
 
-**Feel free to suggest topics for the upcoming meeting below.**
+- Locking in net_processing. See [PR #21527](https://github.com/bitcoin/bitcoin/pull/21527) (_net_processing: lock clean up_). This PR adds a new net_processing mutex that could eventually be used as a replacement for cs_main within net_processing. It currently needs more review and there are several blocked PRs that make use of the new locking ([21160](https://github.com/bitcoin/bitcoin/pull/21160), [22053](https://github.com/bitcoin/bitcoin/pull/22053)).
 
 ## 1 Jun 20201
 
