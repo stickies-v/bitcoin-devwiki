@@ -47,6 +47,7 @@ Previous meetings:
 ## 15 Jun 2021
 
 - Locking in net_processing. See [PR #21527](https://github.com/bitcoin/bitcoin/pull/21527) (_net_processing: lock clean up_). This PR adds a new net_processing mutex that could eventually be used as a replacement for cs_main within net_processing. It currently needs more review and there are several blocked PRs that make use of the new locking ([21160](https://github.com/bitcoin/bitcoin/pull/21160), [22053](https://github.com/bitcoin/bitcoin/pull/22053)).
+- Reduce addr blackholes ([PR #21528](https://github.com/bitcoin/bitcoin/pull/21528) & [PR #22245](https://github.com/bitcoin/bitcoin/pull/22245)) (Amiti)
 
 ## 1 Jun 20201
 
