@@ -2,10 +2,7 @@ What are you currently working on with the Bitcoin Core wallet? (Add your GitHub
 
 Please update in advance of the wallet meeting held every two weeks on Friday at 19:00 UTC (**#bitcoin-core-dev** on **Libera.chat**). The next meeting is on **June 18th at 19:00 UTC**. Specific topics for discussion can also be preregistered on IRC using `#proposedwalletmeetingtopic`. This will be added to https://gnusha.org/bitcoin-core-dev/proposedwalletmeetingtopics.txt by a bot prior to the meeting.
 
-e.g.
-
-### @sipa 2021-06-04
-* Basic Taproot signing support for descriptor wallets (https://github.com/bitcoin/bitcoin/pull/21365) and inference support (getting the descriptor for a given scriptPubKey) with feature freeze for 22.0 (~June 14th) before the next wallet meeting
+Notes from previous meeting: #21365 is merged. For the 22.0 milestone, open wallet PRs are #22166 and #21329 (@achow101 priorities), #22154 and #19651 (more bug fix-ish and can be merged after feature freeze). There is also #22275 but that is pretty small and low priority.
 
 ### @achow101 2021-06-04
 * `OutputType::BECH32M` [#22154](https://github.com/bitcoin/bitcoin/pull/22154)
