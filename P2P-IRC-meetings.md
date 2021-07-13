@@ -1,8 +1,10 @@
-**21:00 UTC alternate Tuesdays on the #bitcoin-core-dev channel on Libera.chat**
+**~21:00 UTC alternate Tuesdays on the #bitcoin-core-dev channel on Libera.chat~**
+
+**P2P meetings are currently on hold. We may restart them in future if activity picks up.**
 
 Join us for an IRC meeting every two weeks to discuss P2P PRs and issues in Bitcoin Core. The next meeting will be on:
 
-- 13 Jul 2021 at 21:00 UTC 
+- **NO MEETINGS PLANNED**
 
 Previous meetings:
 
