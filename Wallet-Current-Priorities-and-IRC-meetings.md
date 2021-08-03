@@ -3,7 +3,7 @@ What are you currently working on with the Bitcoin Core wallet? (Add your GitHub
 Please update in advance of the wallet meeting held every two weeks on Friday at 19:00 UTC (**#bitcoin-core-dev** on **Libera.chat**). The next meeting is on **August 13th at 19:00 UTC**. Specific topics for discussion can also be preregistered on IRC using `#proposedwalletmeetingtopic`. This will be added to https://gnusha.org/bitcoin-core-dev/proposedwalletmeetingtopics.txt by a bot prior to the meeting.
 
 Possible topics for the next meeting (feel free to preregister a topic using #proposedwalletmeetingtopic):
-Adding a new RPC (generatedescriptor) for creating a Taproot descriptor (https://www.twitch.tv/videos/1105987609)
+Adding a new RPC (generatedescriptor) for creating a Taproot descriptor (e.g. https://www.twitch.tv/videos/1105987609)
 
 ### @achow101 2021-06-04
 * `OutputType::BECH32M` [#22154](https://github.com/bitcoin/bitcoin/pull/22154)
