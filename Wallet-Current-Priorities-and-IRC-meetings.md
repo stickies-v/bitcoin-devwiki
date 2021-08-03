@@ -10,3 +10,13 @@ Conversation log: https://gnusha.org/bitcoin-core-dev/2021-07-16.log
 * Coin selection upgrades
   * Refactor `CreateTransactionInternal` [#22008](https://github.com/bitcoin/bitcoin/pull/22008)
   * Waste metric to choose algo [#22009](https://github.com/bitcoin/bitcoin/pull/22009)
+
+Links to conversation logs of previous meetings
+
+Friday July 30th: https://gnusha.org/bitcoin-core-dev/2021-07-30.log
+
+Friday July 16th: https://gnusha.org/bitcoin-core-dev/2021-07-16.log
+
+Friday July 2nd: https://gnusha.org/bitcoin-core-dev/2021-07-02.log
+
+
