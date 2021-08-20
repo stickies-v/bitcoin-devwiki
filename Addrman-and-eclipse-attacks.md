@@ -130,6 +130,9 @@ Anchor connections were introduced by PR [#17326](https://github.com/bitcoin/bit
 Another tradeoff is that persistent long-lived connections would enable a snooping attacker to passively capture persistence of connections, potentially making topology inference more powerful. Strong persistence can contribute to network self-partitioning (e.g., long distance links are less reliable, so they get culled, and eventually disconnected subgraphs might only connect to their own continent) ([source](https://github.com/bitcoin/bitcoin/issues/17326#issuecomment-550521262)).
 This added behavior should probably pair with a complementary behavior on the inbound side. As of now, about half the inbound slots are preserved for longest-connected peers. Half of those could be redirected to be preserved for peers with the longest-historically-connected time. Without some measure like this, persistent connection logic could be undermined by an attacker that fills the connection slots up on long-running static IPed nodes in order to cause the eviction of (or prevent connections from) the other hosts they hope to eclipse ([source](https://github.com/bitcoin/bitcoin/issues/17326#issuecomment-550521262)).
 
+### Other Countermeasure: Disallow inbounds from tried tables
+While this was not among the countermeasures recommended in the eclipse attack paper, [PR #8594](https://github.com/bitcoin/bitcoin/pull/8594) disabled that incoming peers could add their address to the tried tables just by connecting to the node. The actual attack presented in the eclipse paper used this method to populate the tried tables with attacker-controlled addresses while filling the new table with trash IPs. After #8594, addresses would only be added to tried when the connection was initiated by the node, making it much harder for an attacker to gain influence over the tried tables.
+
 ## Undeployed (or partially deployed) recommended countermeasures
 
 ### Countermeasure 7: More outgoing connections
@@ -153,7 +156,6 @@ The current way incoming connections are diversified is by prioritizing incoming
 ### Countermeasure 10: Anomaly detection
 
 The eclipse attack can have several specific "signatures'' that make it detectable, including: (1) a flurry of short-lived incoming TCP connections from diverse IP addresses that send large ADDR messages containing "trash" IP addresses. (2) An attacker that suddenly connects a large number of nodes to the network. (3) As could one that uses eclipsing to decrease the network's mining power dramatically. Monitoring and anomaly detection systems that look for this behavior would be useful. They would, at the very least, force an eclipse attacker to attack at a lower rate or waste resources on overwriting new, rather than useless, IP addresses.
-
 
 ## Open questions and areas for research
 
