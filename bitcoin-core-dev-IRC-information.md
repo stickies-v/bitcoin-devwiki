@@ -2,8 +2,8 @@
 
 ## Channel logs
 
-- http://www.erisian.com.au/bitcoin-core-dev/
-- http://gnusha.org/bitcoin-core-dev/
+- https://www.erisian.com.au/bitcoin-core-dev/
+- https://gnusha.org/bitcoin-core-dev/
 - https://bitcoin-irc.chaincode.com/
 
 ## Regular meetings
