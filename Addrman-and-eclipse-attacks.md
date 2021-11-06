@@ -10,37 +10,39 @@ A restart-based eclipse attack occurs when the adversary is able to sufficiently
 
 ## The address manager in Bitcoin Core
 
-The Bitcoin peer-to-peer layer supports messages that allow nodes to gossip the addresses of other nodes on the network. This allows new nodes coming online to learn of other peers, and new listening nodes (that are able to take incoming connections) can have their address gossiped so that other nodes can connect to them later.
+The Bitcoin peer-to-peer layer supports messages that allow nodes to gossip the network addresses of other nodes on the network. This allows new nodes coming online to learn of other peers, and new listening nodes (that are able to take incoming connections) can have their address gossiped so that other nodes can connect to them later.
 
-Bitcoin Core tracks addresses in an "addresses manager", known as [AddrMan](https://github.com/bitcoin/bitcoin/blob/77a2f5d30c5ecb764b8a7c098492e1f5cdec90f0/src/addrman.h#L25-L54), introduced in [#787](https://github.com/bitcoin/bitcoin/pull/787). AddrMan maintains known addresses (e.g. IP and onion) of bitcoin peers on the network. While the implementation has undergone several changes, namely increasing the number of buckets for each table, the essential design remains the same.
+Bitcoin Core tracks addresses in an "addresses manager", known as [AddrMan](https://github.com/bitcoin/bitcoin/blob/77a2f5d30c5ecb764b8a7c098492e1f5cdec90f0/src/addrman.h#L25-L54), introduced in [#787](https://github.com/bitcoin/bitcoin/pull/787). AddrMan maintains network addresses (e.g. IP and onion) of potential bitcoin nodes on the network. While the implementation has undergone several changes, namely increasing the number of buckets for each table, the essential design remains the same.
 
-Note that a Bitcoin node's sybil resistance requires having at least one honest peer which is not eclipsed itself, which provides connectivity to the honest network, and thus able to learn of newly mined blocks in some timely fashion.
+Bitcoin node's sybil resistance requires having at least one honest peer which is not eclipsed itself, which provides connectivity to the honest network, and thus able to learn of newly mined blocks in some timely fashion.
 
 ### Assumption of a healthy addrman from the start
 
 When a node first comes online, it is at the mercy of the DNS seeds (or alternatively by placing trust in the developers by using the hard-coded seeds included in each release) and the first connections it makes by querying for addresses. If fed bad addresses from the start, a fledgling node has little chance of collecting honest peers' addresses. Therefore, addrman assumes that the peer tables are unpoisoned before an attack is initiated.
 
+We limit the trust in any single DNS seed by querying multiple DNS seeds when starting up with an empty addrman.
+
 ### How addresses are stored
 
-Nodes store the IP addresses discovered by received [ADDR](https://developer.bitcoin.org/reference/p2p_networking.html#addr) messages in two tables: the "new" table and the "tried" table. The design goal of the address manager is to ensure that no attacker can fill the entire table with his nodes/addresses. A [comment in AddrMan.h](https://github.com/bitcoin/bitcoin/blob/be3af4f31089726267ce2dbdd6c9c153bb5aeae1/src/addrman.h#L97) outlines both the address manager's design goals and the bucketing method.
+Nodes store the IP addresses discovered by received [addr](https://developer.bitcoin.org/reference/p2p_networking.html#addr) messages in two tables: the "new" table and the "tried" table. The design goal of the address manager is to ensure that no attacker can fill the entire table with their nodes/addresses. A [comment in addrman.h](https://github.com/bitcoin/bitcoin/blob/be3af4f31089726267ce2dbdd6c9c153bb5aeae1/src/addrman.h#L97) outlines both the address manager's design goals and the bucketing method.
 
-Addresses that have not yet been tried go into 1024 "new" buckets. The address range (/16 for IPv4) of the source (the peer that gossiped the addr to us) determines which of the 64 buckets it is randomly assigned to by being hashed with a cryptographic hash function. A single address can occur in up to 8 different buckets to increase selection chances of frequently seen addresses. When adding a new address to a full bucket, a randomly chosen position within a randomly chosen bucket is selected. If that position already contains an address, it uses some rules to determine if the new addr should be stored and the old addr should be evicted or if the new addr should be discarded ([code](https://github.com/bitcoin/bitcoin/blob/e08f3193b543017702d000c2263bccbefa981c14/src/addrman.cpp#L314)). The new table stores the IP addresses that could potentially contain invalid or malicious addresses and could contain IPs that are not Bitcoin nodes or even unallocated IP addresses. 
+Addresses that have not yet been tried go into 1024 "new" buckets. The address group (either the source's AS if using [asmap](https://github.com/bitcoin/bitcoin/pull/16702) is enabled or /16 for IPv4 if not) of the source (the peer that gossiped the addr to us) is used to select 64 buckets out of the possible 1024, and the destination address is used to select the specific bucket and position, using a cryptographic hash function. A single address can occur in up to 8 different buckets to increase selection chances of frequently seen addresses. If the selected bucket and position is occupied, it uses some rules to determine if the new addr should be stored and the old addr should be evicted or if the new addr should be discarded ([code](https://github.com/bitcoin/bitcoin/blob/e08f3193b543017702d000c2263bccbefa981c14/src/addrman.cpp#L314)). The new table stores network addresses that could potentially contain invalid or malicious addresses and could contain network addresses that are not Bitcoin nodes or even unallocated IP addresses.
 
 Addresses of nodes known to be an accessible bitcoin node go into 256 "tried" buckets. Each address range selects eight of these buckets at random. The actual bucket is chosen from one of these, based on the full address. Bucket selection is based on cryptographic hashing, using a randomly-generated 256-bit key. This key should remain private since an adversary with knowledge of a victim’s bucket selection could more easily target peer addresses to be evicted.
 
-When adding a new good address to a full bucket in the "tried" table, a short-lived connection attempts to connect to a randomly chosen entry (with a bias favoring less recently tried ones). If the connection is successful, then the older address is not evicted back to the "new" buckets. The new address is stored in the "tried" table only if the connection fails. (For more, see [Countermeasure #3: Test-before-evict](/#countermeasure-3-test-before-evict---9037).)
+When attempting to add a new good address to an occupied bucket/position in the "tried" table, a short-lived connection attempts to connect to the existing entry. If the connection is unsuccessful, then the older address is evicted back to the "new" buckets and the new address is stored in the "tried" table. (For more, see [Countermeasure #3: Test-before-evict](/#countermeasure-3-test-before-evict---9037).)
 
 ## Peer seeding sources
 
 Peers are discovered from six sources:
 
-1. Loaded from peers.dat
+#### 1. Loaded from peers.dat
 
 A node can use its pre-existing knowledge of possible peers recorded in `peers.dat`.
 
-2. DNS Seeds
+#### 2. DNS Seeds
 
-This is the most common method for a brand new Bitcoin node to discover peers for the first time. A node can use DNS seeds to populate the addrman when its addrman is empty or if passing in the `-forcednsseed` argument. DNS seeds are [domains](https://github.com/bitcoin/bitcoin/blob/86a8b35f321d55bb2381ea56bcc1cdd17c7896e6/src/chainparams.cpp#L121) owned by Bitcoin contributors that do two things: (1) expose subdomains that DNS resolve to IP addresses of potential peers and (2) run minimal nodes capable of VERSION/VERACK handshakes and addr gossip ([code](https://github.com/bitcoin/bitcoin/blob/094402430925ec5aac6edbbf52d74f10c665da43/src/net.cpp#L1541-L1549)). Usually, a node will query these seeds via the DNS protocol, which resolves to IP addresses independent from the bitcoin protocol.
+This is the most common method for a brand new Bitcoin node to discover peers for the first time. A node can use DNS seeds to populate the addrman when its addrman is empty or if passing in the `-forcednsseed` argument. DNS seeds are [domains](https://github.com/bitcoin/bitcoin/blob/86a8b35f321d55bb2381ea56bcc1cdd17c7896e6/src/chainparams.cpp#L121) owned by Bitcoin contributors that do two things: (1) expose subdomains that DNS resolve to IP addresses of potential peers and (2) run minimal nodes capable of `version`/`verack` handshakes and `addr` gossip ([code](https://github.com/bitcoin/bitcoin/blob/094402430925ec5aac6edbbf52d74f10c665da43/src/net.cpp#L1541-L1549)). Usually, a node will query these seeds via the DNS protocol, which uses a different port from the bitcoin protocol.
 
 If our node is behind a [proxy](https://github.com/bitcoin/bitcoin/blob/417f95fa453d97087a33d4176523ab278bef21a1/src/net.cpp#L1742-L1743) (or if the seeder [does not support service bit filtering](https://github.com/bitcoin/bitcoin/blob/417f95fa453d97087a33d4176523ab278bef21a1/src/net.cpp#L1763-L1767) over DNS), the seeders are treated as an [AddrFetch connection](https://github.com/bitcoin/bitcoin/blob/417f95fa453d97087a33d4176523ab278bef21a1/src/net.h#L174-L180). (For more on `AddrFetch` connections, see 4 below). Nodes will engage in the Bitcoin protocol handshake and addr gossip with the seeder. The connection will disconnect soon after.
 
@@ -48,19 +50,19 @@ There are downsides to DNS seeding. DNS seeding leaks to the ISP that the node i
 
 To prevent a single malicious seeder from dominating addrman by announcing large numbers of IP addresses, [the number of IPs each seeder can contribute is limited to 256](https://github.com/bitcoin/bitcoin/blob/086226d98ae8c194a0a38b2fbfffd0dc3773e879/src/net.cpp#L1685).
 
-3. Fixed seeds
+#### 3. Fixed seeds
 
 In the case that DNS seeds aren’t responding, as a fallback, the node attempts to expand the peers in addrman via fixed seeds hardcoded in [chainparamsseeds.h](https://github.com/bitcoin/bitcoin/blob/417f95fa453d97087a33d4176523ab278bef21a1/src/chainparamsseeds.h) [code](https://github.com/bitcoin/bitcoin/blob/417f95fa453d97087a33d4176523ab278bef21a1/src/net.cpp#L1887-L1900). This hardcoded list contains addresses of recently active nodes on the network and is updated every release cycle. [#18506](https://github.com/bitcoin/bitcoin/pull/18506) is an example of the process to update the fixed seeds. Connections to fixed seeds are established as ADDR_FETCH connections, used for addr collection and then disconnected.
 
-4. AddrFetch connections via `-seednode`
+#### 4. AddrFetch connections via `-seednode`
 
 `AddrFetch` connections are short-lived connections that are established for the sole purpose of populating the addrman ([source](https://github.com/bitcoin/bitcoin/blob/417f95fa453d97087a33d4176523ab278bef21a1/src/net.h#L174-L180)). These ADDR_FETCH connections can also be initiated by explicitly passing in `-seednode` addresses. or under certain circumstances with DNS seeds (i.e., [here](https://github.com/bitcoin/bitcoin/blob/417f95fa453d97087a33d4176523ab278bef21a1/src/net.cpp#L1742-L1743) and [here](https://github.com/bitcoin/bitcoin/blob/417f95fa453d97087a33d4176523ab278bef21a1/src/net.cpp#L1763-L1767)).
 
-5. Manual connection in `-connect` mode
+#### 5. Manual connection with `-connect` configuration
 
-If the user runs the node in this configuration, `bitcoind` will only ever make outbound connections with nodes specified in `-connect`. For example, this might be useful in enterprise settings where internal nodes all only talk to a gateway node, which is responsible for staying in sync with the public Bitcoin network. Manual connections cannot be evicted and do not contribute to the limits of outbound-full-relay and outbound-block-relay.
+If the user runs the node with this configuration, `bitcoind` will only ever make outbound connections with nodes specified in `-connect`. For example, this might be useful in enterprise settings where internal nodes all only talk to a gateway node, which is responsible for staying in sync with the public Bitcoin network. Manual connections cannot be evicted and do not contribute to the limits of outbound-full-relay and outbound-block-relay.
 
-6. Manual connection with `-addnode`
+#### 6. Manual connection with `-addnode` configuration or using the `addnode` RPC
 
 Bitcoind will make an outbound connection to a specified node, and engage in addr relay with the peer. As new peers are discovered, more outbound connections will be established. Manual connections cannot be evicted and do not contribute to the limits of outbound-full-relay and outbound-block-relay.
 
@@ -69,21 +71,21 @@ Bitcoind will make an outbound connection to a specified node, and engage in add
 
 Once a node has peers established through any of the above seeding techniques, it engages in addr relay to grow its addrman.
 
-### Unsolicited ADDR messages*
+### Unsolicited `addr` messages*
 
 Peers share data with each other by gossiping unsolicited addresses. After establishing a connection, the initiating node sends its own address to the new peer, which then forwards it to a couple more peers in the network. Additionally, nodes will resend their address to their peers on average once every 24 hours ([source](https://github.com/bitcoin/bitcoin/blob/816314ef0f7bdf50a6596ef893ac1a1d2d8723bf/src/net_processing.cpp#L4130-L4131)). Those peers will batch these in maximum sets of 10 ([source](https://github.com/bitcoin/bitcoin/blob/816314ef0f7bdf50a6596ef893ac1a1d2d8723bf/src/net_processing.cpp#L2619-L2623)) and send them to a limited group of their peers who haven't been relayed that address before ([code](https://github.com/bitcoin/bitcoin/blob/d0852f39a7a3bfbb36437ef20bf94c263cad632a/src/net_processing.cpp#L1636-L1638)).
 
 *Note: this description of addr relay behavior only describes Bitcoin Core. There are no BIPs specifying addr relay, and therefore, the behavior of other Bitcoin software on the network is purely local policy.
 
-### From responses to GETADDRs
+### From responses to `getaddr` messages
 
-GETADDR data provides another way to populate the addrman. After the initial version handshake, a node sends a GETADDR message requesting information about known active peers to help find potential nodes in the network ([source](https://github.com/bitcoin/bitcoin/blob/094402430925ec5aac6edbbf52d74f10c665da43/src/net_processing.cpp#L2424-L2425)). The receiving node proportionally samples addresses from the new and tried tables and responds with an addr message containing up to 1,000 addresses capped at 23% of its own addrman size ([code](https://github.com/bitcoin/bitcoin/blob/094402430925ec5aac6edbbf52d74f10c665da43/src/addrman.cpp#L482-L505)).
+`getaddr` data provides another way to populate the addrman. After the initial `version`/`verack` handshake, a node sends a `getaddr` message requesting information about known active peers to help find potential nodes in the network ([source](https://github.com/bitcoin/bitcoin/blob/094402430925ec5aac6edbbf52d74f10c665da43/src/net_processing.cpp#L2424-L2425)). The receiving node proportionally samples addresses from the new and tried tables and responds with an addr message containing up to 1,000 addresses capped at 23% of its own addrman size ([code](https://github.com/bitcoin/bitcoin/blob/094402430925ec5aac6edbbf52d74f10c665da43/src/addrman.cpp#L482-L505)).
 
-Past research has exploited GETADDR messages by sending them to all possible nodes on the network, then comparing these messages to infer the possible edges of each node. The [Coinscope paper](https://www.cs.umd.edu/projects/coinscope/coinscope.pdf) took advantage of long-lived connections and used timestamps proliferated through the network to infer topology. This behavior was addressed in version 10.1 and further improved by [#14897](https://github.com/bitcoin/bitcoin/pull/14897), which randomized the request order and introduced a bias toward outbound connections giving them a higher priority when a node chooses from whom it should request a transaction. [#18991](https://github.com/bitcoin/bitcoin/pull/18991) cached responses to GETADDR to further prevent topology leaks.
+Past research has exploited `getaddr` messages by sending them to all possible nodes on the network, then comparing these messages to infer the possible edges of each node. The [Coinscope paper](https://www.cs.umd.edu/projects/coinscope/coinscope.pdf) took advantage of long-lived connections and used timestamps proliferated through the network to infer topology. This behavior was addressed in version 10.1 and further improved by [#14897](https://github.com/bitcoin/bitcoin/pull/14897), which randomized the request order and introduced a bias toward outbound connections giving them a higher priority when a node chooses from whom it should request a transaction. [#18991](https://github.com/bitcoin/bitcoin/pull/18991) cached responses to `getaddr` to further prevent topology leaks.
 
 ## Timestamps
 
-AddrMan also tracks the timestamps of peers, currently connected or announced by other peers. A timestamp is kept for each address to keep track of when the node address was last seen. Nodes keep newly received addresses in memory and wait two hours before adding them to the `peers.dat` database. However, if the address received is in the database, the timestamp will be updated with the new one if it is more recent ([source](https://core.ac.uk/download/pdf/288502346.pdf)).
+Addrman also tracks the timestamps of peers, currently connected or announced by other peers. A timestamp is kept for each address to keep track of when the node address was last seen. Nodes keep newly received addresses in memory and wait two hours before adding them to the `peers.dat` database. However, if the address received is in the database, the timestamp will be updated with the new one if it is more recent ([source](https://core.ac.uk/download/pdf/288502346.pdf)).
 
 When successfully connecting to a peer, the `CAddress`'s nTime is updated, which is gossiped to peers. `net_processing` also updates this timestamp when it disconnects from a peer to prevent leaking information about currently connected peers ([code](https://github.com/bitcoin/bitcoin/blob/e669c3156ff88627a9478be8a6cac12723c2614a/src/addrman.h#L284-L294)).
 The above timestamps should not be confused with the `nLastSuccess` timestamp on `CAddrInfo` that updates when we mark an [address as Good](https://github.com/bitcoin/bitcoin/blob/e669c3156ff88627a9478be8a6cac12723c2614a/src/addrman.cpp#L215).
@@ -159,7 +161,7 @@ The eclipse attack can have several specific "signatures'' that make it detectab
 
 ## Open questions and areas for research
 
-1. Examining the rules for evicting an incoming connection
+#### 1. Examining the rules for evicting an incoming connection
 
 A DoS connection exhaustion attack is when an adversary fills all available incoming connection slots on the network, then overtakes the outbounds for a victim just starting up. A [patch in 2015](https://github.com/bitcoin/bitcoin/pull/6374) fixed this by enabling new incoming connections to evict old incoming connections. However, this patch introduced the possibility of an attacker purposely evicting connections. For example, because a trusted outgoing connection is another node's untrusted incoming connection, an attacker with knowledge of a node's topology inference could evict this connection. Therefore, an attacker might be able to eclipse a node without reboots via connection eviction logic ([source](https://github.com/bitcoin/bitcoin/issues/17326#issuecomment-548410548)).
 Changes to incoming connection eviction logic to mitigate a connection exhaustion attack are described as follows:
@@ -188,15 +190,15 @@ a) How feasible is it for incoming connections to be displaced by new incoming c
 
 b) For a connection exhaustion attack, at some point, the attacker may just be evicting itself and (only possibly) locking new connections out. How many IP addresses are needed to perform this connection exhaustion attack, and what netgroups or geographic locations would be required?
  
-2. Timestamps on addr messages:
+#### 2. Timestamps on addr messages:
 
 The [Coinscope paper](https://www.cs.umd.edu/projects/coinscope/coinscope.pdf) used addr messages to infer network topology. Since then, changes have been made, including PR #18991, which introduced a mechanism to reduce the ability to scrape the address manager. However, there are likely more leaks and a smarter way to communicate timestamps. There may be the possibility of a spam attack using malicious timestamps as well. Some have proposed doing away with these timestamps altogether. (See [October 20th, 2020, P2P IRC meeting](https://github.com/bitcoin-core/bitcoin-devwiki/wiki/P2P-IRC-meetings#topic-remove-timestamps-from-addr-messages-it-seems-like-the-timestamp-is-only-used-to-leak-information-about-our-recent-connectivity-it-doesnt-look-like-we-use-it-to-make-decisions-about-who-to-connect-to-sdaftuarjnewbery) for more discussion.)
 
-3. Defending against bad actors when a node first comes online
+#### 3. Defending against bad actors when a node first comes online
 
 As discussed in the discussion on Assumption of a [Healthy Addrman from the Start](#assumption-of-a-healthy-addrman-from-the-start), nodes are most vulnerable when they first come online. Can we harden the seeders? Should we use authentication? What are the vulnerabilities of the DNS caching?
 
-4. Effects on the network of outbound peer rotation
+#### 4. Effects on the network of outbound peer rotation
 
 The effects of outbound peer rotation have both positive and negative effects on peers. Outbound peer rotation is good for transaction-relayed peers as it improves privacy and makes topology inference more difficult. However, outbound peer rotation is bad for block-only-relayed peers as it increases the risk of a node being eclipsed.
 
@@ -204,15 +206,15 @@ Nodes make new full-relay connections when the tip is stale, disconnecting after
 
 Further discussion can be found at [#4723](https://github.com/bitcoin/bitcoin/pull/4723), [#15759](https://github.com/bitcoin/bitcoin/pull/15759), and the [mailing list](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-August/006502.html)).
 
-5. Resources estimation given the current mitigations in place
+#### 5. Resources estimation given the current mitigations in place
 
 Heilman, et al. cited ~9000 IP addresses were required to complete an attack successfully. Given the suggested countermeasures implemented as well as other changes deployed, a new model is needed to understand the resource requirements of successfully exploiting a victim.
  
-6. Heuristics for “quality” peers besides online presence
+#### 6. Heuristics for “quality” peers besides online presence
 
 Should the feeler connection poll the chain tip of peers similar to the outbound peer rotation logic? What is the cost of adding this logic?
- 
-7. The optimum bucket sizes and size of the new and tried tables
+
+#### 7. The optimum bucket sizes and size of the new and tried tables
 
 How is the growth of the network reflected in these bucket sizes and new and tried tables? Are there enough addresses to fill up these tables? Would smaller buckets lend themselves to a more defensible position? 
 
