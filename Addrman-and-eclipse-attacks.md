@@ -12,7 +12,7 @@ A restart-based eclipse attack occurs when the adversary is able to sufficiently
 
 The Bitcoin peer-to-peer layer supports messages that allow nodes to gossip the addresses of other nodes on the network. This allows new nodes coming online to learn of other peers, and new listening nodes (that are able to take incoming connections) can have their address gossiped so that other nodes can connect to them later.
 
-Bitcoin Core tracks addresses in an "addresses manager", known as 'AddrMan' and defined by the class `CAddrMan`, introduced by sipa in [#787](https://github.com/bitcoin/bitcoin/pull/787). AddrMan maintains known addresses (e.g. IP and onion) of bitcoin peers on the network. While the implementation has undergone several changes, namely increasing the number of buckets for each table, the essential design remains the same.
+Bitcoin Core tracks addresses in an "addresses manager", known as [AddrMan](https://github.com/bitcoin/bitcoin/blob/77a2f5d30c5ecb764b8a7c098492e1f5cdec90f0/src/addrman.h#L25-L54), introduced in [#787](https://github.com/bitcoin/bitcoin/pull/787). AddrMan maintains known addresses (e.g. IP and onion) of bitcoin peers on the network. While the implementation has undergone several changes, namely increasing the number of buckets for each table, the essential design remains the same.
 
 Note that a Bitcoin node's sybil resistance requires having at least one honest peer which is not eclipsed itself, which provides connectivity to the honest network, and thus able to learn of newly mined blocks in some timely fashion.
 
