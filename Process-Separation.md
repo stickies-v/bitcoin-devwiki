@@ -38,7 +38,7 @@ Minimal change changing `bitcoin-gui` to spawn a `bitcoin-node` process, and
 `bitcoin-node` to spawn a `bitcoin-wallet` process and for gui, node, and wallet
 functionality to run in the different processes and communicate though pipes.
 
-- [ ] [#19160 Add basic spawn and IPC support](https://github.com/bitcoin/bitcoin/pull/19160)
+- [X] [#19160 Add basic spawn and IPC support](https://github.com/bitcoin/bitcoin/pull/19160)
 - [ ] [#10102 Multiprocess bitcoin](https://github.com/bitcoin/bitcoin/pull/10102)
 
 ### Step 5: Ad-hoc connection PRs
