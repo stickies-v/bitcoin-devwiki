@@ -132,6 +132,12 @@ Anchor connections were introduced by PR [#17326](https://github.com/bitcoin/bit
 Another tradeoff is that persistent long-lived connections would enable a snooping attacker to passively capture persistence of connections, potentially making topology inference more powerful. Strong persistence can contribute to network self-partitioning (e.g., long distance links are less reliable, so they get culled, and eventually disconnected subgraphs might only connect to their own continent) ([source](https://github.com/bitcoin/bitcoin/issues/17326#issuecomment-550521262)).
 This added behavior should probably pair with a complementary behavior on the inbound side. As of now, about half the inbound slots are preserved for longest-connected peers. Half of those could be redirected to be preserved for peers with the longest-historically-connected time. Without some measure like this, persistent connection logic could be undermined by an attacker that fills the connection slots up on long-running static IPed nodes in order to cause the eviction of (or prevent connections from) the other hosts they hope to eclipse ([source](https://github.com/bitcoin/bitcoin/issues/17326#issuecomment-550521262)).
 
+### Countermeasure 8: Ban unsolicited ADDR messages
+
+Before, unsolicited ADDR messages of greater than 10 [addresses were accepted](https://github.com/bitcoin/bitcoin/blob/83e4670fd7cde3f9624d91208885e868fda6658f/src/net_processing.cpp#L2628) but not relayed. A node could choose not to accept large unsolicited ADDR messages from incoming peers and only solicit ADDR messages from outgoing connections when its new table is near empty. This prevents adversarial incoming connections from flooding a victim's new table with useless or malicious addresses. The tradeoff would be the slower propagation of addresses from new nodes across the network.
+
+At large, this was addressed by PR [#22387](https://github.com/bitcoin/bitcoin/pull/22387) (included in the 22.0 release), which introduced a rate limit mechanism for unsolicited ADDR messages, making it harder for an attacker to flood the victim's new table. The rate limit does not distinguish between inbound and outbound peers.
+
 ### Other Countermeasure: Disallow inbounds from tried tables
 While this was not among the countermeasures recommended in the eclipse attack paper, [PR #8594](https://github.com/bitcoin/bitcoin/pull/8594) disabled that incoming peers could add their address to the tried tables just by connecting to the node. The actual attack presented in the eclipse paper used this method to populate the tried tables with attacker-controlled addresses while filling the new table with trash IPs. After #8594, addresses would only be added to tried when the connection was initiated by the node, making it much harder for an attacker to gain influence over the tried tables.
 
@@ -145,9 +151,6 @@ Version 0.19 added two outbound block-relay-only connections via [PR #15759](htt
 
 When considering the addition of more outbound connections by default, there exists a fundamental tradeoff between resource minimization and robustness to peer misbehavior. Adding more connectivity to the network graph makes Bitcoin's network more robust (e.g., to eclipse or partition attacks), but at the cost of more resource utilization. The Erlay proposal presents a promising path to reduce the bandwidth required for these connections, allowing more connections while maintaining resource requirements.
 
-### Countermeasure 8: Ban unsolicited ADDR messages
-
-Currently, unsolicited ADDR messages of greater than 10 [addresses are accepted](https://github.com/bitcoin/bitcoin/blob/83e4670fd7cde3f9624d91208885e868fda6658f/src/net_processing.cpp#L2628) but not relayed. A node could choose not to accept large unsolicited ADDR messages from incoming peers and only solicit ADDR messages from outgoing connections when its new table is near empty. This prevents adversarial incoming connections from flooding a victim's new table with useless or malicious addresses. The tradeoff would be the slower propagation of addresses from new nodes across the network.
 
 ### Countermeasure 9: Diversify incoming connections
 
