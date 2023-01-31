@@ -43,6 +43,7 @@ Instead of hopping to another centralized provider or self-hosted single point o
 * How is the "sign-up" handled?
 * How is spam dealt with?
 * How well-maintained are they?
+* Who deals with the hardware/software stack, if self-hosted (Anti-DoS, sysadmin stuff, ...)
 
 ## Possible alternatives:
 
