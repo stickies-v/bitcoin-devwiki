@@ -9,7 +9,7 @@ Priority Projects:
    * Tracking issue: https://github.com/bitcoin/bitcoin/issues/27463
  * Kernel
    * Champion: @TheCharlaton
-   * Reviewers: @stickies-v @jonatack
+   * Reviewers: @stickies-v @jonatack @fanquake
  * AssumeUTXO
     * Champion: @jamesob
     * Reviewers: @jonatack @sdaftuar
