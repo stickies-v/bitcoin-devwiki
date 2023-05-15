@@ -3,6 +3,7 @@ Priority Projects:
  * BIP324 (encrypted p2p)
    * Champion: @sipa
    * Reviewers: @ajtowns @instagibbs @theStack
+   * Tracking issue: https://github.com/bitcoin/bitcoin/issues/27634
  * Package Relay
    * Champion: @glozow
    * Reviewers: @ajtowns @sdaftuar @stickies-v
