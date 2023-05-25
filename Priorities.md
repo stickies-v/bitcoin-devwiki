@@ -15,3 +15,4 @@ Priority Projects:
  * AssumeUTXO
     * Champion: @jamesob
     * Reviewers: @jonatack @sdaftuar
+    * Project: https://github.com/orgs/bitcoin/projects/7
