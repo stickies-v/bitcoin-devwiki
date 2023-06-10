@@ -119,8 +119,7 @@ The conflicted state was first added in [#7105](https://github.com/bitcoin/bitco
 
 - [X] <a name="history-10286"></a> [PR #10286 – Call wallet notify callbacks in scheduler thread](https://github.com/bitcoin/bitcoin/pull/10286) – _TheBlueMatt_ – Nov 2017  
   PR adding `CWalletTx::fInMempool` cache field, setting and using it.
-- [X] <a name="history-27145"></a> [PR #27145 wallet: when a block is disconnected, update transactions that are no longer conflicted](https://github.com/bitcoin/bitcoin/pull/27145) – _ishaanam_ – May 2023  
-  This PR picks up [#17543](https://github.com/bitcoin/bitcoin/pull/17543) and implements [_idea-refresh-conflicted_](https://github.com/bitcoin-core/bitcoin-devwiki/wiki/Wallet-Transaction-Conflict-Tracking#idea-refresh-conflicted). This PR fixes [_bug-stale-conflicted_](https://github.com/bitcoin-core/bitcoin-devwiki/wiki/Wallet-Transaction-Conflict-Tracking#bug-stale-conflicted), [_bug-reorg-depth_](https://github.com/bitcoin-core/bitcoin-devwiki/wiki/Wallet-Transaction-Conflict-Tracking#bug-reorg-depth), and [_bug-reorg-spent_](https://github.com/bitcoin-core/bitcoin-devwiki/wiki/Wallet-Transaction-Conflict-Tracking#bug-reorg-spent).
+
 - [X] <a name="history-15931"></a> [PR #15931 – Remove GetDepthInMainChain dependency on locked chain interface](https://github.com/bitcoin/bitcoin/pull/15931) – _ariard_ – May 2019  
   PR changing `GetDepthInMainChain` and other wallet code to use most recent updated block instead of chain tip to avoid the need for locking the chain to return consistent results.
 
