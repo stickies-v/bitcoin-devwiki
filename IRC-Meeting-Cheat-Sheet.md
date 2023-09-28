@@ -18,4 +18,4 @@ The following is the general script used for running the meeting, text in `code 
   * `Anything to add or remove from https://github.com/orgs/bitcoin/projects/1/views/4`
 * Around the time of a release, remind people about feature freeze and the release. Possibly replace ad-hoc priorities with a release priorities, e.g. `#topic 26.0 release priorities`
 * When most recent topic appears to be finished, and there are no other topics, ask if there are any further topics: `Anything else to discuss?`
-* End the meeting: `#endmeeting`
+* End the meeting either when there are no topics left, or the time is 15:00 UTC: `#endmeeting`
