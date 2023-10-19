@@ -10,9 +10,8 @@ The following is the general script used for running the meeting, text in `code 
 * Ask for last minute topics (usually there are none, replace `no` with the number when there are): `There are no pre-proposed meeting topics this week. Any last minute ones to add? Reminder that you can pre-propose a meeting topic by prefixing your message with #preproposedmeetingtopic`
 * Priority projects are fixed topics. Do them one by one and ping the project's champion:
   * `#topic package relay updates (glozow)`
-  * `#topic BIP 324 updates (sipa)`
-  * `#topic libbitcoinkernel updates (TheCharlatan)`
-  * `#topic assumeutxo updates (jamesob)`
+  * `#topic silent payments updates (josibake)`
+  * `#topic multiprocess updates (ryanofsky)`
 * Ask about the ad-hoc high priority for review
   * `#topic Ad-hoc high priority for review`
   * `Anything to add or remove from https://github.com/orgs/bitcoin/projects/1/views/4`
