@@ -8,7 +8,10 @@ The following is the general script used for running the meeting, text in `code 
     #bitcoin-core-dev Meeting: achow101 _aj_ amiti ariard aureleoules b10c BlueMatt brunoerg cfields darosior dergoegge dongcarl fanquake fjahr furszy gleb glozow hebasto instagibbs jamesob jarolrod jonatack josibake kallewoof kanzure kouloumos kvaciral laanwj LarryRuane lightlike luke-jr MacroFake Murch phantomcircuit pinheadmz promag provoostenator ryanofsky sdaftuar S3RK stickies-v sipa theStack TheCharlatan vasild
     ```
 * Check https://gnusha.org/bitcoin-core-dev/proposedmeetingtopics.txt for pre-proposed meeting topics
-* Ask for last minute topics (usually there are none, replace `no` with the number when there are): `There are no pre-proposed meeting topics this week. Any last minute ones to add? Reminder that you can pre-propose a meeting topic by prefixing your message with #preproposedmeetingtopic`
+* Ask for last minute topics (usually there are none, replace `no` with the number when there are):
+    ```
+    There are no pre-proposed meeting topics this week. Any last minute ones to add? Reminder that you can pre-propose a meeting topic by prefixing your message with #preproposedmeetingtopic`
+    ```
 * Priority projects are fixed topics. Do them one by one and ping the project's champion:
   * `#topic package relay updates (glozow)`
   * `#topic silent payments updates (josibake)`
