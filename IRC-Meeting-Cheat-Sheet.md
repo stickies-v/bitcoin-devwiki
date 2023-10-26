@@ -14,7 +14,7 @@ The following is the general script used for running the meeting, text in `code 
     ```
 * Priority projects are fixed topics. Do them one by one and ping the project's champion:
   * `#topic package relay updates (glozow)`
-  * `#topic silent payments updates (josibake)`
+  * `#topic silent payments updates (josie)`
   * `#topic multiprocess updates (ryanofsky)`
 * Ask about the ad-hoc high priority for review
   * `#topic Ad-hoc high priority for review`
